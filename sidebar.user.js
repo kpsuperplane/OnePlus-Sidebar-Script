@@ -141,7 +141,7 @@ function getWarningMsg(option, name, title){
 }
 	function sidebar(title){
 		this.wrapper = $('<div class="section widget-group-no-name widget-container"></div>');
-		this.wrapper.append('<div class="secondaryContent widget" id="widget-12"><h3>'+title+'</h3><ul class="custom-inner"></ul><div class="clearfix" style="clear:left"></div></div>');
+		this.wrapper.append('<div class="secondaryContent widget" id="widget-12"><h3 style="padding-bottom:0px;">'+title+'</h3><ul class="custom-inner"></ul><div class="clearfix" style="clear:left"></div></div>');
 		this.content = this.wrapper.find('.custom-inner');
 		this.add = function(elem, callback){
 			this.content.append(elem);
