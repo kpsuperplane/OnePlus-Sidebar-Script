@@ -145,7 +145,7 @@ function getWarningMsg(option, name, title){
 		this.content = this.wrapper.find('.custom-inner');
 		this.add = function(elem, callback){
 			this.content.append(elem);
-			elem.wrap('<li></li>');
+			elem.wrap('<li style="padding-top:15px;"></li>');
 			if(typeof callback != "undefined"){
 				callback(elem);
 			}
