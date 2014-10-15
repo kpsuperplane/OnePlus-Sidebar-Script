@@ -354,7 +354,5 @@ function main() {
     }).resize(function(){
          $('.sidebar').css('left',$('.mainContent').outerWidth()+$('#top').offset().left+10).css('max-height', $(window).height()-110);
     }).trigger('resize').trigger('scroll');
-=======
->>>>>>> parent of 360ee51... Accordion Support
 }
 addJQuery(main);
