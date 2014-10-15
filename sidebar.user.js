@@ -10,11 +10,12 @@
 // ==/UserScript==
 //ADD JQUERY SCRIPT ADAPTED FROM https://gist.github.com/eristoddle/4440713
 function addJQuery(callback) {
+    $('<style type="text/css"></style').text('.sidebar{position:absolute;right:0px;}.sidebar.fixed{position:fixed;top:80px;box-sizing:border-box;}.custom-inner li{padding-top:16px;}.custom-inner li:first-child{padding-top: 0px;}.sidebar .section h3{padding:0px;padding-bottom:0px !important;cursor:pointer; color:#000 !important;}.sidebar .section h3 a{color:#000 !important;}#create-thread-button .inner{margin-bottom:30px;}.sidebar .section h3 a:hover{text-decoration:none;}#widget-11 .widget_header_small:hover{text-decoration:underline;}#create-thread-button .inner{margin-bottom:30px;}.sidebar .section .widget{padding:8px 0px 14px 0px;}.sidebar .section .section-wrapper{display:none;padding:10px 0px;}').appendTo('head');
     var script = document.createElement("script");
     script.textContent = "(" + callback.toString() + ")();";
     document.body.appendChild(script);
 }
-
+$.fn.overflown=function(){var e=this[0];return e.scrollHeight>e.clientHeight||e.scrollWidth>e.clientWidth;}
 function main() {
     function closeThread(batch) {
         function getWarningMsg(option, name, title) {
@@ -282,7 +283,7 @@ function main() {
         this.content = this.wrapper.find('.custom-inner');
         this.add = function(elem, callback) {
             this.content.append(elem);
-            elem.wrap('<li style="padding-top:15px;"></li>');
+            elem.wrap('<li></li>');
             if (typeof callback != "undefined") {
                 callback(elem);
             }
@@ -324,9 +325,6 @@ function main() {
             closeThread(true);
         });
     });
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
     $('.sidebar .section .widget').each(function(){
         $(this).children('*').not('h3').wrapAll('<div class="section-wrapper"></div>');
     });
@@ -356,8 +354,5 @@ function main() {
     }).resize(function(){
          $('.sidebar').css('left',$('.mainContent').outerWidth()+$('#top').offset().left+10).css('max-height', $(window).height()-110);
     }).trigger('resize').trigger('scroll');
-=======
->>>>>>> parent of 360ee51... Accordion Support
->>>>>>> parent of 4155603... Fix Accordion Support
 }
 addJQuery(main);
