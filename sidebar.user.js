@@ -17,7 +17,7 @@ function addJQuery(callback) {
 	document.body.appendChild(script);
 }
 function main(){
-	function closeThread(batch = false){
+	function closeThread(batch){
 		function getWarningMsg(option, name, title){
 			if(option == 1){
 				return '<p>Hi there @'+name+'!</p><br/><p>It has come to my attention that you have created a thread to ask for invites, however that is not allowed.</p><br/><p>The best way to receive an invite is to hang around the forums, join in on the community discussion and create quality replies and threads.</p><br/><p>If you have any further questions, please read the following thread https://forums.oneplus.net/threads/2-rules-revisited-and-restated.78159/, or feel free to message me via the private message feature.</p><br/><p>Thanks for your understanding!</p><br/><p>Thread closed.</p>';
@@ -135,7 +135,7 @@ function main(){
 	var moderatorTools = new sidebar("Moderator Tools");
 	moderatorTools.add($('<a href="javascript:void(0);">Close Current Thread</a>'), function(elem){
 		elem.click(function(){
-			closeThread();
+			closeThread(false);
 		});
 	});
 	moderatorTools.add($('<a href="javascript:void(0);">Batch Close Threads</a>'), function(elem){
