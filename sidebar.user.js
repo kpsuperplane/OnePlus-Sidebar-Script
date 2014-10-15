@@ -324,5 +324,40 @@ function main() {
             closeThread(true);
         });
     });
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    $('.sidebar .section .widget').each(function(){
+        $(this).children('*').not('h3').wrapAll('<div class="section-wrapper"></div>');
+    });
+    $('body').on('click','.sidebar h3', function(e){
+        e.preventDefault();
+        $(this).next().stop().slideToggle(500, function(){
+            if($(window).scrollTop() > $('#top').offset().top-40){
+                if($(window).scrollTop() + $('.sidebar')[0].scrollHeight + 160 > $(document).height() - 286){
+                    $('.sidebar').removeClass('fixed').css('top', $('.mainContent').height() - $('.sidebar')[0].scrollHeight + 200);
+                }
+            }
+        }); 
+    });
+    $('#widget-11 .widget_header_small').click(function(){
+          location.href = "/forums/"; 
+    });
+    $(window).scroll(function(){
+          if($(window).scrollTop() > $('#top').offset().top-40){
+              if($(window).scrollTop() + $('.sidebar')[0].scrollHeight + 160 > $(document).height() - 286){
+                  $('.sidebar').removeClass('fixed').css('top', $('.mainContent').height() - $('.sidebar')[0].scrollHeight + 200);
+              }else{
+                 $('.sidebar').addClass('fixed').css('top', '');
+              }
+          }else{
+              $('.sidebar').removeClass('fixed').css('top', '');
+          }
+    }).resize(function(){
+         $('.sidebar').css('left',$('.mainContent').outerWidth()+$('#top').offset().left+10).css('max-height', $(window).height()-110);
+    }).trigger('resize').trigger('scroll');
+=======
+>>>>>>> parent of 360ee51... Accordion Support
+>>>>>>> parent of 4155603... Fix Accordion Support
 }
 addJQuery(main);
