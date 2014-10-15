@@ -324,7 +324,6 @@ function main() {
             closeThread(true);
         });
     });
-<<<<<<< HEAD
     $('.sidebar .section .widget').each(function(){
         $(this).children('*').not('h3').wrapAll('<div class="section-wrapper"></div>');
     });
