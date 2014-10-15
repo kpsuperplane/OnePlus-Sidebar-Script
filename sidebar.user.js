@@ -119,9 +119,153 @@ function main(){
 			runClose();
 		}
 	}
-	function sidebar(title){
+	function like(method){
+        //---------------------------- CURRENT PAGE LIKING FUNCTION -------------------------------//  
+        function like() {
+            for (k = 0; k < document.getElementsByClassName('LikeLink item control like').length; k++) {
+                document.getElementsByClassName('LikeLink item control like')[k].click();
+           }
+        }
+		//---------------------------- THREAD LIKING FUNCTION -------------------------------//  
+		function likeThreadPosts() {
+			var links = [];
+			jQuery.ajaxSetup({async:false});
+			try { document.getElementsByClassName('PageNav')[0].getAttribute('data-last')
+					var pages = parseInt(document.getElementsByClassName('PageNav')[0].getAttribute('data-last')) + 2;
+				} catch(err) { 
+					var pages = 1;
+				}
+			var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/'
+			getLikeURLs();
+			likeLinks();
+		   
+			function getLikeURLs() {
+				for (i = 1; i <= pages; i++) {
+					$.get(url + 'page-' + i, function(data) {
+						//gets the like links from current page
+						$(data).find('a[class="LikeLink item control like"]').each(function() {
+							links.push($(this).attr('href')); // get the normalized `href` property; fastest solution
+						});
+						async:false
+					});
+				}
+			}
+		   
+			function likeLinks() {
+				var numbLinks = links.length + 2;
+				for (t = 0; t <= numbLinks; t++) {
+					var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
+					jQuery.ajaxSetup({async:false});
+					$.post(links[t], {
+						_xfToken: token,
+						_xfNoRedirect: 1,
+						_xfResponseType: 'json'
+					}, function(data) {});
+				}
+				alert('done');
+			}
+		}
+		//---------------------------- FORWARD POST LIKING FUNCTION -------------------------------//
+		function likeForward() {
+			var links = [];
+			jQuery.ajaxSetup({async:false});
+			try { document.getElementsByClassName('PageNav')[0].getAttribute('data-last')
+					var pages = parseInt(document.getElementsByClassName('PageNav')[0].getAttribute('data-last'));
+				} catch(err) { 
+					var pages = 1;
+				}
+			var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/'
+			getForward();
+			likeLinks();
+		   
+			function getForward() {
+				for (i = parseInt(document.getElementsByClassName('PageNav')[0].getAttribute('data-end')) ; i <= pages; i++) {
+					$.get(url + 'page-' + i, function(data) {
+						//gets the like links from current page
+						$(data).find('a[class="LikeLink item control like"]').each(function() {
+							links.push($(this).attr('href')); // get the normalized `href` property; fastest solution
+						});
+						async:false
+					});
+				}
+			}
+		   
+			function likeLinks() {
+				var numbLinks = links.length + 2;
+				for (t = 0; t <= numbLinks; t++) {
+					var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
+					jQuery.ajaxSetup({async:false});
+					$.post(links[t], {
+						_xfToken: token,
+						_xfNoRedirect: 1,
+						_xfResponseType: 'json'
+					}, function(data) {});
+				}
+				alert('done');
+			}
+		}
+		//---------------------------- ALERT LIKING FUNCTION -------------------------------//
+		function likeAlert() {  
+			var url = 'https://forums.oneplus.net/account/alerts'
+			jQuery.ajaxSetup({async:false});
+			var alertPages = 5;
+			var alertLinks = []; //contains all the tagged / quoted links
+			getAlertLinks();
+			likeAlertLinks();
+
+			//Gets the links of posts you've been tagged or quoted in
+			function getAlertLinks() {
+				for (i = 0; i <= alertPages; i++) {
+					$.get(url + '?page=' + i, function(data) {
+						$(data).find("h3:contains('tagged')").each(function(likes) {
+							alertLinks.push($(this).find("a[class='PopupItemLink']").attr('href') + 'like')
+						});
+						async: false
+					});
+				}
+			}
+			//Likes the links stored into the array.
+			function likeAlertLinks() {
+				var numbLinks = alertLinks.length + 2;
+				for (t = 0; t <= numbLinks; t++) {
+					var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
+					jQuery.ajaxSetup({
+						async: false
+					});
+					$.post(alertLinks[t], {
+						_xfToken: token,
+						_xfNoRedirect: 1,
+						_xfResponseType: 'json'
+					}, function(data) {});
+				}
+				alert('done');
+			}
+		}
+		//---------------------------- POST LIKING MENU -------------------------------//
+		function option() {
+			var menu = window.prompt("Choose an option below.\n1. Like all posts on page.\n2. like all posts in thread.\n3. Like posts from this page forward");  
+			if (menu == 1) {
+				like();
+			} else if (menu == 2) {
+				likeThreadPosts();
+			} else if (menu == 3) {
+				likeForward();
+			}
+		}
+		if(method == "allPosts"){
+			option();
+		}
+		if(method == "alerts"){
+			likeAlert();
+		}
+	}
+	function sidebar(title, opts){
+		var options = {
+			layout: 'oneColumn'
+		};
+		$.extend(options, opts); 
 		this.wrapper = $('<div class="section widget-group-no-name widget-container"></div>');
-		this.wrapper.append('<div class="secondaryContent widget" id="widget-12"><h3 style="padding-bottom:0px;">'+title+'</h3><ul class="custom-inner"></ul><div class="clearfix" style="clear:left"></div></div>');
+		this.wrapper.append('<div class="secondaryContent widget" id="widget-12"><h3 style="padding-bottom:0px;">'+title+'</h3><ul class="custom-inner '+(options.layout=='twoColumns' ? 'xenforo-list-2cols':'')+'"></ul><div class="clearfix" style="clear:left"></div></div>');
 		this.content = this.wrapper.find('.custom-inner');
 		this.add = function(elem, callback){
 			this.content.append(elem);
@@ -132,6 +276,30 @@ function main(){
 		}
 		$('.sidebar .section:first').after(this.wrapper);
 	}
+	//Quick Links
+	var quickLinks = new sidebar("Quick Links", {layout:"twoColumns"});
+	quickLinks.add($('<a href="/account/signature/">Edit Signature</a>'));
+	quickLinks.add($('<a href="https://account.oneplus.net/invite/overview">View Invites</a>'));
+	quickLinks.add($('<a href="/conversations/add">Start PM</a>'));
+	quickLinks.add($('<a href="/account/ignored">Blocked People</a>'));
+	quickLinks.add($('<a href="/account/following">Following</a>'));
+	quickLinks.add($('<a href="/watched/threads">Watched Threads</a>'));
+	quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
+	
+	//Misc. Tools
+	var miscTools = new sidebar("Misc. Tools");
+	miscTools.add($('<a href="javascript:void(0);">Like All Posts</a>'), function(elem){
+		elem.click(function(){
+			like('allPosts');
+		});
+	});
+	miscTools.add($('<a href="javascript:void(0);">Like Alerts</a>'), function(elem){
+		elem.click(function(){
+			like('alerts');
+		});
+	});
+	
+	//Mod Tools
 	var moderatorTools = new sidebar("Moderator Tools");
 	moderatorTools.add($('<a href="javascript:void(0);">Close Current Thread</a>'), function(elem){
 		elem.click(function(){
