@@ -230,7 +230,7 @@ function main() {
                 for (i = 0; i <= alertPages; i++) {
                     $.get(url + '?page=' + i, function(data) {
                         $(data).find("h3:contains('tagged')").each(function(likes) {
-                            alertLinks.push($(this).find("a[class='PopupItemLink']").attr('href') + 'like')
+                            links.push($(this).find("a[class='PopupItemLink']").attr('href') + 'like')
                         });
                         async: false
                     });
