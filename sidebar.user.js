@@ -218,41 +218,20 @@ function main() {
         }
         //---------------------------- ALERT LIKING FUNCTION -------------------------------//
         function likeAlert() {
-            var url = 'https://forums.oneplus.net/account/alerts'
-            jQuery.ajaxSetup({
-                async: false
-            });
-            var alertPages = 5;
-            var links = []; //contains all the tagged / quoted links
-            getAlertLinks();
-            likeLinks();
-            //Gets the links of posts you've been tagged or quoted in
-            function getAlertLinks() {
-                for (i = 0; i <= alertPages; i++) {
-                    $.get(url + '?page=' + i, function(data) {
-                        $(data).find("h3:contains('tagged')").each(function(likes) {
-                            links.push($(this).find("a[class='PopupItemLink']").attr('href') + 'like')
-                        });
-                        async: false
-                    });
-                }
-            }
-            //Likes the links stored into the array.
-            function likeLinks() {
-                var numbLinks = links.length + 2;
-                for (t = 0; t <= numbLinks; t++) {
-                    var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
-                    jQuery.ajaxSetup({
-                        async: false
-                    });
-                    $.post(links[t], {
+            var alerts = [];
+            $.get('account/alerts?page=' + 0, function(data) {
+                var token = data.match(/_csrfToken: \"(.*)\"/)[1];
+                for (i = 0; i <= 30; i++) {
+                    alerts.push($(data).find('a.PopupItemLink').eq(i).attr('href') + 'like');
+                    console.log('Liking post: ' + alerts[i].split('/')[1])
+                    $.post(alerts[i], {
                         _xfToken: token,
                         _xfNoRedirect: 1,
                         _xfResponseType: 'json'
                     }, function(data) {});
                 }
-                alert('done');
-            }
+            });
+			alert('done')
         }
         //---------------------------- POST LIKING MENU -------------------------------//
         function option() {
