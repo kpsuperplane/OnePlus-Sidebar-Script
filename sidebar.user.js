@@ -17,6 +17,30 @@ function addJQuery(callback) {
 }
 $.fn.overflown=function(){var e=this[0];return e.scrollHeight>e.clientHeight||e.scrollWidth>e.clientWidth;}
 function main() {
+	function modal(title, content, btns){
+		this.modalObj = $('<div class="xenOverlay" style="display: block;position: fixed;left: 50%;width: 600px;margin-left: -300px;top: 50%;height: auto;"><form class="formOverlay xenForm"><div class="heading" id="redactor_modal_header">'+title+'</div><div id="redactor_modal_inner"><dl class="ctrlUnit"><div class="modal-inner-content"></div></dl><dl class="ctrlUnit submitUnit modal-btn-wrapper"></dl></div></form></div>');
+		modalObj.find('.modal-inner-content').append(content);
+		var modalMethods = {
+			close: function(){
+				modalObj.remove();
+			},
+			add: function(data){
+				modalObj.find('.modal-inner-content').append(data);
+			}
+		};
+		$.each(btns, function(index, value) {
+			var btn = $('<button class="redactor_modal_btn button" style="margin-right:5px;">'+index+'</button>');
+			if(value.type == "red"){
+				btn.addClass('primary');
+			}
+			modalObj.find('.modal-btn-wrapper').append(btn);
+			btn.click(function(){
+				btns[index].click.call(modalMethods);
+			});
+		});
+		modalObj.appendTo('body');
+		modalObj.css('margin-top', -modalObj.outerHeight()/2);
+	}
     function closeThread(batch) {
         function getWarningMsg(option, name, title) {
             if (option == 1) {
@@ -34,7 +58,7 @@ function main() {
             }
         }
 
-        function closePost(url, message) {
+        function closePost(url, message, modalObj) {
             $.get(url, function(data) {
                 var token = data.match(/_csrfToken: \"(.*)\"/)[1];
                 var dataObject = $(data);
@@ -63,7 +87,7 @@ function main() {
                         _xfResponseType: 'json'
                     }, function(data) {
                         if (batch) {
-                            modal.find('#close-messages').append('<li>Closed ' + (url.replace('https://forums.oneplus.net/threads/', '').replace('/', '').replace('-', ' ')) + '. Waiting 30 seconds...</li>');
+                            modalObj.add('<li>Closed ' + (url.replace('https://forums.oneplus.net/threads/', '').replace('/', '').replace('-', ' ')) + '. Waiting 30 seconds...</li>');
                         } else {
                             location.reload(1);
                         }
@@ -71,9 +95,7 @@ function main() {
                 });
             });
         }
-        var links = [];
-
-        function runClose() {
+        function runClose(modalObj, links) {
             window.queue = [];
             for (var i = 0; i < links.length; i++) {
                 var message = 0;
@@ -86,26 +108,42 @@ function main() {
                 window.queue.push([links[i].replace(/page-\d+/, '').split("#")[0], message]);
             }
             var thisArgs = window.queue.shift();
-            closePost(thisArgs[0], thisArgs[1]);
+            closePost(thisArgs[0], thisArgs[1], modalObj);
             if (window.queue.length != 0) {
                 window.closeInterval = setInterval(function() {
                     thisArgs = window.queue.shift();
-                    closePost(thisArgs[0], thisArgs[1]);
-                    if (window.queue.length == 0 && modal) {
+                    closePost(thisArgs[0], thisArgs[1], modalObj);
+                    if (window.queue.length == 0) {
                         alert('All thread(s) successfully closed!');
-                        modal.remove();
+                        modalObj.remove();
                         clearInterval(window.closeInterval);
                     }
                 }, 35000);
             } else {
-                if (modal) {
+                if (batch) {
                     alert('All thread(s) successfully closed!');
-                    modal.remove();
+                    modalObj.close();
                 }
             }
         }
         if (batch) {
-            var modal = $('<div class="xenOverlay" id="url_modal" style="display: block;position: fixed;left: 50%;width: 600px;margin-left: -300px;top: 50%;height: auto;margin-top: -174px;"><form class="formOverlay xenForm"><div class="heading" id="redactor_modal_header"> Autoclose </div><div id="redactor_modal_inner"><dl class="ctrlUnit"><dt> Links: </dt><dd><textarea id="postUrls" class="textCtrl" style="height: 100px;resize: none"></textarea></dd></dl><ul id="close-messages"></ul><dl class="ctrlUnit submitUnit"><dt></dt><dd><input name="upload" class="redactor_modal_btn button primary" id="redactor_insert_urls_btn" value="Close!" type="button"><a href="javascript:void(null);" class="redactor_modal_btn redactor_btn_modal_close button"> Cancel </a></dd></dl></div></form></div>');
+			var txtArea = $('<textarea id="postUrls" class="textCtrl" style="height: 100px;resize: none;display:block;width:100%;"></textarea>');
+			var modalInner = $('<div>Links:</div>');
+			modalInner.append(txtArea);
+			modal('Batch Close Threads', modalInner, {
+				'Close!': {
+					type: 'red',
+					click: function(){
+						runClose(this, txtArea.val().split("\n"));
+					}
+				},
+				'Cancel': {
+					type: 'grey',
+					click: function(){
+						this.close();
+					}
+				}
+			});
             modal.appendTo('body');
             modal.find('.redactor_btn_modal_close').click(function() {
                 modal.remove();
@@ -116,8 +154,7 @@ function main() {
                 runClose();
             });
         } else {
-            links.push(location.href);
-            runClose();
+            runClose([location.href]);
         }
     }
 
