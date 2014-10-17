@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Quick Links for OnePlus Forum Users
 // @namespace    *.oneplus.net*
-// @version      1.2
+// @version      1.3
 // @description  enter something useful
 // @author       Mikasa Ackerman aka Kallen & Kevin Pei
 // @match        *.oneplus.net*
