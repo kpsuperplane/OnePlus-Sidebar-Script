@@ -165,6 +165,67 @@ function main() {
                 document.getElementsByClassName('LikeLink item control like')[k].click();
             }
         }
+        //---------------------------- SPECIFIC USER LIKING FUNCTION -------------------------------//  
+        function likeSpecific() {
+			var userlinks = [];
+			jQuery.ajaxSetup({
+			    async: false
+			});
+			try {
+		        document.getElementsByClassName('PageNav')[0].getAttribute('data-last')
+		        var pages = parseInt(document.getElementsByClassName('PageNav')[0].getAttribute('data-last')) + 2;
+		    } catch (err) {
+		        var pages = 1;
+		    }
+		    var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/'
+			var menu=$('<div class="xenOverlay" id="likePopup" style="display: block;position: fixed;left: 50%;width: 600px;margin-left: -300px;top: 50%;height: auto;margin-top: -174px;"><form class="formOverlay xenForm"><div class="heading" id="redactor_modal_header"> Whoms posts should I like? </div><br>Enter username<div id="redactor_modal_inner"><dl class="ctrlUnit"><dt> Answer: </dt><dd><textarea id="likeUser" class="textCtrl" style="height: 30px;resize: none"></textarea></dd></dl><ul id="close-messages"></ul><dl class="ctrlUnit submitUnit"><dt></dt><dd><input name="upload" class="redactor_modal_btn button primary" id="redactor_like_btn" value="Like!" type="button"><a href="javascript:void(null);" class="redactor_modal_btn redactor_btn_modal_close button"> Cancel </a></dd></dl></div></form></div>');
+		    menu.appendTo('body');
+		    menu.find('.redactor_btn_modal_close').click(function() {
+		        menu.remove();
+		    });
+		    menu.find('#redactor_like_btn').click(function() {
+		        menu.find('.button').remove();
+		        name = menu.find('#likeUser').val()
+		        menu.remove();
+		        getUserLinks();
+		    });
+
+			function getUserLinks() {
+				jQuery.ajaxSetup({
+			    	async: false
+				});
+				for (i = 1; i <= pages; i++) {
+					$.get(url + 'page-' + i, function(data) {
+						$.expr[":"].contains = $.expr.createPseudo(function(arg) {
+						    return function( elem ) {
+						        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+						    };
+						});
+						$(data).find("li:contains("+name+")").each(function() {
+							userlinks.push($(this).find('a[class="LikeLink item control like"]').attr('href'));
+							console.log($(this).find('a[class="LikeLink item control like"]').attr('href'))
+						});
+					})
+				}
+				likeLinks();
+			}
+
+			function likeLinks() {
+			    var numbLinks = userlinks.length + 2;
+			    for (t = 0; t <= numbLinks; t++) {
+			        var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
+			        jQuery.ajaxSetup({
+			            async: false
+			        });
+			        $.post(userlinks[t], {
+			            _xfToken: token,
+			            _xfNoRedirect: 1,
+			            _xfResponseType: 'json'
+			        }, function(data) {});
+			    }
+			    alert('done');
+			}
+		}
         //---------------------------- THREAD LIKING FUNCTION -------------------------------//  
         function likeThreadPosts() {
             var links = [];
@@ -272,14 +333,25 @@ function main() {
         }
         //---------------------------- POST LIKING MENU -------------------------------//
         function option() {
-            var menu = window.prompt("Choose an option below.\n1. Like all posts on page.\n2. like all posts in thread.\n3. Like posts from this page forward");
-            if (menu == 1) {
-                like();
-            } else if (menu == 2) {
-                likeThreadPosts();
-            } else if (menu == 3) {
-                likeForward();
-            }
+            var menu=$('<div class="xenOverlay" id="likePopup" style="display: block;position: fixed;left: 50%;width: 600px;margin-left: -300px;top: 50%;height: auto;margin-top: -174px;"><form class="formOverlay xenForm"><div class="heading" id="redactor_modal_header"> Choose an option below. </div><br>1. Like all posts on page.<br>2. like all posts in thread.<br>3. Like posts from this page forward<br>4. Like all posts by specific user<div id="redactor_modal_inner"><dl class="ctrlUnit"><dt> Answer: </dt><dd><textarea id="likeType" class="textCtrl" style="height: 30px;resize: none"></textarea></dd></dl><ul id="close-messages"></ul><dl class="ctrlUnit submitUnit"><dt></dt><dd><input name="upload" class="redactor_modal_btn button primary" id="redactor_like_btn" value="Like!" type="button"><a href="javascript:void(null);" class="redactor_modal_btn redactor_btn_modal_close button"> Cancel </a></dd></dl></div></form></div>');
+            menu.appendTo('body');
+            menu.find('.redactor_btn_modal_close').click(function() {
+                menu.remove();
+            });
+            menu.find('#redactor_like_btn').click(function() {
+                menu.find('.button').remove();
+                likeChoice = menu.find('#likeType').val()
+                if (likeChoice == 1) {
+                    like();
+                } else if (likeChoice == 2) {
+                    likeThreadPosts();
+                } else if (likeChoice == 3) {
+                    likeForward();
+                } else if (likeChoice == 4) {
+                	likeSpecific();
+                }
+                menu.remove();
+            });
         }
         if (method == "allPosts") {
             option();
