@@ -95,7 +95,7 @@ function main() {
                 });
             });
         }
-        function runClose(modalObj, links) {
+        function runClose(links, modalObj) {
             window.queue = [];
             for (var i = 0; i < links.length; i++) {
                 var message = 0;
@@ -134,7 +134,7 @@ function main() {
 				'Close!': {
 					type: 'red',
 					click: function(){
-						runClose(this, txtArea.val().split("\n"));
+						runClose(txtArea.val().split("\n"), this);
 					}
 				},
 				'Cancel': {
