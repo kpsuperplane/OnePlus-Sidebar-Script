@@ -178,25 +178,7 @@ function main() {
 		    } catch (err) {
 		        var pages = 1;
 		    }
-		    var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/';
-			var usernameInput = $('<input type="text" style="width:100%;"/>');
-			modal('Enter username', usernameInput, {
-				'Like!': {
-					type: 'red',
-					click: function(){
-						name = usernameInput.val();
-						getUserLinks();
-						this.close();
-					}
-				},
-				'Cancel': {
-					type: 'grey',
-					click: function(){
-						this.close();
-					}
-				}
-			});
-			function getUserLinks() {
+			function getSpecificUserLinks() {
 				jQuery.ajaxSetup({
 			    	async: false
 				});
@@ -213,10 +195,10 @@ function main() {
 						});
 					})
 				}
-				likeLinks();
+				likeSpecificLinks();
 			}
 
-			function likeLinks() {
+			function likeSpecificLinks() {
 			    var numbLinks = userlinks.length + 2;
 			    for (t = 0; t <= numbLinks; t++) {
 			        var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
@@ -231,6 +213,24 @@ function main() {
 			    }
 			    alert('done');
 			}
+		    var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/';
+			var usernameInput = $('<input type="text" style="width:100%;"/>');
+			modal('Enter username', usernameInput, {
+				'Like!': {
+					type: 'red',
+					click: function(){
+						name = usernameInput.val();
+						getSpecificUserLinks();
+						this.close();
+					}
+				},
+				'Cancel': {
+					type: 'grey',
+					click: function(){
+						this.close();
+					}
+				}
+			});
 		}
         //---------------------------- THREAD LIKING FUNCTION -------------------------------//  
         function likeThreadPosts() {
