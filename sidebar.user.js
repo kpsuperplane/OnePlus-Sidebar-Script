@@ -4,7 +4,6 @@
 // @version      1.3.1
 // @description  enter something useful
 // @author       Mikasa Ackerman aka Kallen & Kevin Pei
-// @match        *forums.oneplus.net*
 // @include      *forums.oneplus.net*
 // @grant        none
 // @license      MIT License; http://opensource.org/licenses/MIT
