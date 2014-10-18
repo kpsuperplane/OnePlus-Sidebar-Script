@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         Quick Links for OnePlus Forum Users
 // @namespace    *.oneplus.net*
-// @version      1.3
+// @version      1.3.1
 // @description  enter something useful
 // @author       Mikasa Ackerman aka Kallen & Kevin Pei
-// @match        *.oneplus.net*
-// @include        *.oneplus.net*
+// @match        *forums.oneplus.net*
+// @include      *forums.oneplus.net*
 // @grant        none
+// @license      MIT License; http://opensource.org/licenses/MIT
 // ==/UserScript==
 //ADD JQUERY SCRIPT ADAPTED FROM https://gist.github.com/eristoddle/4440713
 function addJQuery(callback) {
@@ -15,7 +16,6 @@ function addJQuery(callback) {
     script.textContent = "(" + callback.toString() + ")();";
     document.body.appendChild(script);
 }
-$.fn.overflown=function(){var e=this[0];return e.scrollHeight>e.clientHeight||e.scrollWidth>e.clientWidth;}
 function main() {
 	function modal(title, content, btns){
 		this.overlayObj = $('<div id="redactor_modal_overlay"></div>');
