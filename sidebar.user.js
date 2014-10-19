@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Quick Links for OnePlus Forum Users
 // @namespace    *.oneplus.net*
-// @version      1.3.1
+// @version      1.3.2
 // @description  enter something useful
-// @author       Mikasa Ackerman aka Kallen & Kevin Pei
+// @author       Mikasa Ackerman aka Kallen, Kevin Pei & Sam Prescott aka sp99
 // @include      *forums.oneplus.net*
 // @grant        none
 // @license      MIT License; http://opensource.org/licenses/MIT
@@ -416,6 +416,19 @@ function main() {
             like('alerts');
         });
     });
+    
+    //Notifications
+    var nBar = new sidebar("Notifications");
+    nBar.add($('<span> On first page of alerts:</span>'))
+    $.get('/account/alerts?page=' + 0, function(data) {
+    var tagNum = $(data).find("h3:contains('tagged')").length
+    var likeNum = $(data).find("h3:contains('liked')").length
+    var quoteNum = $(data).find("h3:contains('quoted')").length
+    nBar.add($('<span> Tags: '+tagNum+'</span>'))
+    nBar.add($('<span> Likes: '+likeNum+'</span>'))
+    nBar.add($('<span> Quotes: '+quoteNum+'</span>'))
+    })
+    
     //Mod Tools
     var moderatorTools = new sidebar("Moderator Tools");
     moderatorTools.add($('<a href="javascript:void(0);">Close Current Thread</a>'), function(elem) {
