@@ -3,7 +3,7 @@
 // @namespace    *.oneplus.net*
 // @version      1.3.2
 // @description  enter something useful
-// @author       Mikasa Ackerman aka Kallen, Kevin Pei & Sam Prescott aka sp99
+// @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99
 // @include      *forums.oneplus.net*
 // @grant        none
 // @license      MIT License; http://opensource.org/licenses/MIT
@@ -17,8 +17,8 @@ function addJQuery(callback) {
 }
 function main() {
 	function modal(title, content, btns){
-		this.overlayObj = $('<div id="redactor_modal_overlay"></div>');
-		this.modalObj = $('<div class="xenOverlay" style="display: block;position: fixed;left: 50%;width: 600px;z-index:209999;margin-left: -300px;top: 50%;height: auto;"><form class="formOverlay xenForm"><div class="heading" id="redactor_modal_header">'+title+'</div><div id="redactor_modal_inner"><dl class="ctrlUnit"><div class="modal-inner-content"></div></dl><dl class="ctrlUnit submitUnit modal-btn-wrapper"></dl></div></form></div>');
+		var overlayObj = $('<div id="redactor_modal_overlay"></div>');
+		var modalObj = $('<div class="xenOverlay" style="display: block;position: fixed;left: 50%;width: 600px;z-index:209999;margin-left: -300px;top: 50%;height: auto;"><form class="formOverlay xenForm"><div class="heading" id="redactor_modal_header">'+title+'</div><div id="redactor_modal_inner"><dl class="ctrlUnit"><div class="modal-inner-content"></div></dl><dl class="ctrlUnit submitUnit modal-btn-wrapper"></dl></div></form></div>');
 		modalObj.find('.modal-inner-content').append(content);
 		var modalMethods = {
 			close: function(){
@@ -29,6 +29,7 @@ function main() {
 				modalObj.find('.modal-inner-content').append(data);
 			}
 		};
+		this.methods = modalMethods;
 		$.each(btns, function(index, value) {
 			var btn = $('<button class="redactor_modal_btn button" style="margin-right:5px;">'+index+'</button>');
 			if(value.type == "red"){
@@ -180,6 +181,8 @@ function main() {
 		    } catch (err) {
 		        var pages = 1;
 		    }
+			var modalProgress = $('<div></div>');
+			var progressModal;
 			function getSpecificUserLinks() {
 				jQuery.ajaxSetup({
 			    	async: false
@@ -191,11 +194,12 @@ function main() {
 						        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
 						    };
 						});
-						$(data).find("li:contains("+name+")").each(function() {
+						$(data.replace(/<img[^>]*>/g,"")).find("li:contains("+name+")").each(function() {
 							userlinks.push($(this).find('a[class="LikeLink item control like"]').attr('href'));
 							console.log($(this).find('a[class="LikeLink item control like"]').attr('href'))
 						});
-					})
+					});
+					modalProgress.text('Checking Page '+i+' of '+pages+'...');
 				}
 				likeSpecificLinks();
 			}
@@ -212,18 +216,21 @@ function main() {
 			            _xfNoRedirect: 1,
 			            _xfResponseType: 'json'
 			        }, function(data) {});
+					modalProgress.text('Liking '+t+'/'+numbLinks+' ('+Math.round(t*100/numbLinks)+'%)');
 			    }
-			    alert('done');
 			}
 		    var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/';
 			var usernameInput = $('<input type="text" style="width:100%;"/>');
-			modal('Enter username', usernameInput, {
+			new modal('Enter username', usernameInput, {
 				'Like!': {
 					type: 'red',
 					click: function(){
+						this.close();
+						progressModal = new modal('Liking..', modalProgress, {});
 						name = usernameInput.val();
 						getSpecificUserLinks();
-						this.close();
+						progressModal.methods.close();
+						alert('done');
 					}
 				},
 				'Cancel': {
@@ -246,19 +253,23 @@ function main() {
             } catch (err) {
                 var pages = 1;
             }
-            var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/'
+            var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/';
+			var modalProgress = $('<div></div>');
+			var progressModal = new modal('Liking..', modalProgress, {});
             getLikeURLs();
             likeLinks();
-
+			progressModal.methods.close();
+			alert('done');
             function getLikeURLs() {
                 for (i = 1; i <= pages; i++) {
                     $.get(url + 'page-' + i, function(data) {
                         //gets the like links from current page
-                        $(data).find('a[class="LikeLink item control like"]').each(function() {
+                        $(data.replace(/<img[^>]*>/g,"")).find('a[class="LikeLink item control like"]').each(function() {
                             links.push($(this).attr('href')); // get the normalized `href` property; fastest solution
                         });
                         async: false
                     });
+					modalProgress.text('Checking Page '+i+' of '+pages+'...');
                 }
             }
 
@@ -274,8 +285,8 @@ function main() {
                         _xfNoRedirect: 1,
                         _xfResponseType: 'json'
                     }, function(data) {});
+					modalProgress.text('Liking '+t+'/'+numbLinks+' ('+Math.round(t*100/numbLinks)+'%)');
                 }
-                alert('done');
             }
         }
         //---------------------------- FORWARD POST LIKING FUNCTION -------------------------------//
@@ -291,35 +302,40 @@ function main() {
                 var pages = 1;
             }
             var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/'
-            getForward();
-            likeLinks();
-
-            function getForward() {
+			var modalProgress = $('<div></div>');
+			var progressModal = new modal('Liking..', modalProgress, {});
+			console.log(progressModal);
+            getForward(modalProgress);
+            likeLinks(modalProgress);
+			jQuery.ajaxSetup({
+				async: false
+			});
+			progressModal.methods.close();
+			alert('done');
+            function getForward(modalProgress) {
                 for (i = parseInt(document.getElementsByClassName('PageNav')[0].getAttribute('data-end')); i <= pages; i++) {
                     $.get(url + 'page-' + i, function(data) {
                         //gets the like links from current page
-                        $(data).find('a[class="LikeLink item control like"]').each(function() {
+                        $(data.replace(/<img[^>]*>/g,"")).find('a[class="LikeLink item control like"]').each(function() {
                             links.push($(this).attr('href')); // get the normalized `href` property; fastest solution
                         });
                         async: false
                     });
+					modalProgress.text('Checking Page '+i+' of '+pages+'...');
                 }
             }
-
-            function likeLinks() {
+            function likeLinks(modalProgress) {
+				console.log(progressModal);
                 var numbLinks = links.length + 2;
                 for (t = 0; t <= numbLinks; t++) {
-                    var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
-                    jQuery.ajaxSetup({
-                        async: false
-                    });
+                    var token = document.getElementsByName('_xfToken')[0].getAttribute('value');
                     $.post(links[t], {
                         _xfToken: token,
                         _xfNoRedirect: 1,
                         _xfResponseType: 'json'
                     }, function(data) {});
+					modalProgress.text('Liking '+t+'/'+numbLinks+' ('+Math.round(t*100/numbLinks)+'%)');
                 }
-                alert('done');
             }
         }
         //---------------------------- ALERT LIKING FUNCTION -------------------------------//
@@ -343,7 +359,7 @@ function main() {
         function option() {
 			var selection = $('<select style="width:100%;"><option value="1">Like all posts on page</option><option value="2">Like all posts in thread</option><option value="3">Like posts from this page forward</option><option value="4">Like all posts by specific user</option></select>');
 			var modalContent = $('<div></div>').append(selection);
-			modal('Choose an option below', modalContent, {
+			new modal('Choose an option below', modalContent, {
 				'Like!': {
 					type: 'red',
 					click: function(){
