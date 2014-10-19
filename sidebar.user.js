@@ -331,7 +331,6 @@ function main() {
                         actualCount++;
                         modalProgress.text('Checking Page '+actualCount+' of '+pages+'...');
                         if(actualCount == pages){
-							console.log(links.length);
 							if(links.length > 50){
 								if(confirm("DISCLAIMER/WARNING: You are about to give more than 50 likes. We the script creator's will not be responsible for any possible repercussions. Would you like to proceed?")){
 									likeLinks(modalProgress);
@@ -461,7 +460,7 @@ function main() {
     quickLinks.add($('<a href="/account/following">Following</a>'));
     quickLinks.add($('<a href="/watched/threads">Watched Threads</a>'));
     quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
-    //Misc. Tools
+    /*Misc. Tools
     var miscTools = new sidebar("Misc. Tools");
     miscTools.add($('<a href="javascript:void(0);">Like All Posts</a>'), function(elem) {
         elem.click(function() {
@@ -472,7 +471,7 @@ function main() {
         elem.click(function() {
             like('alerts');
         });
-    });
+    });*/
 
     //Notifications
     var nBar = new sidebar("Notifications");
