@@ -269,7 +269,7 @@ function main() {
                                 setTimeout(function(){sendBatch();}, 200);
                             }
                             modalProgress.text('Liking '+t+'/'+numbLinks+' ('+Math.round(t*100/numbLinks)+'%)');
-                            if(actualLoad >= numbLinks){
+                            if(actualLoad == numbLinks){
                                 progressModal.methods.close();
                                 alert('done');
                             }
