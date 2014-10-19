@@ -282,7 +282,7 @@ function main() {
                 sendBatch();
             }
             function getLikeURLs(modalProgress) {
-                var actualCount = 10;
+                var actualCount = 0;
                 for (i = 1; i <= pages; i++) {
                     $.get(url + 'page-' + i, function(data) {
                         //gets the like links from current page
