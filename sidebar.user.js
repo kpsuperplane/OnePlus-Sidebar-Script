@@ -16,35 +16,35 @@ function addJQuery(callback) {
     document.body.appendChild(script);
 }
 function main() {
-	function modal(title, content, btns){
-		var overlayObj = $('<div id="redactor_modal_overlay"></div>');
-		var modalObj = $('<div class="xenOverlay" style="display: block;position: fixed;left: 50%;width: 600px;z-index:209999;margin-left: -300px;top: 50%;height: auto;"><form class="formOverlay xenForm"><div class="heading" id="redactor_modal_header">'+title+'</div><div id="redactor_modal_inner"><dl class="ctrlUnit"><div class="modal-inner-content"></div></dl><dl class="ctrlUnit submitUnit modal-btn-wrapper"></dl></div></form></div>');
-		modalObj.find('.modal-inner-content').append(content);
-		var modalMethods = {
-			close: function(){
-				modalObj.remove();
-				overlayObj.remove();
-			},
-			add: function(data){
-				modalObj.find('.modal-inner-content').append(data);
-			}
-		};
-		this.methods = modalMethods;
-		$.each(btns, function(index, value) {
-			var btn = $('<button class="redactor_modal_btn button" style="margin-right:5px;">'+index+'</button>');
-			if(value.type == "red"){
-				btn.addClass('primary');
-			}
-			modalObj.find('.modal-btn-wrapper').append(btn);
-			btn.click(function(e){
-				e.preventDefault();
-				btns[index].click.call(modalMethods);
-			});
-		});
-		overlayObj.appendTo('body');
-		modalObj.appendTo('body');
-		modalObj.css('margin-top', -modalObj.outerHeight()/2);
-	}
+    function modal(title, content, btns){
+        var overlayObj = $('<div id="redactor_modal_overlay"></div>');
+        var modalObj = $('<div class="xenOverlay" style="display: block;position: fixed;left: 50%;width: 600px;z-index:209999;margin-left: -300px;top: 50%;height: auto;"><form class="formOverlay xenForm"><div class="heading" id="redactor_modal_header">'+title+'</div><div id="redactor_modal_inner"><dl class="ctrlUnit"><div class="modal-inner-content"></div></dl><dl class="ctrlUnit submitUnit modal-btn-wrapper"></dl></div></form></div>');
+        modalObj.find('.modal-inner-content').append(content);
+        var modalMethods = {
+            close: function(){
+                modalObj.remove();
+                overlayObj.remove();
+            },
+            add: function(data){
+                modalObj.find('.modal-inner-content').append(data);
+            }
+        };
+        this.methods = modalMethods;
+        $.each(btns, function(index, value) {
+            var btn = $('<button class="redactor_modal_btn button" style="margin-right:5px;">'+index+'</button>');
+            if(value.type == "red"){
+                btn.addClass('primary');
+            }
+            modalObj.find('.modal-btn-wrapper').append(btn);
+            btn.click(function(e){
+                e.preventDefault();
+                btns[index].click.call(modalMethods);
+            });
+        });
+        overlayObj.appendTo('body');
+        modalObj.appendTo('body');
+        modalObj.css('margin-top', -modalObj.outerHeight()/2);
+    }
     function closeThread(batch) {
         function getWarningMsg(option, name, title) {
             if (option == 1) {
@@ -131,23 +131,23 @@ function main() {
             }
         }
         if (batch) {
-			var txtArea = $('<textarea id="postUrls" class="textCtrl" style="height: 100px;resize: none;display:block;width:100%;"></textarea>');
-			var modalInner = $('<div>Links:</div>');
-			modalInner.append(txtArea);
-			modal('Batch Close Threads', modalInner, {
-				'Close!': {
-					type: 'red',
-					click: function(){
-						runClose(txtArea.val().split("\n"), this);
-					}
-				},
-				'Cancel': {
-					type: 'grey',
-					click: function(){
-						this.close();
-					}
-				}
-			});
+            var txtArea = $('<textarea id="postUrls" class="textCtrl" style="height: 100px;resize: none;display:block;width:100%;"></textarea>');
+            var modalInner = $('<div>Links:</div>');
+            modalInner.append(txtArea);
+            modal('Batch Close Threads', modalInner, {
+                'Close!': {
+                    type: 'red',
+                    click: function(){
+                        runClose(txtArea.val().split("\n"), this);
+                    }
+                },
+                'Cancel': {
+                    type: 'grey',
+                    click: function(){
+                        this.close();
+                    }
+                }
+            });
             modal.appendTo('body');
             modal.find('.redactor_btn_modal_close').click(function() {
                 modal.remove();
@@ -171,82 +171,75 @@ function main() {
         }
         //---------------------------- SPECIFIC USER LIKING FUNCTION -------------------------------//  
         function likeSpecific() {
-			var userlinks = [];
-			jQuery.ajaxSetup({
-			    async: false
-			});
-			try {
-		        document.getElementsByClassName('PageNav')[0].getAttribute('data-last')
-		        var pages = parseInt(document.getElementsByClassName('PageNav')[0].getAttribute('data-last')) + 2;
-		    } catch (err) {
-		        var pages = 1;
-		    }
-			var modalProgress = $('<div></div>');
-			var progressModal;
-			function getSpecificUserLinks() {
-				jQuery.ajaxSetup({
-			    	async: false
-				});
-				for (i = 1; i <= pages; i++) {
-					$.get(url + 'page-' + i, function(data) {
-						$.expr[":"].contains = $.expr.createPseudo(function(arg) {
-						    return function( elem ) {
-						        return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-						    };
-						});
-						$(data.replace(/<img[^>]*>/g,"")).find("li:contains("+name+")").each(function() {
-							userlinks.push($(this).find('a[class="LikeLink item control like"]').attr('href'));
-							console.log($(this).find('a[class="LikeLink item control like"]').attr('href'))
-						});
-					});
-					modalProgress.text('Checking Page '+i+' of '+pages+'...');
-				}
-				likeSpecificLinks();
-			}
+            var userlinks = [];
+            try {
+                document.getElementsByClassName('PageNav')[0].getAttribute('data-last')
+                var pages = parseInt(document.getElementsByClassName('PageNav')[0].getAttribute('data-last')) + 2;
+            } catch (err) {
+                var pages = 1;
+            }
+            var modalProgress = $('<div></div>');
+            var progressModal;
+            function getSpecificUserLinks() {
+                jQuery.ajaxSetup({
+                    async: false
+                });
+                for (i = 1; i <= pages; i++) {
+                    $.get(url + 'page-' + i, function(data) {
+                        $.expr[":"].contains = $.expr.createPseudo(function(arg) {
+                            return function( elem ) {
+                                return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+                            };
+                        });
+                        $(data.replace(/<img[^>]*>/g,"")).find("li:contains("+name+")").each(function() {
+                            userlinks.push($(this).find('a[class="LikeLink item control like"]').attr('href'));
+                        });
+                    });
+                    modalProgress.text('Checking Page '+i+' of '+pages+'...');
+                }
+                likeSpecificLinks();
+            }
 
-			function likeSpecificLinks() {
-			    var numbLinks = userlinks.length + 2;
-			    for (t = 0; t <= numbLinks; t++) {
-			        var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
-			        jQuery.ajaxSetup({
-			            async: false
-			        });
-			        $.post(userlinks[t], {
-			            _xfToken: token,
-			            _xfNoRedirect: 1,
-			            _xfResponseType: 'json'
-			        }, function(data) {});
-					modalProgress.text('Liking '+t+'/'+numbLinks+' ('+Math.round(t*100/numbLinks)+'%)');
-			    }
-			}
-		    var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/';
-			var usernameInput = $('<input type="text" style="width:100%;"/>');
-			new modal('Enter username', usernameInput, {
-				'Like!': {
-					type: 'red',
-					click: function(){
-						this.close();
-						progressModal = new modal('Liking..', modalProgress, {});
-						name = usernameInput.val();
-						getSpecificUserLinks();
-						progressModal.methods.close();
-						alert('done');
-					}
-				},
-				'Cancel': {
-					type: 'grey',
-					click: function(){
-						this.close();
-					}
-				}
-			});
-		}
+            function likeSpecificLinks() {
+                var numbLinks = userlinks.length + 2;
+                for (t = 0; t <= numbLinks; t++) {
+                    var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
+                    jQuery.ajaxSetup({
+                        async: false
+                    });
+                    $.post(userlinks[t], {
+                        _xfToken: token,
+                        _xfNoRedirect: 1,
+                        _xfResponseType: 'json'
+                    }, function(data) {});
+                    modalProgress.text('Liking '+t+'/'+numbLinks+' ('+Math.round(t*100/numbLinks)+'%)');
+                }
+            }
+            var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/';
+            var usernameInput = $('<input type="text" style="width:100%;"/>');
+            new modal('Enter username', usernameInput, {
+                'Like!': {
+                    type: 'red',
+                    click: function(){
+                        this.close();
+                        progressModal = new modal('Liking..', modalProgress, {});
+                        name = usernameInput.val();
+                        getSpecificUserLinks();
+                        progressModal.methods.close();
+                        alert('done');
+                    }
+                },
+                'Cancel': {
+                    type: 'grey',
+                    click: function(){
+                        this.close();
+                    }
+                }
+            });
+        }
         //---------------------------- THREAD LIKING FUNCTION -------------------------------//  
         function likeThreadPosts() {
             var links = [];
-            jQuery.ajaxSetup({
-                async: false
-            });
             try {
                 document.getElementsByClassName('PageNav')[0].getAttribute('data-last')
                 var pages = parseInt(document.getElementsByClassName('PageNav')[0].getAttribute('data-last')) + 2;
@@ -254,47 +247,70 @@ function main() {
                 var pages = 1;
             }
             var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/';
-			var modalProgress = $('<div></div>');
-			var progressModal = new modal('Liking..', modalProgress, {});
-            getLikeURLs();
-            likeLinks();
-			progressModal.methods.close();
-			alert('done');
-            function getLikeURLs() {
+            var modalProgress = $('<div></div>');
+            var progressModal = new modal('Liking..', modalProgress, {});
+            function likeLinks(modalProgress) {
+                var numbLinks = links.length + 2;
+                var actualLoad = 0;
+                function sendBatch(){
+                    var batchLoaded = 0;
+                    for (i = 0; i <= 500; i++) {
+						console.log(i);
+                        t = actualLoad + i;
+                        var token = document.getElementsByName('_xfToken')[0].getAttribute('value');
+                        $.post(links[t], {
+                            _xfToken: token,
+                            _xfNoRedirect: 1,
+                            _xfResponseType: 'json'
+                        }, function(data) {
+                            actualLoad++;
+                            batchLoaded++;
+                            if(batchLoaded == 500){
+                                setTimeout(function(){sendBatch();}, 200);
+                            }
+                            modalProgress.text('Liking '+t+'/'+numbLinks+' ('+Math.round(t*100/numbLinks)+'%)');
+                            if(actualLoad >= numbLinks){
+                                progressModal.methods.close();
+                                alert('done');
+                            }
+                        });
+                        if(t > numbLinks){
+                            break;
+                        }
+                    }
+                }
+                sendBatch();
+            }
+            function getLikeURLs(modalProgress) {
+                var actualCount = 10;
                 for (i = 1; i <= pages; i++) {
                     $.get(url + 'page-' + i, function(data) {
                         //gets the like links from current page
                         $(data.replace(/<img[^>]*>/g,"")).find('a[class="LikeLink item control like"]').each(function() {
                             links.push($(this).attr('href')); // get the normalized `href` property; fastest solution
                         });
-                        async: false
+                        actualCount++;
+                        modalProgress.text('Checking Page '+actualCount+' of '+pages+'...');
+                        if(actualCount == pages){
+							if(links.length > 50){
+								if(confirm("DISCLAIMER/WARNING: You are about to give more than 50 likes. We the script creator's will not be responsible for any possible repercussions. Would you like to proceed?")){
+									likeLinks(modalProgress);
+								}else{
+									progressModal.methods.close();
+									
+								}
+							}else{
+								likeLinks(modalProgress);
+							}
+                        }
                     });
-					modalProgress.text('Checking Page '+i+' of '+pages+'...');
                 }
             }
-
-            function likeLinks() {
-                var numbLinks = links.length + 2;
-                for (t = 0; t <= numbLinks; t++) {
-                    var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
-                    jQuery.ajaxSetup({
-                        async: false
-                    });
-                    $.post(links[t], {
-                        _xfToken: token,
-                        _xfNoRedirect: 1,
-                        _xfResponseType: 'json'
-                    }, function(data) {});
-					modalProgress.text('Liking '+t+'/'+numbLinks+' ('+Math.round(t*100/numbLinks)+'%)');
-                }
-            }
+            getLikeURLs(modalProgress);
         }
         //---------------------------- FORWARD POST LIKING FUNCTION -------------------------------//
         function likeForward() {
             var links = [];
-            jQuery.ajaxSetup({
-                async: false
-            });
             try {
                 document.getElementsByClassName('PageNav')[0].getAttribute('data-last')
                 var pages = parseInt(document.getElementsByClassName('PageNav')[0].getAttribute('data-last'));
@@ -302,41 +318,66 @@ function main() {
                 var pages = 1;
             }
             var url = '/' + window.location.pathname.split('/')[1] + '/' + window.location.pathname.split('/')[2] + '/'
-			var modalProgress = $('<div></div>');
-			var progressModal = new modal('Liking..', modalProgress, {});
-			console.log(progressModal);
-            getForward(modalProgress);
-            likeLinks(modalProgress);
-			jQuery.ajaxSetup({
-				async: false
-			});
-			progressModal.methods.close();
-			alert('done');
+            var modalProgress = $('<div></div>');
+            var progressModal = new modal('Liking..', modalProgress, {});
             function getForward(modalProgress) {
+                var actualCount = parseInt(document.getElementsByClassName('PageNav')[0].getAttribute('data-end'));
                 for (i = parseInt(document.getElementsByClassName('PageNav')[0].getAttribute('data-end')); i <= pages; i++) {
                     $.get(url + 'page-' + i, function(data) {
                         //gets the like links from current page
                         $(data.replace(/<img[^>]*>/g,"")).find('a[class="LikeLink item control like"]').each(function() {
                             links.push($(this).attr('href')); // get the normalized `href` property; fastest solution
                         });
-                        async: false
+                        actualCount++;
+                        modalProgress.text('Checking Page '+actualCount+' of '+pages+'...');
+                        if(actualCount == pages){
+							console.log(links.length);
+							if(links.length > 50){
+								if(confirm("DISCLAIMER/WARNING: You are about to give more than 50 likes. We the script creator's will not be responsible for any possible repercussions. Would you like to proceed?")){
+									likeLinks(modalProgress);
+								}else{
+									progressModal.methods.close();
+								}
+							}else{
+								likeLinks(modalProgress);
+							}
+                        }
                     });
-					modalProgress.text('Checking Page '+i+' of '+pages+'...');
                 }
             }
             function likeLinks(modalProgress) {
-				console.log(progressModal);
                 var numbLinks = links.length + 2;
-                for (t = 0; t <= numbLinks; t++) {
-                    var token = document.getElementsByName('_xfToken')[0].getAttribute('value');
-                    $.post(links[t], {
-                        _xfToken: token,
-                        _xfNoRedirect: 1,
-                        _xfResponseType: 'json'
-                    }, function(data) {});
-					modalProgress.text('Liking '+t+'/'+numbLinks+' ('+Math.round(t*100/numbLinks)+'%)');
+                var actualLoad = 0;
+                function sendBatch(){
+                    var batchLoaded = 0;
+                    for (i = 0; i <= 500; i++) {
+                        t = actualLoad + i;
+						console.log(t);
+                        var token = document.getElementsByName('_xfToken')[0].getAttribute('value');
+                        $.post(links[t], {
+                            _xfToken: token,
+                            _xfNoRedirect: 1,
+                            _xfResponseType: 'json'
+                        }, function(data) {
+                            actualLoad++;
+                            batchLoaded++;
+                            if(batchLoaded == 500){
+                                setTimeout(function(){sendBatch();}, 200);
+                            }
+                            modalProgress.text('Liking '+t+'/'+numbLinks+' ('+Math.round(t*100/numbLinks)+'%)');
+                            if(actualLoad >= numbLinks){
+                                progressModal.methods.close();
+                                alert('done');
+                            }
+                        });
+                        if(t > numbLinks){
+                            break;
+                        }
+                    }
                 }
+                sendBatch();
             }
+            getForward(modalProgress);
         }
         //---------------------------- ALERT LIKING FUNCTION -------------------------------//
         function likeAlert() {
@@ -353,36 +394,36 @@ function main() {
                     }, function(data) {});
                 }
             });
-			alert('done')
+            alert('done')
         }
         //---------------------------- POST LIKING MENU -------------------------------//
         function option() {
-			var selection = $('<select style="width:100%;"><option value="1">Like all posts on page</option><option value="2">Like all posts in thread</option><option value="3">Like posts from this page forward</option><option value="4">Like all posts by specific user</option></select>');
-			var modalContent = $('<div></div>').append(selection);
-			new modal('Choose an option below', modalContent, {
-				'Like!': {
-					type: 'red',
-					click: function(){
-						this.close();
-						var likeChoice = Number(selection.find('option:selected').val());
-						if (likeChoice == 1) {
-							like();
-						} else if (likeChoice == 2) {
-							likeThreadPosts();
-						} else if (likeChoice == 3) {
-							likeForward();
-						} else if (likeChoice == 4) {
-							likeSpecific();
-						}
-					}
-				},
-				'Cancel': {
-					type: 'grey',
-					click: function(){
-						this.close();
-					}
-				}
-			});
+            var selection = $('<select style="width:100%;"><option value="1">Like all posts on page</option><option value="2">Like all posts in thread</option><option value="3">Like posts from this page forward</option><option value="4">Like all posts by specific user</option></select>');
+            var modalContent = $('<div></div>').append(selection);
+            new modal('Choose an option below', modalContent, {
+                'Like!': {
+                    type: 'red',
+                    click: function(){
+                        this.close();
+                        var likeChoice = Number(selection.find('option:selected').val());
+                        if (likeChoice == 1) {
+                            like();
+                        } else if (likeChoice == 2) {
+                            likeThreadPosts();
+                        } else if (likeChoice == 3) {
+                            likeForward();
+                        } else if (likeChoice == 4) {
+                            likeSpecific();
+                        }
+                    }
+                },
+                'Cancel': {
+                    type: 'grey',
+                    click: function(){
+                        this.close();
+                    }
+                }
+            });
         }
         if (method == "allPosts") {
             option();
@@ -432,19 +473,19 @@ function main() {
             like('alerts');
         });
     });
-    
+
     //Notifications
     var nBar = new sidebar("Notifications");
     nBar.add($('<span> On first page of alerts:</span>'))
     $.get('/account/alerts?page=' + 0, function(data) {
-    var tagNum = $(data).find("h3:contains('tagged')").length
-    var likeNum = $(data).find("h3:contains('liked')").length
-    var quoteNum = $(data).find("h3:contains('quoted')").length
-    nBar.add($('<span> Tags: '+tagNum+'</span>'))
-    nBar.add($('<span> Likes: '+likeNum+'</span>'))
-    nBar.add($('<span> Quotes: '+quoteNum+'</span>'))
+        var tagNum = $(data).find("h3:contains('tagged')").length
+        var likeNum = $(data).find("h3:contains('liked')").length
+        var quoteNum = $(data).find("h3:contains('quoted')").length
+        nBar.add($('<span> Tags: '+tagNum+'</span>'))
+        nBar.add($('<span> Likes: '+likeNum+'</span>'))
+        nBar.add($('<span> Quotes: '+quoteNum+'</span>'))
     })
-    
+
     //Mod Tools
     var moderatorTools = new sidebar("Moderator Tools");
     moderatorTools.add($('<a href="javascript:void(0);">Close Current Thread</a>'), function(elem) {
@@ -471,20 +512,20 @@ function main() {
         }); 
     });
     $('#widget-11 .widget_header_small').click(function(){
-          location.href = "/forums/"; 
+        location.href = "/forums/"; 
     });
     $(window).scroll(function(){
-          if($(window).scrollTop() > $('#top').offset().top-40){
-              if($(window).scrollTop() + $('.sidebar')[0].scrollHeight + 160 > $(document).height() - 286){
-                  $('.sidebar').removeClass('fixed').css('top', $('.mainContent').height() - $('.sidebar')[0].scrollHeight + 200);
-              }else{
-                 $('.sidebar').addClass('fixed').css('top', '');
-              }
-          }else{
-              $('.sidebar').removeClass('fixed').css('top', '');
-          }
+        if($(window).scrollTop() > $('#top').offset().top-40){
+            if($(window).scrollTop() + $('.sidebar')[0].scrollHeight + 160 > $(document).height() - 286){
+                $('.sidebar').removeClass('fixed').css('top', $('.mainContent').height() - $('.sidebar')[0].scrollHeight + 200);
+            }else{
+                $('.sidebar').addClass('fixed').css('top', '');
+            }
+        }else{
+            $('.sidebar').removeClass('fixed').css('top', '');
+        }
     }).resize(function(){
-         $('.sidebar').css('left',$('.mainContent').outerWidth()+$('#top').offset().left+10).css('max-height', $(window).height()-110);
+        $('.sidebar').css('left',$('.mainContent').outerWidth()+$('#top').offset().left+10).css('max-height', $(window).height()-110);
     }).trigger('resize').trigger('scroll');
 }
 addJQuery(main);
