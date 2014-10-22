@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Quick Links for OnePlus Forum Users
 // @namespace    *.oneplus.net*
-// @version      1.3.5
+// @version      1.3.6
 // @description  enter something useful
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99
 // @include      *forums.oneplus.net*
@@ -85,6 +85,269 @@ function main() {
 				}
 			}
 		});
+	}
+	function rainbowfy(){
+		function tohex(decval) {
+		  var l, h;
+		  var str = "";
+		  l = Math.floor(decval % 16);
+		  h = Math.floor(decval / 16);
+		  if (h < 10) {
+		  str = "" + h;
+		  }
+		  if (h > 9) {
+		  switch (h) {
+		  case 10:
+		  str = "A";
+		  break;
+		  case 11:
+		  str = "B";
+		  break;
+		  case 12:
+		  str = "C";
+		  break;
+		  case 13:
+		  str = "D";
+		  break;
+		  case 14:
+		  str = "E";
+		  break;
+		  case 15:
+		  str = "F";
+		  break;
+		  default:
+		  str = "X";
+		  break;
+		  }
+		  }
+		  if (l < 10) {
+		  str = str + "" + l;
+		  }
+		  if (l > 9) {
+		  switch (l) {
+		  case 10:
+		  str += "A";
+		  break;
+		  case 11:
+		  str += "B";
+		  break;
+		  case 12:
+		  str += "C";
+		  break;
+		  case 13:
+		  str += "D";
+		  break;
+		  case 14:
+		  str += "E";
+		  break;
+		  case 15:
+		  str += "F";
+		  break;
+		  default:
+		  str += "X";
+		  break;
+		  }
+		  }
+		  return str;
+		}
+
+		function todec(hexval) {
+		  var l, h;
+		  hexstr = new String(hexval).toUpperCase();
+		  switch (hexstr.charAt(0)) {
+		  case "A":
+		  h = 10;
+		  break;
+		  case "B":
+		  h = 11;
+		  break;
+		  case "C":
+		  h = 12;
+		  break;
+		  case "D":
+		  h = 13;
+		  break;
+		  case "E":
+		  h = 14;
+		  break;
+		  case "F":
+		  h = 15;
+		  break;
+		  default:
+		  h = eval(hexstr.charAt(0));
+		  }
+		  switch (hexstr.charAt(1)) {
+		  case "A":
+		  l = 10;
+		  break;
+		  case "B":
+		  l = 11;
+		  break;
+		  case "C":
+		  l = 12;
+		  break;
+		  case "D":
+		  l = 13;
+		  break;
+		  case "E":
+		  l = 14;
+		  break;
+		  case "F":
+		  l = 15;
+		  break;
+		  default:
+		  l = eval(hexstr.charAt(1));
+		  }
+		  return l + 16 * h;
+		}
+
+		function hexToRGB(hexval) {
+		  str = new String(hexval).toUpperCase();
+		  if (str.charAt(0) == "#") str = str.substr(1);
+		  g_r = todec(str.substr(0, 2));
+		  g_g = todec(str.substr(2, 2));
+		  g_b = todec(str.substr(4, 2));
+		}
+
+		function getSFXColor(k) {
+		  var r, g, b, k1, min, max;
+		  k1 = k;
+		  r = 127 + 127 * Math.cos(k1 - .5);
+		  g = 127 + 127 * Math.cos(k1 - 2.5);
+		  b = 127 + 127 * Math.cos(k1 - 4.5);
+		  min = r;
+		  if (g < min) min = g;
+		  if (b < min) min = b;
+		  r -= min;
+		  g -= min;
+		  b -= min;
+		  max = r;
+		  if (g > max) max = g;
+		  if (b > max) max = b;
+		  max = 255.0 / max;
+		  r *= max;
+		  g *= max;
+		  b *= max;
+		  var tekBright = 200;
+		  var tekContrast = 255;
+		  max = (tekBright / 255) * (tekContrast / 255);
+		  min = (255 - tekContrast) * (tekBright / 255);
+		  r = r * max + min;
+		  g = g * max + min;
+		  b = b * max + min;
+		  if (r < 0) r = 0;
+		  if (g < 0) g = 0;
+		  if (b < 0) b = 0;
+		  if (r > 255) r = 255;
+		  if (g > 255) g = 255;
+		  if (b > 255) b = 255;
+		  g_r = r;
+		  g_g = g;
+		  g_b = b;
+		}
+
+		function setOutSizeIndicator(divtext) {
+		  document.getElementById("charssub").setAttribute("id", "oldsub");
+		  var newdiv = document.createElement("div");
+		  newdiv.setAttribute("id", "charssub");
+		  var newtext = document.createTextNode(divtext);
+		  newdiv.appendChild(newtext);
+		  document.getElementById("chars").appendChild(newdiv);
+		  document.getElementById("chars").removeChild(document.getElementById("oldsub"));
+		}
+
+		function preview() {}
+
+		function MakeSFX(inputString) {
+		  var r, g, b;
+		  var i, j, k, l;
+		  var x, scale, res;
+		  var min, max;
+		  var in_tag = 0;
+		  var oignumi = 0;
+		  temp = new String("");
+		  var numreps = 1;
+		  if (numreps < 1) numreps = 1;
+		  if (numreps > 10) numreps = 10;
+		  instr = inputString;
+		  outstr = new String("");
+		  tempstr = new String("");
+		  res = 1;
+		  j = instr.length;
+		  scale = Math.PI * (2 * eval(numreps) - .21) / j;
+		  g_cstyle = 0;
+		  for (i = 0; i < j; i++) {
+		  if (instr.charAt(i) == "<") in_tag = 1;
+		  if (in_tag == 0) {
+		  k = scale * i;
+		  getSFXColor(k);
+		  r = g_r;
+		  g = g_g;
+		  b = g_b;
+		  tempstr = tohex(r) + tohex(g) + tohex(b);
+		  temp = instr.charAt(i);
+		  if (instr.charAt(i) == "&") {
+		  for (l = i + 1; l < j; l++) {
+		  if (instr.charAt(l) == " ") break;
+		  if (instr.charAt(l) == "<") break;
+		  if (instr.charAt(l) == ">") break;
+		  if (instr.charAt(l) == ";") break;
+		  }
+		  if (instr.charAt(l) == ";") {
+		  temp = instr.substr(i, l - i + 1);
+		  }
+		  }
+		  if (i % res == 0) {
+		  outstr = outstr + "<font color=\"#" + tempstr + "\">";
+		  oignumi = 1;
+		  }
+		  outstr = outstr + temp;
+		  if ((i + 1) % res == 0) {
+		  outstr = outstr + "</font>";
+		  oignumi = 0;
+		  }
+		  if (temp.length > 1) i += (temp.length - 1);
+		  }
+		  if (in_tag == 1) outstr = outstr + instr.charAt(i);
+		  if (instr.charAt(i) == ">") in_tag = 0;
+		  }
+		  if (oignumi > 0) {
+		  if (document.colorform.out_format.value == "html") outstr = outstr + "</font>";
+		  if (document.colorform.out_format.value == "bbc") outstr = outstr + "[/color]";
+		  }
+		  return outstr;
+		}
+
+		function UpdateRGB(ctl) {
+		  var lum;
+		  ctl.style.backgroundColor = ctl.value;
+		  hexToRGB(ctl.value);
+		  lum = .29 * g_r + .57 * g_g + .14 * g_b;
+		  if (lum < 96) {
+		  ctl.style.color = "#FFFFFF";
+		  } else {
+		  ctl.style.color = "#000000";
+		  }
+		  preview();
+		}
+
+		function flipbkg(ctl) {
+		  if (prevbkc == "#FFFFFF") prevbkc = "#000000";
+		  else prevbkc = "#FFFFFF";
+		  ctl.style.backgroundColor = prevbkc;
+		}
+
+
+		function rainbow(event) {
+		  if (document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete') [0]) {
+		  iframe = document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete') [0];
+		  } else if (document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_') [0]) {
+		  iframe = document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_') [0];
+		  }
+		  var message = iframe.contentWindow.document.getElementsByTagName('body') [0].innerHTML
+		  iframe.contentWindow.document.getElementsByTagName('body') [0].innerHTML = MakeSFX(message);
+		}
+		rainbow();
 	}
     function closeThread(batch) {
         function getWarningMsg(option, name, title) {
@@ -540,7 +803,7 @@ function main() {
     });
 	
 	//Quick PM
-	var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
+	var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" style="font-size:11px;padding:5px;height:auto;line-height:12px;margin-top:5px;" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
 	pmBtn.appendTo('.userTitle');
 	var numb = $('input.button.PreviewButton.JsOnly').length
 	for (i = 0; i < numb; i++) {
@@ -581,5 +844,15 @@ function main() {
     }).resize(function(){
         $('.sidebar').css('left',$('.mainContent').outerWidth()+$('#top').offset().left+10).css('max-height', $(window).height()-110);
     }).trigger('resize').trigger('scroll');
+	
+	//Rainbowfy Text
+	if($('input[value="Post Reply"]').length > 0){
+		var rainbowfyBtn = $('&nbsp;<button class="button">Rainbowfy</button>');
+		$('input[value="Post Reply"]').after(rainbowfyBtn);
+		rainbowfyBtn.click(function(e){
+			e.preventDefault();
+			rainbowfy();
+		});
+	}
 }
 addJQuery(main);
