@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Quick Links for OnePlus Forum Users
 // @namespace    *.oneplus.net*
-// @version      1.3.4
+// @version      1.3.5
 // @description  enter something useful
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99
 // @include      *forums.oneplus.net*
@@ -45,6 +45,47 @@ function main() {
         modalObj.appendTo('body');
         modalObj.css('margin-top', -modalObj.outerHeight()/2);
     }
+	function quickPM(user) {
+		var pm_title = $('<input id="title" class="textCtrl" type="text" style="width:50%;"/><br>');
+		var pm_msg = $('<textarea id="message" class="textCtrl" style="height: 100px;resize: none;display:block;width:100%;"></textarea>')
+		var sendMsg = $('<div>Subject: </div>');
+		sendMsg.append(pm_title);
+		sendMsg.append('<br><br>Message:')
+		sendMsg.append(pm_msg);
+		new modal('QUICK PM', sendMsg, {
+			'Send Message': {
+				type: 'red',
+				click: function(){
+					this.close();
+					console.log(pm_msg.val().replace('<br>', '\n'))
+					var url = 'https://forums.oneplus.net/conversations/add';
+					var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
+					var msgTitle = pm_title.val()
+					var msg = pm_msg.val().replace('\n', '<br>')
+					$.get('/conversations/add', function(data) {
+						$.post('/conversations/insert', {
+							recipients: user,
+							title: msgTitle,
+							message_html: msg,
+							last_date: Date.now(),
+							last_known_date: Date.now(),
+							xfRelativeResolver: url,
+							_xfToken: token,
+							_xfRequestUri: url.replace("https://forums.oneplus.net", ""),
+							_xfNoRedirect: 1,
+							_xfResponseType: "json"
+						});
+					});
+				}
+			},
+			'Cancel': {
+				type: 'grey',
+				click: function(){
+					this.close();
+				}
+			}
+		});
+	}
     function closeThread(batch) {
         function getWarningMsg(option, name, title) {
             if (option == 1) {
@@ -497,6 +538,20 @@ function main() {
             closeThread(true);
         });
     });
+	
+	//Quick PM
+	var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
+	pmBtn.appendTo('.userTitle');
+	var numb = $('input.button.PreviewButton.JsOnly').length
+	for (i = 0; i < numb; i++) {
+		$('input.button.PreviewButton.JsOnly')[i].id = i
+	}
+	var button = document.getElementsByClassName("button PreviewButton JsOnly");
+	for (i=0; i<button.length; i++){
+		button[i].addEventListener("click", function bob(){ var t = this.id; quickPM($('li.message')[t].getAttribute('data-author'));});
+	}
+	
+	//Sidebar Customizations
     $('.sidebar .section .widget').each(function(){
         $(this).children('*').not('h3').wrapAll('<div class="section-wrapper"></div>');
     });
