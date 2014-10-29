@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Quick Links for OnePlus Forum Users
 // @namespace    *.oneplus.net*
-// @version      1.3.7
+// @version      1.3.8
 // @description  enter something useful
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99
 // @include      *forums.oneplus.net*
@@ -860,4 +860,5 @@ function main() {
 		});
 	}
 }
+var $ = jQuery;
 addJQuery(main);
