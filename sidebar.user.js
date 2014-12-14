@@ -483,7 +483,7 @@ function rainbow() {
     }
         iframe2=iframe2.contentWindow.document.getElementsByTagName('body')[0];
     //Rainbowfy Text
-    if ($('input[value="Post Reply"]').length > 0) {
+    /*if ($('input[value="Post Reply"]').length > 0) {
         var rainbowfyBtn = $('&nbsp;<button class="button">Rainbowfy</button>');
         $('input[value="Post Reply"]').after(rainbowfyBtn);
         
@@ -492,7 +492,7 @@ function rainbow() {
             rainbow();
         });
     }
-    
+    */
     function like(method) {
         //---------------------------- CURRENT PAGE LIKING FUNCTION -------------------------------//  
         function like() {
