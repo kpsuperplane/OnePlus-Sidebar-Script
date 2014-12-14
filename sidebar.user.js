@@ -767,11 +767,15 @@ function rainbow() {
 
     function sidebar(title, opts) {
         var options = {
-            layout: 'oneColumn'
+            layout: 'oneColumn',
+			clicked: function(){}
         };
         $.extend(options, opts);
         this.wrapper = $('<div class="section widget-group-no-name widget-container"></div>');
         this.wrapper.append('<div class="secondaryContent widget" id="widget-12"><h3 style="padding-bottom:0px;">' + title + '</h3><ul class="custom-inner ' + (options.layout == 'twoColumns' ? 'xenforo-list-2cols' : '') + '"></ul><div class="clearfix" style="clear:left"></div></div>');
+		this.wrapper.find('h3').click(function(){
+			options.clicked();
+		});
         this.content = this.wrapper.find('.custom-inner');
         this.add = function(elem, callback) {
             this.content.append(elem);
