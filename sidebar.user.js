@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      1.4.0
+// @version      1.4.1
 // @description  enter something useful
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -425,6 +425,7 @@ function flipbkg(ctl) {
 }
 
 function rainbow() {
+    if(window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
     var iframe;
     if (document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete')[0]) {
         iframe = document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete')[0];
@@ -433,7 +434,6 @@ function rainbow() {
     }
         
         var message = iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML;
-    
     if (message.indexOf("http") == -1 && message.indexOf("www") == -1 && message.indexOf("@") == -1 && message.indexOf("QUOTE") == -1 && message.indexOf("[/color]") == -1 && message.indexOf("<font color") == -1&& message.indexOf(":") == -1 && message.indexOf("[COLOR") == -1) {
         iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = MakeSFX(message, false);
     } else {
@@ -475,7 +475,7 @@ function rainbow() {
             message = message.replace(tagrest, misc[i]);
         }
         iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = message;
-    }
+        }
 }
     var iframe2;
     if (document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete')[0]) {
@@ -484,8 +484,9 @@ function rainbow() {
         iframe2 = document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_')[0];
     }
         iframe2=iframe2.contentWindow.document.getElementsByTagName('body')[0];
+}
     //Rainbowfy Text
-    if ($('input[value="Post Reply"]').length > 0) {
+    if(window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
         var rainbowfyBtn = $('&nbsp;<button class="button">Rainbowfy</button>');
         $('input[value="Post Reply"]').after(rainbowfyBtn);
         
