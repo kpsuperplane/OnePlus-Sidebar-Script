@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      1.5.0
+// @version      1.5.1
 // @description  enter something useful
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -91,6 +91,23 @@ function main() {
 			}
 		});
 	}
+
+//Alert Info
+function getAlertInfo() {
+    nBar.add($('<span> On first page of alerts:</span>'))
+    $.get('/account/alerts?page=' + 0, function(data) {
+        var tagNum = $(data).find("h3:contains('tagged')").length
+        var likeNum = $(data).find("h3:contains('liked')").length
+        var quoteNum = $(data).find("h3:contains('quoted')").length
+        var replyNum = $(data).find("h3:contains('replied')").length
+	var startedNum = $(data).find("h3:contains('started')").length
+        nBar.add($('<span> Tags: '+tagNum+'</span>'))
+        nBar.add($('<span> Likes: '+likeNum+'</span>'))
+        nBar.add($('<span> Quotes: '+quoteNum+'</span>'))
+        nBar.add($('<span> Replies: '+replyNum+'</span>'))
+        nBar.add($('<span> Threads Started: '+startedNum+'</span>'))
+    })
+    }
 
 //Emoji
 if(window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
@@ -591,19 +608,6 @@ if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conver
 }
 }
 
-//Alert Info
-function getAlertInfo() {
-    nBar.add($('<span> On first page of alerts:</span>'))
-    $.get('/account/alerts?page=' + 0, function(data) {
-        var tagNum = $(data).find("h3:contains('tagged')").length
-        var likeNum = $(data).find("h3:contains('liked')").length
-        var quoteNum = $(data).find("h3:contains('quoted')").length
-        nBar.add($('<span> Tags: '+tagNum+'</span>'))
-        nBar.add($('<span> Likes: '+likeNum+'</span>'))
-        nBar.add($('<span> Quotes: '+quoteNum+'</span>'))
-    })
-    }
-
 //Rainbowify
 	function tohex(decval) {
     var l, h;
@@ -1092,3 +1096,4 @@ function rainbow() {
 }
 var $ = jQuery;
 addJQuery(main);
+
