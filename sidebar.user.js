@@ -92,6 +92,19 @@ function main() {
 		});
 	}
 
+//Alert Info
+function getAlertInfo() {
+    nBar.add($('<span> On first page of alerts:</span>'))
+    $.get('/account/alerts?page=' + 0, function(data) {
+        var tagNum = $(data).find("h3:contains('tagged')").length
+        var likeNum = $(data).find("h3:contains('liked')").length
+        var quoteNum = $(data).find("h3:contains('quoted')").length
+        nBar.add($('<span> Tags: '+tagNum+'</span>'))
+        nBar.add($('<span> Likes: '+likeNum+'</span>'))
+        nBar.add($('<span> Quotes: '+quoteNum+'</span>'))
+    })
+    }
+
 //Rainbowify
 	function tohex(decval) {
     var l, h;
@@ -530,22 +543,10 @@ function rainbow() {
     quickLinks.add($('<a href="/watched/threads">Watched Threads</a>'));
     quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
 
-    /*
-//Misc. Tools
-    var miscTools = new sidebar("Misc. Tools");
-    */
-
     //Notifications
-    var nBar = new sidebar("Notifications");
-    nBar.add($('<span> On first page of alerts:</span>'))
-    $.get('/account/alerts?page=' + 0, function(data) {
-        var tagNum = $(data).find("h3:contains('tagged')").length
-        var likeNum = $(data).find("h3:contains('liked')").length
-        var quoteNum = $(data).find("h3:contains('quoted')").length
-        nBar.add($('<span> Tags: '+tagNum+'</span>'))
-        nBar.add($('<span> Likes: '+likeNum+'</span>'))
-        nBar.add($('<span> Quotes: '+quoteNum+'</span>'))
-    })
+    //var nBar = new sidebar("Notifications"){
+    //clicked: getAlertInfo();
+    //}
 	
 	//Quick PM
 	var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" style="font-size:11px;padding:5px;height:auto;line-height:12px;margin-top:5px;" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
