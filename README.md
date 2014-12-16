@@ -1,4 +1,5 @@
 OnePlus-Sidebar-Script
 ======================
 
-Bacon. (Stuff will be added here as we prepare for public release)
+This is a sidebar script for the OnePlus forum.
+Please view this thread for more: [THREAD LINK]
