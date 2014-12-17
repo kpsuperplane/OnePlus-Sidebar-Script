@@ -52,21 +52,21 @@ function main() {
     }
 	function quickPM(user) {
 		var pm_title = $('<input id="title" class="textCtrl" type="text" style="width:50%;"/><br>');
-		var pm_msg = $('<textarea id="message" class="textCtrl" style="height: 100px;resize: none;display:block;width:100%;"></textarea>')
+		var pm_msg = $('<textarea id="message" class="textCtrl" style="height: 100px;resize: none;display:block;width:100%;"></textarea>');
 		var sendMsg = $('<div>Subject: </div>');
 		sendMsg.append(pm_title);
-		sendMsg.append('<br><br>Message:')
+		sendMsg.append('<br><br>Message:');
 		sendMsg.append(pm_msg);
 		new modal('QUICK PM', sendMsg, {
 			'Send Message': {
 				type: 'red',
 				click: function(){
 					this.close();
-					console.log(pm_msg.val().replace('<br>', '\n'))
+					console.log(pm_msg.val().replace('<br>', '\n'));
 					var url = 'https://forums.oneplus.net/conversations/add';
-					var token = document.getElementsByName('_xfToken')[0].getAttribute('value')
-					var msgTitle = pm_title.val()
-					var msg = pm_msg.val().replace('\n', '<br>')
+					var token = document.getElementsByName('_xfToken')[0].getAttribute('value');
+					var msgTitle = pm_title.val();
+					var msg = pm_msg.val().replace('\n', '<br>');
 					$.get('/conversations/add', function(data) {
 						$.post('/conversations/insert', {
 							recipients: user,
@@ -94,23 +94,23 @@ function main() {
 
 //Alert Info
 function getAlertInfo() {
-    nBar.add($('<span> On first page of alerts:</span>'))
+    nBar.add($('<span> On first page of alerts:</span>'));
     $.get('/account/alerts?page=' + 0, function(data) {
-        var tagNum = $(data).find("h3:contains('tagged')").length
-        var likeNum = $(data).find("h3:contains('liked')").length
-        var quoteNum = $(data).find("h3:contains('quoted')").length
-        var replyNum = $(data).find("h3:contains('replied')").length
-	var startedNum = $(data).find("h3:contains('started')").length
-        nBar.add($('<span> Tags: '+tagNum+'</span>'))
-        nBar.add($('<span> Likes: '+likeNum+'</span>'))
-        nBar.add($('<span> Quotes: '+quoteNum+'</span>'))
-        nBar.add($('<span> Replies: '+replyNum+'</span>'))
-        nBar.add($('<span> Threads Started: '+startedNum+'</span>'))
-    })
+        var tagNum = $(data).find("h3:contains('tagged')").length;
+        var likeNum = $(data).find("h3:contains('liked')").length;
+        var quoteNum = $(data).find("h3:contains('quoted')").length;
+        var replyNum = $(data).find("h3:contains('replied')").length;
+	var startedNum = $(data).find("h3:contains('started')").length;
+        nBar.add($('<span> Tags: '+tagNum+'</span>'));
+        nBar.add($('<span> Likes: '+likeNum+'</span>'));
+        nBar.add($('<span> Quotes: '+quoteNum+'</span>'));
+        nBar.add($('<span> Replies: '+replyNum+'</span>'));
+        nBar.add($('<span> Threads Started: '+startedNum+'</span>'));
+    });
     }
 
 //Emoji
-if(window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
+if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0) {
 var iframe2;
 if (document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete')[0]) {
     iframe2 = document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete')[0];
@@ -155,7 +155,7 @@ function clickHandlerO2(index) {
     };
 }
 
-if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0) {
+
     var c = [
         {'src':'http://i.imgur.com/s2mnHPj.png'},
         {'src':'http://i.imgur.com/xQEgir2.png'},
@@ -557,7 +557,7 @@ if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conver
         } else if (document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_')[0]) {
             iframe2 = document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_')[0];
         }
-        var quoteReg=/(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])/igm
+        var quoteReg=/(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])/igm;
         
         var message = iframe2.contentWindow.document.getElementsByTagName('body')[0].innerHTML;
         var misc = message.match(quoteReg);
@@ -606,7 +606,7 @@ if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conver
         iframe2.contentWindow.document.getElementsByTagName('body')[0].innerHTML=message;
     });
 }
-}
+
 
 //Rainbowify
 	function tohex(decval) {
@@ -733,7 +733,6 @@ function hexToRGB(hexval) {
 
 function getSFXColor(k) {
     var r, g, b, k1, min, max;
-    //if (g_cstyle == 0) {
     k1 = k;
     r = 127 + 127 * Math.cos(k1 - .5);
     g = 127 + 127 * Math.cos(k1 - 2.5);
@@ -764,47 +763,6 @@ function getSFXColor(k) {
     if (r > 255) r = 255;
     if (g > 255) g = 255;
     if (b > 255) b = 255;
-    /*}
-	if (g_cstyle == 1) {
-		k -= Math.floor(k);
-		r = r1 + k * dr;
-		g = g1 + k * dg;
-		b = b1 + k * db;
-	}
-	if (g_cstyle == 2) {
-		k -= 2 * Math.floor(k / 2);
-		if (k < 1) {
-			r = r1 + k * dr;
-			g = g1 + k * dg;
-			b = b1 + k * db;
-		}
-		if (k >= 1) {
-			k -= 2;
-			r = r1 - k * dr;
-			g = g1 - k * dg;
-			b = b1 - k * db;
-		}
-	}
-	if (g_cstyle == 3) {
-		k -= 3 * Math.floor(k / 3);
-		if (k < 1) {
-			r = r1 + k * dr;
-			g = g1 + k * dg;
-			b = b1 + k * db;
-		}
-		if (k >= 1 && k < 2) {
-			k -= 1;
-			r = r2 + k * dr1;
-			g = g2 + k * dg1;
-			b = b2 + k * db1;
-		}
-		if (k >= 2) {
-			k -= 2;
-			r = r3 + k * dr2;
-			g = g3 + k * dg2;
-			b = b3 + k * db2;
-		}
-	}*/
     g_r = r;
     g_g = g;
     g_b = b;
@@ -830,7 +788,7 @@ function MakeSFX(inputString, outputHTML) {
     var in_tag = 0;
     var oignumi = 0;
     temp = new String("");
-    var numreps = 1;//parseInt($("#gradient_repeat").val());
+    var numreps = 1;
     if (numreps < 1) numreps = 1;
     if (numreps > 10) numreps = 10;
     instr = inputString;
@@ -838,35 +796,9 @@ function MakeSFX(inputString, outputHTML) {
     tempstr = new String("");
     res = 1;
     j = instr.length;
-    //if (gradientType == "rainbow") {
     scale = Math.PI * (2 * eval(numreps) - .21) / j;
     g_cstyle = 0;
-    /*}
-	if (gradientType == "oneway") {
-		scale = numreps / j;
-		g_cstyle = 1;
-	}
-	if (gradientType == "backandforth") {
-		scale = 2.0 * numreps / j;
-		g_cstyle = 2;
-	}
-	if (gradientType == "tricolor") {
-		scale = 3.0 * numreps / j;
-		g_cstyle = 3;
-	}
-	if (gradientType == 'oneway' || gradientType == 'backandforth') {
-		hexToRGB($("#gradient_1").val());
-		r1 = g_r;
-		g1 = g_g;
-		b1 = g_b;
-		hexToRGB($("#gradient_2").val());
-		r2 = g_r;
-		g2 = g_g;
-		b2 = g_b;
-		dr = 0.0 + r2 - r1;
-		dg = 0.0 + g2 - g1;
-		db = 0.0 + b2 - b1;
-	}*/
+    
     for (i = 0; i < j; i++) {
         if (instr.charAt(i) == "<") in_tag = 1;
         if (in_tag == 0) {
@@ -956,7 +888,7 @@ function rainbow() {
         var imgregex = /(\<img([\s\S]*?)\>)/igm;
         var linkregex= /(\<a([\s\S]*?)<\/a\>)/igm;
         var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^<>]+)/igm;
-        var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])|(\[SPOILER\]?[\s\S]*?\[\/SPOILER\])|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|\:P/igm
+        var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])|(\[SPOILER\]?[\s\S]*?\[\/SPOILER\])|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|\:P/igm;
         var imgrest = /(\[color=#[\w\d]+\]§\[\/color\])/im;
         var linkrest = /(\[color=#[\w\d]+\]╗\[\/color\])/im;
         var urlrest = /(\[color=#[\w\d]+\]▒\[\/color\])/im;
@@ -1031,7 +963,7 @@ function rainbow() {
             if (typeof callback != "undefined") {
                 callback(elem);
             }
-        }
+        };
         $('.sidebar .section:first').after(this.wrapper);
     }
     //Quick Links
@@ -1054,9 +986,9 @@ function rainbow() {
 	//Quick PM
 	var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" style="font-size:11px;padding:5px;height:auto;line-height:12px;margin-top:5px;" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
 	pmBtn.appendTo('.userTitle');
-	var numb = $('input.button.PreviewButton.JsOnly').length
+	var numb = $('input.button.PreviewButton.JsOnly').length;
 	for (i = 0; i < numb; i++) {
-		$('input.button.PreviewButton.JsOnly')[i].id = i
+		$('input.button.PreviewButton.JsOnly')[i].id = i;
 	}
 	var button = document.getElementsByClassName("button PreviewButton JsOnly");
 	for (i=0; i<button.length; i++){
@@ -1096,4 +1028,3 @@ function rainbow() {
 }
 var $ = jQuery;
 addJQuery(main);
-
