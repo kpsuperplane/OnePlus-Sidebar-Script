@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.0.0
+// @version      2.0.1
 // @description  enter something useful
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
