@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.1.0
+// @version      2.1.1
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -986,10 +986,11 @@ function getAlertInfo() {
     }
 
 	//Tools Menu
-var tBar = new sidebar("Tools",{
-layout: "twoColumns"
-});
-tBar.add($('<a href="http://goo.gl/forms/sQI3SDdSRQ">Email Updates</a>'))
+	var tBar = new sidebar("Tools",{
+		layout: "twoColumns"
+	});
+	tBar.add($('<a href="http://goo.gl/forms/sQI3SDdSRQ">Email Updates</a>'))
+	
 	//Quick PM
 	var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" style="font-size:11px;padding:5px;height:auto;line-height:12px;margin-top:5px;" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
 	pmBtn.appendTo('.userTitle');
