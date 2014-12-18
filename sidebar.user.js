@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.0.1
-// @description  enter something useful
+// @version      2.1.0
+// @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
 // @grant        none
@@ -92,22 +92,6 @@ function main() {
 		});
 	}
 
-//Alert Info
-function getAlertInfo() {
-    nBar.add($('<span> On first page of alerts:</span>'));
-    $.get('/account/alerts?page=' + 0, function(data) {
-        var tagNum = $(data).find("h3:contains('tagged')").length;
-        var likeNum = $(data).find("h3:contains('liked')").length;
-        var quoteNum = $(data).find("h3:contains('quoted')").length;
-        var replyNum = $(data).find("h3:contains('replied')").length;
-	var startedNum = $(data).find("h3:contains('started')").length;
-        nBar.add($('<span> Tags: '+tagNum+'</span>'));
-        nBar.add($('<span> Likes: '+likeNum+'</span>'));
-        nBar.add($('<span> Quotes: '+quoteNum+'</span>'));
-        nBar.add($('<span> Replies: '+replyNum+'</span>'));
-        nBar.add($('<span> Threads Started: '+startedNum+'</span>'));
-    });
-    }
 
 //Emoji
 if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0) {
@@ -982,7 +966,30 @@ function rainbow() {
     var nBar = new sidebar("Notifications",{
     clicked: function(){getAlertInfo();}
     });
-	
+
+
+//Alert Info
+function getAlertInfo() {
+    nBar.add($('<span> On first page of alerts:</span>'));
+    $.get('/account/alerts?page=' + 0, function(data) {
+        var tagNum = $(data).find("h3:contains('tagged')").length;
+        var likeNum = $(data).find("h3:contains('liked')").length;
+        var quoteNum = $(data).find("h3:contains('quoted')").length;
+        var replyNum = $(data).find("h3:contains('replied')").length;
+	var startedNum = $(data).find("h3:contains('started')").length;
+        nBar.add($('<span> Tags: '+tagNum+'</span>'));
+        nBar.add($('<span> Likes: '+likeNum+'</span>'));
+        nBar.add($('<span> Quotes: '+quoteNum+'</span>'));
+        nBar.add($('<span> Replies: '+replyNum+'</span>'));
+        nBar.add($('<span> Threads Started: '+startedNum+'</span>'));
+    });
+    }
+
+	//Tools Menu
+var tBar = new sidebar("Tools",{
+layout: "twoColumns"
+});
+tBar.add($('<a href="http://goo.gl/forms/sQI3SDdSRQ">Email Updates</a>'))
 	//Quick PM
 	var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" style="font-size:11px;padding:5px;height:auto;line-height:12px;margin-top:5px;" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
 	pmBtn.appendTo('.userTitle');
