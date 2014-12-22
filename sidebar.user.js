@@ -961,6 +961,7 @@ function rainbow() {
     quickLinks.add($('<a href="/account/following">Following</a>'));
     quickLinks.add($('<a href="/watched/threads">Watched Threads</a>'));
     quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
+    quickLinks.add($('<a href="http://goo.gl/forms/sQI3SDdSRQ">Email Updates</a>'))
 
     //Notifications
     var nBar = new sidebar("Notifications",{
@@ -984,12 +985,6 @@ function getAlertInfo() {
         nBar.add($('<span> Threads Started: '+startedNum+'</span>'));
     });
     }
-
-	//Tools Menu
-	var tBar = new sidebar("Tools",{
-		layout: "twoColumns"
-	});
-	tBar.add($('<a href="http://goo.gl/forms/sQI3SDdSRQ">Email Updates</a>'))
 	
 	//Quick PM
 	var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" style="font-size:11px;padding:5px;height:auto;line-height:12px;margin-top:5px;" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
