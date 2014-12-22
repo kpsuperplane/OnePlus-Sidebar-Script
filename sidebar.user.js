@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.0.2
+// @version      2.1.2
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
