@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.1.8
+// @version      2.2.0
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -916,6 +916,8 @@ function main() {
         quickLinks.add($('<a href="/account/following">Following</a>'));
         quickLinks.add($('<a href="/watched/threads">Watched Threads</a>'));
         quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
+	quickLinks.add($('<a href="/account/avatar">Change Avatar</a>'));
+	quickLinks.add($('<a href="/threads/tool-oneplus-forum-sidebar-mod.208545/">Sidebar Thread</a>'));
         quickLinks.add($('<a href="#" onClick="return false;" id="eUpdates">Email Updates</a>'))
         
         eUpdates.addEventListener("click", function(){
