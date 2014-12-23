@@ -918,7 +918,7 @@ function main() {
         quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
 	quickLinks.add($('<a href="/account/avatar">Change Avatar</a>'));
 	quickLinks.add($('<a href="/threads/tool-oneplus-forum-sidebar-mod.208545/">Sidebar Thread</a>'));
-        quickLinks.add($('<a href="#" onClick="return false;" id="eUpdates">Email Updates</a>'))
+        quickLinks.add($('<a href="#" onClick="return false;" id="eUpdates">Email Updates</a>'));
         
         eUpdates.addEventListener("click", function(){
             var emailForm = $('<center><iframe src="https://docs.google.com/forms/d/1NmKqdgBI-rcZviGtNawZRva1KsLUOWpP8b_kfli653E/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
