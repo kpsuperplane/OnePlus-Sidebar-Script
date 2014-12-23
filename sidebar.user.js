@@ -947,11 +947,11 @@ function main() {
                 var quoteNum = $(data).find("h3:contains('quoted')").length;
                 var replyNum = $(data).find("h3:contains('replied')").length;
                 var startedNum = $(data).find("h3:contains('started')").length;
-                nBar.add($('<span> Tags: '+tagNum+'</span>'));
-                nBar.add($('<span> Likes: '+likeNum+'</span>'));
-                nBar.add($('<span> Quotes: '+quoteNum+'</span>'));
-                nBar.add($('<span> Replies: '+replyNum+'</span>'));
-                nBar.add($('<span> Threads Started: '+startedNum+'</span>'));
+                if(tagNum > 0){nBar.add($('<span> Tags: '+tagNum+'</span>'));}
+                if(likeNum > 0){nBar.add($('<span> Likes: '+likeNum+'</span>'));}
+                if(quoteNum > 0){nBar.add($('<span> Quotes: '+quoteNum+'</span>'));}
+                if(replyNum > 0){nBar.add($('<span> Replies: '+replyNum+'</span>'));}
+                if(startedNum > 0){nBar.add($('<span> Threads Started: '+startedNum+'</span>'));}
             });
         }
     }
