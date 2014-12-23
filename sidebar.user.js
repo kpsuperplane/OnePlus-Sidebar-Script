@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.2.0
+// @version      2.2.1
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -9,6 +9,7 @@
 // @license      MIT License; http://opensource.org/licenses/MIT
 // ==/UserScript==
 //ADD JQUERY SCRIPT ADAPTED FROM https://gist.github.com/eristoddle/4440713
+sidebarVersion = GM_info.script.version;
 function addJQuery(callback) {
     //Checks width for mobiles etc
     if ( $( document ).width() > 850){
@@ -919,6 +920,7 @@ function main() {
 	quickLinks.add($('<a href="/account/avatar">Change Avatar</a>'));
 	quickLinks.add($('<a href="/threads/tool-oneplus-forum-sidebar-mod.208545/">Sidebar Thread</a>'));
         quickLinks.add($('<a href="#" onClick="return false;" id="eUpdates">Email Updates</a>'));
+	quickLinks.add($('<a href="#" onClick="return false;" id="vInfo">Version Info</a>'));
         
         eUpdates.addEventListener("click", function(){
             var emailForm = $('<center><iframe src="https://docs.google.com/forms/d/1NmKqdgBI-rcZviGtNawZRva1KsLUOWpP8b_kfli653E/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
@@ -931,6 +933,10 @@ function main() {
                 }
             });		
         });
+
+	vInfo.addEventListener("click", function(){
+	    alert("Version: " + sidebarVersion);	
+	});
         
         //Notifications
         var nBar = new sidebar("Notifications",{
