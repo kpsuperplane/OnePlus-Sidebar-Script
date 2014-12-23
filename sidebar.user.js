@@ -873,81 +873,81 @@ function main() {
             });
         }
     }
-
+    
     //Checks width for mobiles etc
     if ( $( document ).width() > 850){
-    //Sidebar
-    function sidebar(title, opts) {
-        var options = {
-            layout: 'oneColumn',
-            clicked: function(){}
-        };
-        $.extend(options, opts);
-        this.wrapper = $('<div class="section widget-group-no-name widget-container"></div>');
-        this.wrapper.append('<div class="secondaryContent widget" id="widget-12"><h3 style="padding-bottom:0px;">' + title + '</h3><ul class="custom-inner ' + (options.layout == 'twoColumns' ? 'xenforo-list-2cols' : '') + '"></ul><div class="clearfix" style="clear:left"></div></div>');
-        this.wrapper.find('h3').click(function(){
-            options.clicked();
+        //Sidebar
+        function sidebar(title, opts) {
+            var options = {
+                layout: 'oneColumn',
+                clicked: function(){}
+            };
+            $.extend(options, opts);
+            this.wrapper = $('<div class="section widget-group-no-name widget-container"></div>');
+            this.wrapper.append('<div class="secondaryContent widget" id="widget-12"><h3 style="padding-bottom:0px;">' + title + '</h3><ul class="custom-inner ' + (options.layout == 'twoColumns' ? 'xenforo-list-2cols' : '') + '"></ul><div class="clearfix" style="clear:left"></div></div>');
+            this.wrapper.find('h3').click(function(){
+                options.clicked();
+            });
+            this.content = this.wrapper.find('.custom-inner');
+            this.add = function(elem, callback) {
+                this.content.append(elem);
+                elem.wrap('<li></li>');
+                if (typeof callback != "undefined") {
+                    callback(elem);
+                }
+            };
+            $('.sidebar .section:first').after(this.wrapper);
+        }
+        
+        //Quick Links
+        var quickLinks = new sidebar("Quick Links", {
+            layout: "twoColumns"
         });
-        this.content = this.wrapper.find('.custom-inner');
-        this.add = function(elem, callback) {
-            this.content.append(elem);
-            elem.wrap('<li></li>');
-            if (typeof callback != "undefined") {
-                callback(elem);
-            }
-        };
-        $('.sidebar .section:first').after(this.wrapper);
-    }
-
-    //Quick Links
-    var quickLinks = new sidebar("Quick Links", {
-        layout: "twoColumns"
-    });
-    quickLinks.add($('<a href="/account/signature/">Edit Signature</a>'));
-    quickLinks.add($('<a href="https://account.oneplus.net/invite/overview">View Invites</a>'));
-    quickLinks.add($('<a href="/conversations/add">Start PM</a>'));
-    quickLinks.add($('<a href="/account/ignored">Blocked People</a>'));
-    quickLinks.add($('<a href="/account/following">Following</a>'));
-    quickLinks.add($('<a href="/watched/threads">Watched Threads</a>'));
-    quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
-    quickLinks.add($('<a href="#" id="eUpdates">Email Updates</a>'))
-    
-    eUpdates.addEventListener("click", function(){
-	var emailForm = $('<center><iframe src="https://docs.google.com/forms/d/1NmKqdgBI-rcZviGtNawZRva1KsLUOWpP8b_kfli653E/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
-	$("#eUpdates").click(function(){
-	    new modal('Email Update Form', emailForm, {
-		'Close Window': {
-		    type: 'red',
-		    click: function(){
-			this.close();
-		    }
-		}
-	    });		
-	})
-    });
-    
-    //Notifications
-    var nBar = new sidebar("Notifications",{
-        clicked: function(){getAlertInfo();}
-    });
-    
-    
-    //Alert Info
-    function getAlertInfo() {
-        nBar.add($('<span> On first page of alerts:</span>'));
-        $.get('/account/alerts?page=' + 0, function(data) {
-            var tagNum = $(data).find("h3:contains('tagged')").length;
-            var likeNum = $(data).find("h3:contains('liked')").length;
-            var quoteNum = $(data).find("h3:contains('quoted')").length;
-            var replyNum = $(data).find("h3:contains('replied')").length;
-            var startedNum = $(data).find("h3:contains('started')").length;
-            nBar.add($('<span> Tags: '+tagNum+'</span>'));
-            nBar.add($('<span> Likes: '+likeNum+'</span>'));
-            nBar.add($('<span> Quotes: '+quoteNum+'</span>'));
-            nBar.add($('<span> Replies: '+replyNum+'</span>'));
-            nBar.add($('<span> Threads Started: '+startedNum+'</span>'));
+        quickLinks.add($('<a href="/account/signature/">Edit Signature</a>'));
+        quickLinks.add($('<a href="https://account.oneplus.net/invite/overview">View Invites</a>'));
+        quickLinks.add($('<a href="/conversations/add">Start PM</a>'));
+        quickLinks.add($('<a href="/account/ignored">Blocked People</a>'));
+        quickLinks.add($('<a href="/account/following">Following</a>'));
+        quickLinks.add($('<a href="/watched/threads">Watched Threads</a>'));
+        quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
+        quickLinks.add($('<a href="#" id="eUpdates">Email Updates</a>'))
+        
+        eUpdates.addEventListener("click", function(){
+            var emailForm = $('<center><iframe src="https://docs.google.com/forms/d/1NmKqdgBI-rcZviGtNawZRva1KsLUOWpP8b_kfli653E/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
+            $("#eUpdates").click(function(){
+                new modal('Email Update Form', emailForm, {
+                    'Close Window': {
+                        type: 'red',
+                        click: function(){
+                            this.close();
+                        }
+                    }
+                });		
+            })
         });
-    }
+        
+        //Notifications
+        var nBar = new sidebar("Notifications",{
+            clicked: function(){getAlertInfo();}
+        });
+        
+        
+        //Alert Info
+        function getAlertInfo() {
+            nBar.add($('<span> On first page of alerts:</span>'));
+            $.get('/account/alerts?page=' + 0, function(data) {
+                var tagNum = $(data).find("h3:contains('tagged')").length;
+                var likeNum = $(data).find("h3:contains('liked')").length;
+                var quoteNum = $(data).find("h3:contains('quoted')").length;
+                var replyNum = $(data).find("h3:contains('replied')").length;
+                var startedNum = $(data).find("h3:contains('started')").length;
+                nBar.add($('<span> Tags: '+tagNum+'</span>'));
+                nBar.add($('<span> Likes: '+likeNum+'</span>'));
+                nBar.add($('<span> Quotes: '+quoteNum+'</span>'));
+                nBar.add($('<span> Replies: '+replyNum+'</span>'));
+                nBar.add($('<span> Threads Started: '+startedNum+'</span>'));
+            });
+        }
     }
     
     //Quick PM
@@ -995,3 +995,4 @@ function main() {
 }
 var $ = jQuery;
 addJQuery(main);
+
