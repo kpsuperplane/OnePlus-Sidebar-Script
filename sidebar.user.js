@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.1.6
+// @version      2.1.7
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -873,6 +873,9 @@ function main() {
             });
         }
     }
+
+    //Checks width for mobiles etc
+    if ( $( document ).width() > 850){
     //Sidebar
     function sidebar(title, opts) {
         var options = {
@@ -944,6 +947,7 @@ function main() {
             nBar.add($('<span> Replies: '+replyNum+'</span>'));
             nBar.add($('<span> Threads Started: '+startedNum+'</span>'));
         });
+    }
     }
     
     //Quick PM
