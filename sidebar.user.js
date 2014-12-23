@@ -10,7 +10,7 @@
 // ==/UserScript==
 //ADD JQUERY SCRIPT ADAPTED FROM https://gist.github.com/eristoddle/4440713
 function addJQuery(callback) {
-    $('<style type="text/css"></style').text('.xenOverlay .xenForm.animateClose{-webkit-transition:300ms cubic-bezier(0.215,.61,.355,1);transition:300ms cubic-bezier(0.215,.61,.355,1);opacity:0;-webkit-transform: scale(0.9,0.9);transform: scale(0.9,0.9);}.xenOverlay .xenForm.animateClose.open{opacity:1;-webkit-transform: scale(1,1);transform: scale(1,1);}.xenOverlay .xenForm{border-radius:3px;box-shadow:0px 0px 600px #000;border-style:none;background:#151515 !important;}.xenOverlay .formOverlay .heading {color: #FFF;background: transparent;padding-left: 0px;border-style:none;}.sidebar{position:absolute;right:0px;}.sidebar.fixed{position:fixed;top:80px;box-sizing:border-box;}.custom-inner li{padding-top:16px;}.custom-inner li:first-child{padding-top: 0px;}.sidebar .section h3{padding:0px;padding-bottom:0px !important;cursor:pointer; color:#000 !important;}.sidebar .section h3 a{color:#000 !important;}#create-thread-button .inner{margin-bottom:30px;}.sidebar .section h3 a:hover{text-decoration:none;}#widget-11 .widget_header_small:hover{text-decoration:underline;}#create-thread-button .inner{margin-bottom:30px;}.sidebar .section .widget{padding:8px 0px 14px 0px;}.sidebar .section .section-wrapper{display:none;padding:10px 0px;}').appendTo('head');
+    $('<style type="text/css"></style').text('.emoji-active{background:#EEE !important;color:#333 !important;font-weight:bold !important;}#emojis-top a{display: inline-block;padding: 5px 10px 5px;border-radius: 5px;margin-right: 5px;text-decoration: none;}#emojis-top a:hover {background: #EEE;}.mceSmilieSprite{display:inline-block;margin-right:5px;margin-bottom:5px;height:30px;width:30px;}.mceSmilieSprite img{display:inline-block;margin:0px;padding:0px;height:100%;width:100%;}.xenOverlay .xenForm.animateClose{-webkit-transition:300ms cubic-bezier(0.215,.61,.355,1);transition:300ms cubic-bezier(0.215,.61,.355,1);opacity:0;-webkit-transform: scale(0.9,0.9);transform: scale(0.9,0.9);}.xenOverlay .xenForm.animateClose.open{opacity:1;-webkit-transform: scale(1,1);transform: scale(1,1);}.xenOverlay .xenForm{border-radius:3px;box-shadow:0px 0px 600px #000;border-style:none;background:#151515 !important;}.xenOverlay .formOverlay .heading {color: #FFF;background: transparent;padding-left: 0px;border-style:none;}.sidebar{position:absolute;right:0px;}.sidebar.fixed{position:fixed;top:80px;box-sizing:border-box;}.custom-inner li{padding-top:16px;}.custom-inner li:first-child{padding-top: 0px;}.sidebar .section h3{padding:0px;padding-bottom:0px !important;cursor:pointer; color:#000 !important;}.sidebar .section h3 a{color:#000 !important;}#create-thread-button .inner{margin-bottom:30px;}.sidebar .section h3 a:hover{text-decoration:none;}#widget-11 .widget_header_small:hover{text-decoration:underline;}#create-thread-button .inner{margin-bottom:30px;}.sidebar .section .widget{padding:8px 0px 14px 0px;}.sidebar .section .section-wrapper{display:none;padding:10px 0px;}').appendTo('head');
     var script = document.createElement("script");
     script.textContent = "(" + callback.toString() + ")();";
     document.body.appendChild(script);
@@ -103,42 +103,6 @@ function main() {
         }
             
             iframe2 = iframe2.contentWindow.document.getElementsByTagName('body')[0];
-        
-        function clickHandlerC(index) {
-            return function () {
-                var pp = iframe2.getElementsByTagName('p');
-                pp[pp.length -1].innerHTML = pp[pp.length -1].innerHTML + '<img src="' + c[index].src + '">&nbsp;';
-            };
-        }
-        
-        function clickHandlerH(index) {
-            return function () {
-                var pp = iframe2.getElementsByTagName('p');
-                pp[pp.length -1].innerHTML = pp[pp.length -1].innerHTML + '<img src="' + h[index].src + '">&nbsp;';
-            };
-        }
-        
-        function clickHandlerO1(index) {
-            return function () {
-                var pp = iframe2.getElementsByTagName('p');
-                pp[pp.length -1].innerHTML = pp[pp.length -1].innerHTML + '<img src="' + o1[index].src + '">&nbsp;';
-            };
-        }
-        
-        function clickHandlerS(index) {
-            return function () {
-                var pp = iframe2.getElementsByTagName('p');
-                pp[pp.length -1].innerHTML = pp[pp.length -1].innerHTML + '<img src="' + s[index].src + '">&nbsp;';
-            };
-        }
-        
-        function clickHandlerO2(index) {
-            return function () {
-                var pp = iframe2.getElementsByTagName('p');
-                pp[pp.length -1].innerHTML = pp[pp.length -1].innerHTML + '<img src="' + o2[index].src + '">&nbsp;';
-            };
-        }
-        
         
         var c = [
             {'src':'http://i.imgur.com/s2mnHPj.png'},
@@ -476,64 +440,61 @@ function main() {
             {'src':'http://tweakimg.net/g/s/hypocrite.gif'},
             {'src':'http://tweakimg.net/g/s/worshippy.gif'}
         ];
-        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-            if($('input[value="Post Reply"]').length > 0) {
-                $('form#QuickReply').after('<div id="emojis" style="margin-left: 0px;"></div>');
-            }else{
-                $('form.Preview').after('<div id="emojis" style="margin: 20px auto 10px auto;"></div>');
-            }
-        }else{
-            if($('input[value="Post Reply"]').length > 0) {
-                $('form#QuickReply').after('<div id="emojis" style="margin-left: 140px;"></div>');
-            }else{
-                $('form.Preview').after('<div id="emojis" style="margin: 10px auto;max-width: 800px;"></div>');
-            }
-        }
-        var p1 = '<div><input class="spoilerbutton" style="display: inline;" type="button" value="Show" onclick="this.value=this.value==\'Show\'?\'Hide\':\'Show\';">';
-        var p2 = '<div class="spoiler"><div id="';
-        var p3 = '"></div></div></div>';
-        $('div#emojis').append('<style type="text/css">.spoilerbutton {display:block;margin:5px 0;}.spoiler'+
-                               ' {overflow:hidden;background: #f5f5f5;}.spoiler > div {-webkit-transition: all'+
-                               ' 0.2s ease;-moz-transition: margin 0.2s ease;-o-transition: all 0.2s ease;trans'+
-                               'ition: margin 0.2s ease;}.spoilerbutton[value="Show"] + .spoiler > div {margin-to'+
-                               'p:-100%;}.spoilerbutton[value="Hide"] + .spoiler {padding:5px;}</style>');
-        $('div#emojis').append('<span id="c"></span>');
-        $('div#emojis').append(p1+' hangouts emojis'+p2+'h'+p3);
-        $('div#emojis').append(p1+' other1 emojis'+p2+'o1'+p3);
-        $('div#emojis').append(p1+' skype emojis'+p2+'s'+p3);
-        $('div#emojis').append(p1+' other2 emojis'+p2+'o2'+p3);
-        for (i = 0; i < c.length; i++){
-            c[i].element = document.createElement("a");
-            c[i].element.innerHTML = '<img src="' + c[i].src +'" class="mceSmilieSprite">&nbsp;';
-            $('span#c').append(c[i].element);
-            c[i].element.onclick = clickHandlerC(i);
-        }
-        for (i = 0; i < h.length; i++){
-            h[i].element = document.createElement("a");
-            h[i].element.innerHTML = '<img src="' + h[i].src +'" class="mceSmilieSprite">&nbsp;';
-            $('div#h').append(h[i].element);
-            h[i].element.onclick = clickHandlerH(i);
-        }
-        for (i = 0; i < o1.length; i++){
-            o1[i].element = document.createElement("a");
-            o1[i].element.innerHTML = '<img src="' + o1[i].src +'" class="mceSmilieSprite">&nbsp;';
-            $('div#o1').append(o1[i].element);
-            o1[i].element.onclick = clickHandlerO1(i);
-        }
-        for (i = 0; i < s.length; i++){
-            s[i].element = document.createElement("a");
-            s[i].element.innerHTML = '<img src="' + s[i].src +'" class="mceSmilieSprite">&nbsp;';
-            $('div#s').append(s[i].element);
-            s[i].element.onclick = clickHandlerS(i);
-        }
-        for (i = 0; i < o2.length; i++){
-            o2[i].element = document.createElement("a");
-            o2[i].element.innerHTML = '<img src="' + o2[i].src +'" class="mceSmilieSprite">&nbsp;';
-            $('div#o2').append(o2[i].element);
-            o2[i].element.onclick = clickHandlerO2(i);
-        }
-        console.log(c.length);
-        
+        var emojiData = [
+			{
+				name: 'Regular',
+				emojis: c,
+			},
+			{
+				name: 'Hangouts',
+				emojis: h,
+			},
+			{
+				name: 'Skype',
+				emojis: s,
+			},
+			{
+				name: 'Other(1)',
+				emojis: o1,
+			}	,
+			{
+				name: 'Other(2)',
+				emojis: o2,
+			}	
+		];
+		var emojis = $('<div id="emojis"></div>');
+		if($('input[value="Post Reply"]').length > 0) {
+			$('.submitUnit').before(emojis);
+		}else{
+			$('form.Preview').after(emojis);
+		}
+		emojis = $('#emojis');
+		var emojisTop = $('<div id="emojis-top" style="padding: 10px 0px 0px;"></div>'), emojisContent = $('<div style="padding:10px 0px;max-height:100px;overflow-y:auto;"></div>');
+		emojis.append(emojisTop).append(emojisContent);
+		$.each(emojiData, function(idx, val){
+			var btn = $('<a href="javascript:void(0);">'+val.name+'</a>');
+			emojisTop.append(btn);
+			var cont = $('<div class="emojiContainer"></div>');
+			cont.appendTo(emojisContent);
+			cont.hide();
+			$.each(val.emojis, function(index, emote){
+				var emoji = $('<a href="javascript:void(0);" class="mceSmilieSprite"><img src="'+emote.src+'"/></a>');
+				cont.append(emoji);
+				emoji.click(function(){					
+					var pp = iframe2.getElementsByTagName('p');
+					pp[pp.length -1].innerHTML = pp[pp.length -1].innerHTML + '<img src="' + emote.src + '">&nbsp;';
+				});	
+			});
+			btn.click(function(){
+				$('.emoji-active').removeClass('emoji-active');
+				$('.emojiContainer').hide();
+				cont.show();
+				btn.addClass('emoji-active');
+			});
+			if(idx == 0){
+				btn.trigger('click');
+			}
+		});
         $("input.primary").first().click(function (){
             var iframe2;
             if (document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete')[0]) {
