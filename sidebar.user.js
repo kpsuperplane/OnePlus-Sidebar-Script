@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.1.5
+// @version      2.1.6
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -895,6 +895,7 @@ function main() {
         };
         $('.sidebar .section:first').after(this.wrapper);
     }
+
     //Quick Links
     var quickLinks = new sidebar("Quick Links", {
         layout: "twoColumns"
@@ -906,7 +907,21 @@ function main() {
     quickLinks.add($('<a href="/account/following">Following</a>'));
     quickLinks.add($('<a href="/watched/threads">Watched Threads</a>'));
     quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
-    quickLinks.add($('<a href="http://goo.gl/forms/sQI3SDdSRQ">Email Updates</a>'))
+    quickLinks.add($('<a href="#" id="eUpdates">Email Updates</a>'))
+    
+    eUpdates.addEventListener("click", function(){
+	var emailForm = $('<center><iframe src="https://docs.google.com/forms/d/1NmKqdgBI-rcZviGtNawZRva1KsLUOWpP8b_kfli653E/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
+	$("#eUpdates").click(function(){
+	    new modal('Email Update Form', emailForm, {
+		'Close Window': {
+		    type: 'red',
+		    click: function(){
+			this.close();
+		    }
+		}
+	    });		
+	})
+    });
     
     //Notifications
     var nBar = new sidebar("Notifications",{
