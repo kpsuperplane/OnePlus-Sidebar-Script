@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.1.4
+// @version      2.1.5
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -802,52 +802,65 @@ function main() {
         }
         
         function rainbow() {
-            if(window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
-                var message = iframe.innerHTML;
-                if (message.indexOf("http") == -1 && message.indexOf("www") == -1 && message.indexOf("@") == -1 && message.indexOf("QUOTE") == -1 && message.indexOf("[/color]") == -1 && message.indexOf("<font color") == -1&& message.indexOf(":") == -1 && message.indexOf("[COLOR") == -1) {
-                    iframe.innerHTML = MakeSFX(message, false);
-                } else {
-                    var imgregex = /(\<img([\s\S]*?)\>)/igm;
-                    var linkregex= /(\<a([\s\S]*?)<\/a\>)/igm;
-                    var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^<>]+)/igm;
-                    var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])|(\[SPOILER\]?[\s\S]*?\[\/SPOILER\])|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|\:P/igm;
-                    var imgrest = /(\[color=#[\w\d]+\]§\[\/color\])/im;
-                    var linkrest = /(\[color=#[\w\d]+\]╗\[\/color\])/im;
-                    var urlrest = /(\[color=#[\w\d]+\]▒\[\/color\])/im;
-                    var tagrest = /(\[color=#[\w\d]+\]▓\[\/color\])/im;
-                    
-                    var imgs = message.match(imgregex);
-                    var links = message.match(linkregex);
-                    var urls = message.match(urlregex);
-                    var misc = message.match(regex);
-                    
-                    message = message.replace(imgregex, "§");
-                    message = message.replace(linkregex, "╗");
-                    message = message.replace(urlregex, "▒");
-                    message = message.replace(regex, "▓");
-                    message = MakeSFX(message, false);
-                    
-                    var numImgs = (imgs === null) ? 0 : imgs.length;
-                    var numLink = (links === null) ? 0 : links.length;
-                    var numUrls = (urls === null) ? 0 : urls.length;
-                    var numMisc = (misc === null) ? 0 : misc.length;
-                    
-                    for (var u = 0; u < numImgs; u++) {
-                        message = message.replace(imgrest, imgs[u]);
-                    }
-                    for (var u = 0; u < numLink; u++) {
-                        message = message.replace(linkrest, links[u]);
-                    }
-                    for (var u = 0; u < numUrls; u++) {
-                        message = message.replace(urlrest, " <a href=\"" +urls[u]+ "\">" +urls[u]+ "</a> ");
-                    }
-                    for (var i = 0; i < numMisc; i++) {
-                        message = message.replace(tagrest, misc[i]);
-                    }
-                    iframe.innerHTML = message;
-                }
+            var iframe;
+            if (document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete')[0]) {
+                iframe = document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete')[0];
+            } else if (document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_')[0]) {
+                iframe = document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_')[0];
             }
-            //var iframe2 = document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0];
+                
+                var message = iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML;
+            
+            if (message.indexOf("http") == -1 && message.indexOf("www") == -1 && message.indexOf("@") == -1 && message.indexOf("QUOTE") == -1 && message.indexOf("[/color]") == -1 && message.indexOf("<font color") == -1&& message.indexOf(":") == -1 && message.indexOf("[COLOR") == -1) {
+                iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = MakeSFX(message, false);
+            } else {
+                var quotereg = /(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])|(\[SPOILER\]?[\s\S]*?\[\/SPOILER\])/igm;
+                var imgregex = /(\<img([\s\S]*?)\>)/igm;
+                var linkregex= /(\<a([\s\S]*?)<\/a\>)/igm;
+                var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^<>]+)/igm;
+                var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|\:P/igm;
+                var quoterest = /(\[color=#[\w\d]+\]╞\[\/color\])/im;
+                var imgrest = /(\[color=#[\w\d]+\]§\[\/color\])/im;
+                var linkrest = /(\[color=#[\w\d]+\]╗\[\/color\])/im;
+                var urlrest = /(\[color=#[\w\d]+\]▒\[\/color\])/im;
+                var tagrest = /(\[color=#[\w\d]+\]▓\[\/color\])/im;
+                
+                var quotes = message.match(quotereg);
+                message = message.replace(quotereg, '╞');
+                var imgs = message.match(imgregex);      
+                message = message.replace(imgregex, "§");
+                var links = message.match(linkregex);
+                message = message.replace(linkregex, "╗");
+                var urls = message.match(urlregex);
+                message = message.replace(urlregex, "▒");
+                var misc = message.match(regex);
+                message = message.replace(regex, "▓");
+                
+                message = MakeSFX(message, false);
+                
+                var numQuot = (quotes === null) ? 0 : quotes.length;
+                var numImgs = (imgs === null) ? 0 : imgs.length;
+                var numLink = (links === null) ? 0 : links.length;
+                var numUrls = (urls === null) ? 0 : urls.length;
+                var numMisc = (misc === null) ? 0 : misc.length;
+                
+                for (var a = 0 ; a < numQuot; a++) {
+                    message = message.replace(quoterest, quotes[a]);
+                }
+                for (var b = 0; b < numImgs; b++) {
+                    message = message.replace(imgrest, imgs[b]);
+                }
+                for (var c = 0; c < numLink; c++) {
+                    message = message.replace(linkrest, links[c]);
+                }
+                for (var d = 0; d < numUrls; d++) {
+                    message = message.replace(urlrest, " <a href=\"" +urls[d]+ "\">" +urls[d]+ "</a> ");
+                }
+                for (var e = 0; e < numMisc; e++) {
+                    message = message.replace(tagrest, misc[e]);
+                }
+                iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = message;
+            }
         }
         //Rainbowfy Text
         if(window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
