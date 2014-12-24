@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.2.4
+// @version      2.2.5
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -39,10 +39,22 @@ function main() {
                     v1[y] = parseInt(v1[y]);
                 }
                 if (v1[0] < v2[0] || v1[1] < v2[1] || v1[2] < v2[2]) {
-                    var update = confirm("New version found! you may need to allow popup windows\nWould you like to update?");
-                    if(update){
-                        document.getElementById('updateLink').click();
-                    }
+                    var updateText = "New version found! you may need to allow popup windows\nWould you like to view the release page and update?";
+                    new modal('Update!', updateText, {
+                        'Yes': {
+                            type: 'red',
+                            click: function(){
+                                this.close();
+                                document.getElementById('updateLink').click();
+                            }
+                        },
+                        'Not Now': {
+                            type: 'grey',
+                            click: function(){
+                                this.close();
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -946,7 +958,7 @@ function main() {
         quickLinks.add($('<a href="#" onClick="return false;" id="eUpdates">Email Updates</a>'));
         quickLinks.add($('<a href="#" onClick="return false;" id="check">Check for updates</a>'));
         quickLinks.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/releases/" target="_blank" id="updateLink">Github Releases</a>'));
- 
+        
         eUpdates.addEventListener("click", function(){
             var emailForm = $('<center><iframe src="https://docs.google.com/forms/d/1NmKqdgBI-rcZviGtNawZRva1KsLUOWpP8b_kfli653E/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
             new modal('Email Update Form', emailForm, {
@@ -976,12 +988,24 @@ function main() {
                         v1[y] = parseInt(v1[y]);
                     }
                     if (v1[0] < v2[0] || v1[1] < v2[1] || v1[2] < v2[2]) {
-                        var update = confirm("New version found! you may need to allow popup windows\nWould you like to update?");
-                        if(update){
-                            document.getElementById('updateLink').click();
+                        var updateText = "New version found! you may need to allow popup windows\nWould you like to view the release page and update?";
+                    new modal('Update!', updateText, {
+                        'Yes': {
+                            type: 'red',
+                            click: function(){
+                                this.close();
+                                document.getElementById('updateLink').click();
+                            }
+                        },
+                        'Not Now': {
+                            type: 'grey',
+                            click: function(){
+                                this.close();
+                            }
                         }
+                    });
                     }else{
-                        alert('no update found :3');
+                        new modal('Update!', "No update found! :3", {'Close': {type: 'grey', click: function(){this.close();}}});
                     }
                 }
             });
