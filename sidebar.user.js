@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.3.1
+// @version      2.3.2
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -975,7 +975,7 @@ function main() {
         }
         
         //Sidebar Info
-        var sidebarInfo = new sidebar("Sidebar Info", {
+        var sidebarInfo = new sidebar("Sidebar Help", {
             layout: "twoColumns"
         });
         sidebarInfo.add($('<a href="/threads/tool-oneplus-forum-sidebar-mod.208545/">Sidebar Thread</a>'));
@@ -984,11 +984,30 @@ function main() {
         sidebarInfo.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/releases/" target="_blank" id="updateLink">Github Releases</a>'));
         sidebarInfo.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/blob/v' + sidebarVersion + '/README.md">View README</a>'));
         sidebarInfo.add($('<a href="https://forums.oneplus.net/threads/tool-oneplus-forum-sidebar-mod.208545/#post-8332933">View Changelog</a>'));
+        sidebarInfo.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/issues/new">Report an Issue</a>'));
+        sidebarInfo.add($('<a href="#" onClick="return false;" id="featureRequest">Request a Feature</a>'));
+	sidebarInfo.add($('<a href="#" onClick="return false;" id="vInfo">Version Info</a>'));
+	
+	vInfo.addEventListener("click", function(){
+	    alert("Sidebar Version - v" + sidebarVersion);
+	})
+        
+        featureRequest.addEventListener("click", function(){
+            var featureForm = $('<iframe src="https://docs.google.com/forms/d/1W2xyAM3HdwdrAxhsdcSB8BefnPSa6NngRbxU-IZN37w/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
+            new modal('Feature Request Form', featureForm, {
+                'Done': {
+                    type: 'red',
+                    click: function(){
+                        this.close();
+                    }
+                }
+            });		
+        });
         
         eUpdates.addEventListener("click", function(){
             var emailForm = $('<center><iframe src="https://docs.google.com/forms/d/1NmKqdgBI-rcZviGtNawZRva1KsLUOWpP8b_kfli653E/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
             new modal('Email Update Form', emailForm, {
-                'Close Window': {
+                'Done': {
                     type: 'red',
                     click: function(){
                         this.close();
