@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.2.5
+// @version      2.3.0
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -905,6 +905,38 @@ function main() {
                 iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = message;
             }
         }
+        
+        //Ninja Text Viewer
+        function ninja() {
+            //change signature color because above changed it as well
+            var c = document.getElementsByClassName('signature');
+            for (d = 0; d < c.length; d++) {
+                c[d].style.color = 'black';
+            }
+            //change ninja text
+            var s = document.getElementsByTagName('span');
+            for (q = 0; q < s.length; q++) {
+                if (s[q].style.color.indexOf("#ffffff") >= 0 || s[q].style.color.indexOf("255, 255, 255") >= 0 || s[q].style.color.indexOf("white") >= 0)
+                {
+                    s[q].style.color = '#a8a8a8';
+                }
+                if (s[q].style.color.indexOf("#ecebea") >= 0 || s[q].style.color.indexOf("236, 235, 234") >= 0 || s[q].style.color.indexOf("transparent") >= 0)
+                {
+                    s[q].style.color = '#8a8a8a';
+                }
+            }
+            
+            if (document.URL.indexOf("threads") >= 0 || document.URL.indexOf("conversations") >= 0){
+                document.getElementsByClassName('button primary')[0].onclick = waut;
+            }
+        }
+        
+        //function to be activated three seconds after pressing post
+        function waut(){
+            setTimeout(function(){ninja();}, 3000);
+        }
+        
+        
         //Rainbowfy Text
         if(window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
             var rainbowfyBtn = $('&nbsp;<button class="button">Rainbowfy</button>');
@@ -942,22 +974,14 @@ function main() {
             $('.sidebar .section:first').after(this.wrapper);
         }
         
-        //Quick Links
-        var quickLinks = new sidebar("Quick Links", {
+        //Sidebar Info
+        var sidebarInfo = new sidebar("Sidebar Info", {
             layout: "twoColumns"
         });
-        quickLinks.add($('<a href="/account/signature/">Edit Signature</a>'));
-        quickLinks.add($('<a href="https://account.oneplus.net/invite/overview">View Invites</a>'));
-        quickLinks.add($('<a href="/conversations/add">Start PM</a>'));
-        quickLinks.add($('<a href="/account/ignored">Blocked People</a>'));
-        quickLinks.add($('<a href="/account/following">Following</a>'));
-        quickLinks.add($('<a href="/watched/threads">Watched Threads</a>'));
-        quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
-        quickLinks.add($('<a href="/account/avatar">Change Avatar</a>'));
-        quickLinks.add($('<a href="/threads/tool-oneplus-forum-sidebar-mod.208545/">Sidebar Thread</a>'));
-        quickLinks.add($('<a href="#" onClick="return false;" id="eUpdates">Email Updates</a>'));
-        quickLinks.add($('<a href="#" onClick="return false;" id="check">Check for updates</a>'));
-        quickLinks.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/releases/" target="_blank" id="updateLink">Github Releases</a>'));
+        sidebarInfo.add($('<a href="/threads/tool-oneplus-forum-sidebar-mod.208545/">Sidebar Thread</a>'));
+        sidebarInfo.add($('<a href="#" onClick="return false;" id="eUpdates">Email Updates</a>'));
+        sidebarInfo.add($('<a href="#" onClick="return false;" id="check">Check for updates</a>'));
+        sidebarInfo.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/releases/" target="_blank" id="updateLink">Github Releases</a>'));
         
         eUpdates.addEventListener("click", function(){
             var emailForm = $('<center><iframe src="https://docs.google.com/forms/d/1NmKqdgBI-rcZviGtNawZRva1KsLUOWpP8b_kfli653E/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
@@ -989,27 +1013,47 @@ function main() {
                     }
                     if (v1[0] < v2[0] || v1[1] < v2[1] || v1[2] < v2[2]) {
                         var updateText = "New version found! you may need to allow popup windows\nWould you like to view the release page and update?";
-                    new modal('Update!', updateText, {
-                        'Yes': {
-                            type: 'red',
-                            click: function(){
-                                this.close();
-                                document.getElementById('updateLink').click();
+                        new modal('Update!', updateText, {
+                            'Yes': {
+                                type: 'red',
+                                click: function(){
+                                    this.close();
+                                    document.getElementById('updateLink').click();
+                                }
+                            },
+                            'Not Now': {
+                                type: 'grey',
+                                click: function(){
+                                    this.close();
+                                }
                             }
-                        },
-                        'Not Now': {
-                            type: 'grey',
-                            click: function(){
-                                this.close();
-                            }
-                        }
-                    });
+                        });
                     }else{
                         new modal('Update!', "No update found! :3", {'Close': {type: 'grey', click: function(){this.close();}}});
                     }
                 }
             });
         });
+        
+        //Quick Links
+        var quickLinks = new sidebar("Quick Links", {
+            layout: "twoColumns"
+        });
+        quickLinks.add($('<a href="/account/signature/">Edit Signature</a>'));
+        quickLinks.add($('<a href="https://account.oneplus.net/invite/overview">View Invites</a>'));
+        quickLinks.add($('<a href="/conversations/add">Start PM</a>'));
+        quickLinks.add($('<a href="/account/ignored">Blocked People</a>'));
+        quickLinks.add($('<a href="/account/following">Following</a>'));
+        quickLinks.add($('<a href="/watched/threads">Watched Threads</a>'));
+        quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
+        quickLinks.add($('<a href="/account/avatar">Change Avatar</a>'));
+        quickLinks.add($('<a href="#" onClick="return false;" id="ninjaTextBtn">View Ninja Text</a>'));
+        
+        ninjaTextBtn.addEventListener("click",function(){
+            ninja();
+        });
+        
+        
         
         //Notifications
         var nBar = new sidebar("Notifications",{
