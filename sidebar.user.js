@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.2.1
+// @version      2.2.2
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -23,6 +23,31 @@ function addJQuery(callback) {
     document.body.appendChild(script);
 }
 function main() {
+    function update() {
+        var re;
+        $.ajax({
+            type : 'GET',
+            url : 'https://forums.oneplus.net/threads/tool-oneplus-forum-sidebar-mod.208545/#post-8332926',
+            success : function (data) {
+                var ver2 = data.match(/\d\.\d\.\d/i);
+                var v1 = sidebarVersion.toString().split(".");
+                var v2 = ver2[0].split(".");
+                console.log(v1);
+                console.log(v2);
+                for(y=0;y<v2.length;y++){
+                    v2[y] = parseInt(v2[y]);
+                    v1[y] = parseInt(v1[y]);
+                }
+                if (v1[0] < v2[0] || v1[1] < v2[1] || v1[2] < v2[2]) {
+                    var update = confirm("New version found! you may need to allow popup windows\nWould you like to update?");
+                    if(update){
+                        document.getElementById('updateLink').click();
+                    }
+                }
+            }
+        });
+        return re;
+    }
     function modal(title, content, btns){
         var overlayObj = $('<div style="position: fixed;margin: auto;top: 0;left: 0;width: 100%;height: 100%;z-index: 209998;opacity: 0.9;filter: alpha(opacity=90);background-color: rgb(255,255,255);"></div>');
         var modalObj = $('<div class="xenOverlay" style="display: block;position: fixed;left: 50%;width: 600px;z-index:209999;margin-left: -300px;top: 50%;height: auto;"><form class="formOverlay xenForm animateClose"><div class="heading" id="redactor_modal_header">'+title+'</div><div id="redactor_modal_inner"><dl class="ctrlUnit"><div class="modal-inner-content"></div></dl><dl class="ctrlUnit submitUnit modal-btn-wrapper"></dl></div></form></div>');
@@ -917,10 +942,11 @@ function main() {
         quickLinks.add($('<a href="/account/following">Following</a>'));
         quickLinks.add($('<a href="/watched/threads">Watched Threads</a>'));
         quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
-	quickLinks.add($('<a href="/account/avatar">Change Avatar</a>'));
-	quickLinks.add($('<a href="/threads/tool-oneplus-forum-sidebar-mod.208545/">Sidebar Thread</a>'));
+        quickLinks.add($('<a href="/account/avatar">Change Avatar</a>'));
+        quickLinks.add($('<a href="/threads/tool-oneplus-forum-sidebar-mod.208545/">Sidebar Thread</a>'));
         quickLinks.add($('<a href="#" onClick="return false;" id="eUpdates">Email Updates</a>'));
-	quickLinks.add($('<a href="#" onClick="return false;" id="vInfo">Version Info</a>'));
+        quickLinks.add($('<a href="#" onClick="return false;" id="check">Check for updates</a>'));
+        quickLinks.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/raw/master/sidebar.user.js" target="_blank" id="updateLink">Update link</a>'));
         
         eUpdates.addEventListener("click", function(){
             var emailForm = $('<center><iframe src="https://docs.google.com/forms/d/1NmKqdgBI-rcZviGtNawZRva1KsLUOWpP8b_kfli653E/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
@@ -933,10 +959,34 @@ function main() {
                 }
             });		
         });
-
-	vInfo.addEventListener("click", function(){
-	    alert("Version: " + sidebarVersion);	
-	});
+        if(window.location.href.indexOf("thread") == -1 && window.location.href.indexOf("conversation") == -1){
+            update();
+        }
+        check.addEventListener("click", function(){
+            $.ajax({
+                type : 'GET',
+                url : 'https://forums.oneplus.net/threads/tool-oneplus-forum-sidebar-mod.208545/#post-8332926',
+                success : function (data) {
+                    var ver2 = data.match(/\d\.\d\.\d/i);
+                    var v1 = sidebarVersion.toString().split(".");
+                    var v2 = ver2[0].split(".");
+                    console.log(v1);
+                    console.log(v2);
+                    for(y=0;y<v2.length;y++){
+                        v2[y] = parseInt(v2[y]);
+                        v1[y] = parseInt(v1[y]);
+                    }
+                    if (v1[0] < v2[0] || v1[1] < v2[1] || v1[2] < v2[2]) {
+                        var update = confirm("New version found! you may need to allow popup windows\nWould you like to update?");
+                        if(update){
+                            document.getElementById('updateLink').click();
+                        }
+                    }else{
+                        alert('no update found :3');
+                    }
+                }
+            });
+        });
         
         //Notifications
         var nBar = new sidebar("Notifications",{
@@ -1007,4 +1057,3 @@ function main() {
 }
 var $ = jQuery;
 addJQuery(main);
-
