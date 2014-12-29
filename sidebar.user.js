@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.3.3
+// @version      2.3.4
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -860,7 +860,7 @@ function main() {
                 var quotereg = /(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])|(\[SPOILER\]?[\s\S]*?\[\/SPOILER\])/igm;
                 var imgregex = /(\<img([\s\S]*?)\>)/igm;
                 var linkregex= /(\<a([\s\S]*?)<\/a\>)/igm;
-                var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^<>]+)/igm;
+                var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^<▓▒╗╞§>]+)/igm;
                 var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|\:P/igm;
                 var quoterest = /(\[color=#[\w\d]+\]╞\[\/color\])/im;
                 var imgrest = /(\[color=#[\w\d]+\]§\[\/color\])/im;
@@ -897,7 +897,7 @@ function main() {
                     message = message.replace(linkrest, links[c]);
                 }
                 for (var d = 0; d < numUrls; d++) {
-                    message = message.replace(urlrest, " <a href=\"" +urls[d]+ "\">" +urls[d]+ "</a> ");
+                    message = message.replace(urlrest, /*" <a href=\"" +*/urls[d]/*+ "\">" +urls[d]+ "</a> "*/);
                 }
                 for (var e = 0; e < numMisc; e++) {
                     message = message.replace(tagrest, misc[e]);
@@ -1102,7 +1102,7 @@ function main() {
     
     //Quick PM
     var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" style="font-size:11px;padding:5px;height:auto;line-height:12px;margin-top:5px;" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
-    pmBtn.appendTo('.userTitle');
+    $('em.userTitle').after(pmBtn);
     var numb = $('input.button.PreviewButton.JsOnly').length;
     for (i = 0; i < numb; i++) {
         $('input.button.PreviewButton.JsOnly')[i].id = i;
