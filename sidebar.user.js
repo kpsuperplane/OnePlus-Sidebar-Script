@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.3.4
+// @version      2.3.5
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -140,219 +140,82 @@ function main() {
     if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0) {
         var iframe = document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0];
         var c = [
-            {'src':'http://i.imgur.com/s2mnHPj.png'},
-            {'src':'http://i.imgur.com/xQEgir2.png'},
-            {'src':'http://i.imgur.com/uQKnAHL.png'},
-            {'src':'http://i.imgur.com/77QKaCF.png'},
-            {'src':'http://i.imgur.com/aEIFMOD.png'},
-            {'src':'http://i.imgur.com/3xmvLQB.png'},
-            
-            {'src':'http://i.imgur.com/j8kVjQx.png'},
-            {'src':'http://i.imgur.com/Osrk8Z6.png'},
-            {'src':'http://i.imgur.com/PLXyQoG.png'},
-            {'src':'http://i.imgur.com/Wt6Mt5Y.png'},
-            {'src':'http://i.imgur.com/coW4gmv.png'},
-            {'src':'http://i.imgur.com/U7sQeeB.png'},
-            {'src':'http://i.imgur.com/SOIm2QI.png'},
-            {'src':'http://i.imgur.com/1CQnfI4.png'},
-            {'src':'http://i.imgur.com/n0LxE67.png'},
-            {'src':'http://i.imgur.com/0vO27Us.png'},
-            {'src':'http://i.imgur.com/NJ6VaZd.png'},
-            {'src':'http://i.imgur.com/Iz9dIeF.png'},
-            {'src':'http://i.imgur.com/SCcL49G.png'},
-            {'src':'http://i.imgur.com/jJz11mk.png'},
-            {'src':'http://i.imgur.com/JKsX6sA.png'},
-            {'src':'http://i.imgur.com/TE23JDQ.png'},
-            {'src':'http://i.imgur.com/Z6rEbOj.png'},
-            {'src':'http://i.imgur.com/7x4vE57.png'},
-            {'src':'http://i.imgur.com/4kuBhCa.png'},
-            {'src':'http://i.imgur.com/5ySsWCx.png'},
-            {'src':'http://i.imgur.com/oGC5iz9.png'},
-            {'src':'http://i.imgur.com/mlVCJNQ.png'},
-            {'src':'http://i.imgur.com/exbEJw6.png'},
-            {'src':'http://i.imgur.com/XtcLVi8.png'},
-            {'src':'http://i.imgur.com/oXnPJzK.png'},
-            {'src':'http://i.imgur.com/7nQzs1N.png'},
-            {'src':'http://i.imgur.com/C35tWRr.png'},
-            {'src':'http://i.imgur.com/dTeca6e.png'},
-            {'src':'http://i.imgur.com/kz4sU6E.png'},
-            {'src':'http://i.imgur.com/dXV0bPZ.png'},
-            {'src':'http://i.imgur.com/jpgBiOo.png'},
-            {'src':'http://i.imgur.com/e1rc3vr.png'},
-            {'src':'http://i.imgur.com/Pq6xcYg.png'},
+            {'src':'http://i.imgur.com/s2mnHPj.png'},{'src':'http://i.imgur.com/xQEgir2.png'},{'src':'http://i.imgur.com/uQKnAHL.png'},
+            {'src':'http://i.imgur.com/77QKaCF.png'},{'src':'http://i.imgur.com/aEIFMOD.png'},{'src':'http://i.imgur.com/3xmvLQB.png'},
+            {'src':'http://i.imgur.com/j8kVjQx.png'},{'src':'http://i.imgur.com/Osrk8Z6.png'},{'src':'http://i.imgur.com/PLXyQoG.png'},
+            {'src':'http://i.imgur.com/Wt6Mt5Y.png'},{'src':'http://i.imgur.com/coW4gmv.png'},{'src':'http://i.imgur.com/U7sQeeB.png'},
+            {'src':'http://i.imgur.com/SOIm2QI.png'},{'src':'http://i.imgur.com/1CQnfI4.png'},{'src':'http://i.imgur.com/n0LxE67.png'},
+            {'src':'http://i.imgur.com/0vO27Us.png'},{'src':'http://i.imgur.com/NJ6VaZd.png'},{'src':'http://i.imgur.com/Iz9dIeF.png'},
+            {'src':'http://i.imgur.com/SCcL49G.png'},{'src':'http://i.imgur.com/jJz11mk.png'},{'src':'http://i.imgur.com/JKsX6sA.png'},
+            {'src':'http://i.imgur.com/TE23JDQ.png'},{'src':'http://i.imgur.com/Z6rEbOj.png'},{'src':'http://i.imgur.com/7x4vE57.png'},
+            {'src':'http://i.imgur.com/4kuBhCa.png'},{'src':'http://i.imgur.com/5ySsWCx.png'},{'src':'http://i.imgur.com/oGC5iz9.png'},
+            {'src':'http://i.imgur.com/mlVCJNQ.png'},{'src':'http://i.imgur.com/exbEJw6.png'},{'src':'http://i.imgur.com/XtcLVi8.png'},
+            {'src':'http://i.imgur.com/oXnPJzK.png'},{'src':'http://i.imgur.com/7nQzs1N.png'},{'src':'http://i.imgur.com/C35tWRr.png'},
+            {'src':'http://i.imgur.com/dTeca6e.png'},{'src':'http://i.imgur.com/kz4sU6E.png'},{'src':'http://i.imgur.com/dXV0bPZ.png'},
+            {'src':'http://i.imgur.com/jpgBiOo.png'},{'src':'http://i.imgur.com/e1rc3vr.png'},{'src':'http://i.imgur.com/Pq6xcYg.png'},
             {'src':'http://i.imgur.com/hO7m9ga.png'},
         ];
             
             var h = [
             //hangouts        
-            {'src':'http://i.imgur.com/vpOXVGK.png'},
-            {'src':'http://i.imgur.com/Y1vZjiX.png'},
-            {'src':'http://i.imgur.com/qPVDTQ9.png'},
-            {'src':'http://i.imgur.com/zkaTlAd.png'},
-            {'src':'http://i.imgur.com/scUISw8.png'},
-            {'src':'http://i.imgur.com/xp1jqJf.png'},
-            {'src':'http://i.imgur.com/4Kn0YBJ.png'},
-            {'src':'http://i.imgur.com/hK8EFTv.png'},
-            {'src':'http://i.imgur.com/X9SqjQ2.png'},
-            
-            {'src':'http://i.imgur.com/aYRlrHV.png'},
-            {'src':'http://i.imgur.com/I3AS64C.png'},
-            {'src':'http://i.imgur.com/kJJNiwZ.png'},
-            {'src':'http://i.imgur.com/fKAFbm0.png'},
-            {'src':'http://i.imgur.com/JICfIFj.png'},
-            {'src':'http://i.imgur.com/FytXaEh.png'},
-            {'src':'http://i.imgur.com/rrekvUn.png'},
-            {'src':'http://i.imgur.com/ad6HSLi.png'},
-            {'src':'http://i.imgur.com/ER0gWHb.png'},
-            {'src':'http://i.imgur.com/1wkDeWB.png'},
-            {'src':'http://i.imgur.com/KwDoZ9A.png'},
-            {'src':'http://i.imgur.com/ovqPLQn.png'},
-            {'src':'http://i.imgur.com/qOtWwcH.png'},
-            {'src':'http://i.imgur.com/mU1RKXd.png'},
-            {'src':'http://i.imgur.com/x0pychj.png'},
-            {'src':'http://i.imgur.com/u1WHrgx.png'},
-            {'src':'http://i.imgur.com/G3w9kef.png'},
-            {'src':'http://i.imgur.com/HzTxh21.png'},
-            {'src':'http://i.imgur.com/dFUn4OG.png'},
-            {'src':'http://i.imgur.com/ejes95e.png'},
-            {'src':'http://i.imgur.com/OwA33Zb.png'},
-            {'src':'http://i.imgur.com/kmvVMTC.png'},
-            {'src':'http://i.imgur.com/AX9Rut8.png'},
-            {'src':'http://i.imgur.com/pQpnv0k.png'},
-            {'src':'http://i.imgur.com/pf4L6gk.png'},
-            {'src':'http://i.imgur.com/AOKKQP1.png'},
-            {'src':'http://i.imgur.com/WAaoHfp.png'},
-            {'src':'http://i.imgur.com/GmMXwZB.png'},
-            {'src':'http://i.imgur.com/XPVBoet.png'},
-            {'src':'http://i.imgur.com/jbNBigO.png'},
-            {'src':'http://i.imgur.com/817AGU4.png'},
-            {'src':'http://i.imgur.com/sCKxAV9.png'},
-            {'src':'http://i.imgur.com/vI1c2TU.png'},
-            {'src':'http://i.imgur.com/vP3I9w3.png'},
-            {'src':'http://i.imgur.com/pAUELjY.png'},
-            {'src':'http://i.imgur.com/urJYVoa.png'},
-            {'src':'http://i.imgur.com/kV7PgWJ.png'},
-            {'src':'http://i.imgur.com/esFvxar.png'},
-            {'src':'http://i.imgur.com/zDZkc7W.png'},
-            {'src':'http://i.imgur.com/5fC1h4r.png'},
-            {'src':'http://i.imgur.com/TheqhpC.png'},
-            {'src':'http://i.imgur.com/VJnirgH.png'},
-            {'src':'http://i.imgur.com/xLhnK5d.png'},
-            {'src':'http://i.imgur.com/E9W6WN3.png'},
-            {'src':'http://i.imgur.com/kP2djp2.png'},
-            {'src':'http://i.imgur.com/Qx2wwAi.png'},
-            {'src':'http://i.imgur.com/WwrbsDX.png'},
-            {'src':'http://i.imgur.com/Zj2aBHy.png'},
-            {'src':'http://i.imgur.com/QRr7pgi.png'},
-            {'src':'http://i.imgur.com/ynah5l8.png'},
-            {'src':'http://i.imgur.com/TPqkjBo.png'},
-            {'src':'http://i.imgur.com/mXZQQyR.png'},
-            {'src':'http://i.imgur.com/VOesKVE.png'},
-            {'src':'http://i.imgur.com/sPrcwnI.png'},
-            {'src':'http://i.imgur.com/v3eZTzx.png'},
-            {'src':'http://i.imgur.com/QjrFTOo.png'},
-            
-            {'src':'http://i.imgur.com/Oul1J4D.png'},
-            {'src':'http://i.imgur.com/REaECno.png'},
-            {'src':'http://i.imgur.com/tZD9WDu.png'},
-            {'src':'http://i.imgur.com/1snuG0r.png'},
-            {'src':'http://i.imgur.com/nzAP2JG.png'},
-            {'src':'http://i.imgur.com/j7C4Aq0.png'},
-            {'src':'http://i.imgur.com/tMxIx7S.png'},
-            {'src':'http://i.imgur.com/SJbR6sm.png'},
-            {'src':'http://i.imgur.com/YKlOs0W.png'},
-            {'src':'http://i.imgur.com/WTMNq8v.png'},
-            {'src':'http://i.imgur.com/GWilqh2.png'},
-            {'src':'http://i.imgur.com/Bbsm9n5.png'},
-            {'src':'http://i.imgur.com/pGU6x8S.png'},
-            {'src':'http://i.imgur.com/FDP39zz.png'},
-            {'src':'http://i.imgur.com/79VA6TT.png'},
-            {'src':'http://i.imgur.com/WdCtOnn.png'},
+            {'src':'http://i.imgur.com/vpOXVGK.png'},{'src':'http://i.imgur.com/Y1vZjiX.png'},{'src':'http://i.imgur.com/qPVDTQ9.png'},
+            {'src':'http://i.imgur.com/zkaTlAd.png'},{'src':'http://i.imgur.com/scUISw8.png'},{'src':'http://i.imgur.com/xp1jqJf.png'},
+            {'src':'http://i.imgur.com/4Kn0YBJ.png'},{'src':'http://i.imgur.com/hK8EFTv.png'},{'src':'http://i.imgur.com/X9SqjQ2.png'},
+            {'src':'http://i.imgur.com/aYRlrHV.png'},{'src':'http://i.imgur.com/I3AS64C.png'},{'src':'http://i.imgur.com/kJJNiwZ.png'},
+            {'src':'http://i.imgur.com/fKAFbm0.png'},{'src':'http://i.imgur.com/JICfIFj.png'},{'src':'http://i.imgur.com/FytXaEh.png'},
+            {'src':'http://i.imgur.com/rrekvUn.png'},{'src':'http://i.imgur.com/ad6HSLi.png'},{'src':'http://i.imgur.com/ER0gWHb.png'},
+            {'src':'http://i.imgur.com/1wkDeWB.png'},{'src':'http://i.imgur.com/KwDoZ9A.png'},{'src':'http://i.imgur.com/ovqPLQn.png'},
+            {'src':'http://i.imgur.com/qOtWwcH.png'},{'src':'http://i.imgur.com/mU1RKXd.png'},{'src':'http://i.imgur.com/x0pychj.png'},
+            {'src':'http://i.imgur.com/u1WHrgx.png'},{'src':'http://i.imgur.com/G3w9kef.png'},{'src':'http://i.imgur.com/HzTxh21.png'},
+            {'src':'http://i.imgur.com/dFUn4OG.png'},{'src':'http://i.imgur.com/ejes95e.png'},{'src':'http://i.imgur.com/OwA33Zb.png'},
+            {'src':'http://i.imgur.com/kmvVMTC.png'},{'src':'http://i.imgur.com/AX9Rut8.png'},{'src':'http://i.imgur.com/pQpnv0k.png'},
+            {'src':'http://i.imgur.com/pf4L6gk.png'},{'src':'http://i.imgur.com/AOKKQP1.png'},{'src':'http://i.imgur.com/WAaoHfp.png'},
+            {'src':'http://i.imgur.com/GmMXwZB.png'},{'src':'http://i.imgur.com/XPVBoet.png'},{'src':'http://i.imgur.com/jbNBigO.png'},
+            {'src':'http://i.imgur.com/817AGU4.png'},{'src':'http://i.imgur.com/sCKxAV9.png'},{'src':'http://i.imgur.com/vI1c2TU.png'},
+            {'src':'http://i.imgur.com/vP3I9w3.png'},{'src':'http://i.imgur.com/pAUELjY.png'},{'src':'http://i.imgur.com/urJYVoa.png'},
+            {'src':'http://i.imgur.com/kV7PgWJ.png'},{'src':'http://i.imgur.com/esFvxar.png'},{'src':'http://i.imgur.com/zDZkc7W.png'},
+            {'src':'http://i.imgur.com/5fC1h4r.png'},{'src':'http://i.imgur.com/TheqhpC.png'},{'src':'http://i.imgur.com/VJnirgH.png'},
+            {'src':'http://i.imgur.com/xLhnK5d.png'},{'src':'http://i.imgur.com/E9W6WN3.png'},{'src':'http://i.imgur.com/kP2djp2.png'},
+            {'src':'http://i.imgur.com/Qx2wwAi.png'},{'src':'http://i.imgur.com/WwrbsDX.png'},{'src':'http://i.imgur.com/Zj2aBHy.png'},
+            {'src':'http://i.imgur.com/QRr7pgi.png'},{'src':'http://i.imgur.com/ynah5l8.png'},{'src':'http://i.imgur.com/TPqkjBo.png'},
+            {'src':'http://i.imgur.com/mXZQQyR.png'},{'src':'http://i.imgur.com/VOesKVE.png'},{'src':'http://i.imgur.com/sPrcwnI.png'},
+            {'src':'http://i.imgur.com/v3eZTzx.png'},{'src':'http://i.imgur.com/QjrFTOo.png'},{'src':'http://i.imgur.com/Oul1J4D.png'},
+            {'src':'http://i.imgur.com/REaECno.png'},{'src':'http://i.imgur.com/tZD9WDu.png'},{'src':'http://i.imgur.com/1snuG0r.png'},
+            {'src':'http://i.imgur.com/nzAP2JG.png'},{'src':'http://i.imgur.com/j7C4Aq0.png'},{'src':'http://i.imgur.com/tMxIx7S.png'},
+            {'src':'http://i.imgur.com/SJbR6sm.png'},{'src':'http://i.imgur.com/YKlOs0W.png'},{'src':'http://i.imgur.com/WTMNq8v.png'},
+            {'src':'http://i.imgur.com/GWilqh2.png'},{'src':'http://i.imgur.com/Bbsm9n5.png'},{'src':'http://i.imgur.com/pGU6x8S.png'},
+            {'src':'http://i.imgur.com/FDP39zz.png'},{'src':'http://i.imgur.com/79VA6TT.png'},{'src':'http://i.imgur.com/WdCtOnn.png'},
         ];
         
         var o1 = [
             //other1
-            {'src':'http://i.imgur.com/KaCv5op.gif'},
-            {'src':'http://i.imgur.com/ejU2fcF.png'},
-            {'src':'http://i.imgur.com/bio1pvI.gif'},
-            {'src':'http://i.imgur.com/Ltd5iU6.png'},
-            {'src':'http://i.imgur.com/T4IgzTY.gif'},
-            {'src':'http://i.imgur.com/PbUaxYx.png'},
-            {'src':'http://i.imgur.com/R8W6I0w.png'},
-            {'src':'http://i.imgur.com/xG4RIrA.gif'},
-            {'src':'http://i.imgur.com/rbFuPXF.gif'},
-            {'src':'http://i.imgur.com/wyYOabT.gif'},
-            {'src':'http://i.imgur.com/S6UEbHD.gif'},
-            {'src':'http://i.imgur.com/4xMO5KD.gif'},
-            {'src':'http://i.imgur.com/TwFgi2c.gif'},
-            {'src':'http://i.imgur.com/hbETBD0.png'},
-            {'src':'http://i.imgur.com/tQ9iHT6.gif'},
-            {'src':'http://i.imgur.com/jomyAJ4.gif'},
-            {'src':'http://i.imgur.com/1hHjhXy.gif'},
-            {'src':'http://i.imgur.com/JBLi3hO.png'},
-            {'src':'http://i.imgur.com/2zCelqA.gif'},
-            {'src':'http://i.imgur.com/v6wvs7A.gif'},
-            {'src':'http://i.imgur.com/HN61JpJ.png'},
-            {'src':'http://i.imgur.com/p80TRPX.gif'},
-            {'src':'http://i.imgur.com/jKIo5cV.gif'},
-            {'src':'http://i.imgur.com/qENwY90.gif'},
-            {'src':'http://i.imgur.com/3fIiDj2.gif'},
-            {'src':'http://i.imgur.com/6t2Edws.png'},
-            {'src':'http://i.imgur.com/QFgTdCv.gif'},
-            {'src':'http://i.imgur.com/IesFNjq.gif'},
-            {'src':'http://i.imgur.com/dqSaOBe.png'},
-            {'src':'http://i.imgur.com/LFhYb3I.gif'},
-            {'src':'http://i.imgur.com/7ggKVAO.gif'},
-            {'src':'http://i.imgur.com/AccmU5M.gif'},
-            {'src':'http://i.imgur.com/T2CfvSd.gif'},
-            {'src':'http://i.imgur.com/ueULm7y.gif'},
-            {'src':'http://i.imgur.com/euU0YPC.gif'},
-            {'src':'http://i.imgur.com/2cgWGlH.gif'},
-            {'src':'http://i.imgur.com/MPPaTyz.png'},
-            {'src':'http://i.imgur.com/iy5JEtV.gif'},
-            {'src':'http://i.imgur.com/ZENu745.gif'},
-            {'src':'http://i.imgur.com/nfFXKjo.gif'},
-            {'src':'http://i.imgur.com/ebWpush.png'},
-            {'src':'http://i.imgur.com/ZF06woy.gif'},
-            {'src':'http://i.imgur.com/PQ46nnT.gif'},
-            {'src':'http://i.imgur.com/ERHUlCz.gif'},
-            {'src':'http://i.imgur.com/6RjFMle.gif'},
-            {'src':'http://i.imgur.com/f5T2Orb.png'},
-            {'src':'http://i.imgur.com/Sjxv94d.gif'},
-            {'src':'http://i.imgur.com/j79a9aH.gif'},
-            {'src':'http://i.imgur.com/V5cCsWh.png'},
-            {'src':'http://i.imgur.com/cMyP5ad.gif'},
-            {'src':'http://i.imgur.com/HCRlrTz.gif'},
-            {'src':'http://i.imgur.com/UEJ07GO.gif'},
-            {'src':'http://i.imgur.com/FhxkvG1.gif'},
-            {'src':'http://i.imgur.com/OphqGmp.gif'},
-            {'src':'http://i.imgur.com/ltpLsUw.gif'},
-            {'src':'http://i.imgur.com/L8qFDbk.gif'},
-            {'src':'http://i.imgur.com/VdsR7Kd.gif'},
-            {'src':'http://i.imgur.com/Qh7HS3l.gif'},
-            {'src':'http://i.imgur.com/sR5ERGu.png'},
-            {'src':'http://i.imgur.com/NSLcMn7.gif'},
-            {'src':'http://i.imgur.com/1goqhMM.gif'},
-            {'src':'http://i.imgur.com/HrYLFFB.gif'},
-            {'src':'http://i.imgur.com/Jbt4I2Z.gif'},
-            {'src':'http://i.imgur.com/CKbSOtO.png'},
-            {'src':'http://i.imgur.com/hd1dUWI.png'},
-            {'src':'http://i.imgur.com/ylaLgZg.gif'},
-            {'src':'http://i.imgur.com/lYIYWaG.gif'},
-            {'src':'http://i.imgur.com/OfDMTt5.gif'},
-            {'src':'http://i.imgur.com/DtZamGL.gif'},
-            {'src':'http://i.imgur.com/2PfclL5.gif'},
-            {'src':'http://i.imgur.com/mjDDoYp.png'},
-            {'src':'http://i.imgur.com/AFAlTnd.gif'},
-            {'src':'http://i.imgur.com/AbXv6rW.gif'},
-            {'src':'http://i.imgur.com/DdGW27Z.png'},
-            {'src':'http://i.imgur.com/1PWsDVr.gif'},
-            {'src':'http://i.imgur.com/qsn9fnc.png'},
-            {'src':'http://i.imgur.com/p9FSUKE.gif'},
-            {'src':'http://i.imgur.com/Uh85EFc.gif'},
-            {'src':'http://i.imgur.com/WVE2soK.png'},
-            {'src':'http://i.imgur.com/ynRV5zk.png'},
-            {'src':'http://i.imgur.com/hXawssJ.gif'},
+            {'src':'http://i.imgur.com/KaCv5op.gif'},{'src':'http://i.imgur.com/ejU2fcF.png'},{'src':'http://i.imgur.com/bio1pvI.gif'},
+            {'src':'http://i.imgur.com/Ltd5iU6.png'},{'src':'http://i.imgur.com/T4IgzTY.gif'},{'src':'http://i.imgur.com/PbUaxYx.png'},
+            {'src':'http://i.imgur.com/R8W6I0w.png'},{'src':'http://i.imgur.com/xG4RIrA.gif'},{'src':'http://i.imgur.com/rbFuPXF.gif'},
+            {'src':'http://i.imgur.com/wyYOabT.gif'},{'src':'http://i.imgur.com/S6UEbHD.gif'},{'src':'http://i.imgur.com/4xMO5KD.gif'},
+            {'src':'http://i.imgur.com/TwFgi2c.gif'},{'src':'http://i.imgur.com/hbETBD0.png'},{'src':'http://i.imgur.com/tQ9iHT6.gif'},
+            {'src':'http://i.imgur.com/jomyAJ4.gif'},{'src':'http://i.imgur.com/1hHjhXy.gif'},{'src':'http://i.imgur.com/JBLi3hO.png'},
+            {'src':'http://i.imgur.com/2zCelqA.gif'},{'src':'http://i.imgur.com/v6wvs7A.gif'},{'src':'http://i.imgur.com/HN61JpJ.png'},
+            {'src':'http://i.imgur.com/p80TRPX.gif'},{'src':'http://i.imgur.com/jKIo5cV.gif'},{'src':'http://i.imgur.com/qENwY90.gif'},
+            {'src':'http://i.imgur.com/3fIiDj2.gif'},{'src':'http://i.imgur.com/6t2Edws.png'},{'src':'http://i.imgur.com/QFgTdCv.gif'},
+            {'src':'http://i.imgur.com/IesFNjq.gif'},{'src':'http://i.imgur.com/dqSaOBe.png'},{'src':'http://i.imgur.com/LFhYb3I.gif'},
+            {'src':'http://i.imgur.com/7ggKVAO.gif'},{'src':'http://i.imgur.com/AccmU5M.gif'},{'src':'http://i.imgur.com/T2CfvSd.gif'},
+            {'src':'http://i.imgur.com/ueULm7y.gif'},{'src':'http://i.imgur.com/euU0YPC.gif'},{'src':'http://i.imgur.com/2cgWGlH.gif'},
+            {'src':'http://i.imgur.com/MPPaTyz.png'},{'src':'http://i.imgur.com/iy5JEtV.gif'},{'src':'http://i.imgur.com/ZENu745.gif'},
+            {'src':'http://i.imgur.com/nfFXKjo.gif'},{'src':'http://i.imgur.com/ebWpush.png'},{'src':'http://i.imgur.com/ZF06woy.gif'},
+            {'src':'http://i.imgur.com/PQ46nnT.gif'},{'src':'http://i.imgur.com/ERHUlCz.gif'},{'src':'http://i.imgur.com/6RjFMle.gif'},
+            {'src':'http://i.imgur.com/f5T2Orb.png'},{'src':'http://i.imgur.com/Sjxv94d.gif'},{'src':'http://i.imgur.com/j79a9aH.gif'},
+            {'src':'http://i.imgur.com/V5cCsWh.png'},{'src':'http://i.imgur.com/cMyP5ad.gif'},{'src':'http://i.imgur.com/HCRlrTz.gif'},
+            {'src':'http://i.imgur.com/UEJ07GO.gif'},{'src':'http://i.imgur.com/FhxkvG1.gif'},{'src':'http://i.imgur.com/OphqGmp.gif'},
+            {'src':'http://i.imgur.com/ltpLsUw.gif'},{'src':'http://i.imgur.com/L8qFDbk.gif'},{'src':'http://i.imgur.com/VdsR7Kd.gif'},
+            {'src':'http://i.imgur.com/Qh7HS3l.gif'},{'src':'http://i.imgur.com/sR5ERGu.png'},{'src':'http://i.imgur.com/NSLcMn7.gif'},
+            {'src':'http://i.imgur.com/1goqhMM.gif'},{'src':'http://i.imgur.com/HrYLFFB.gif'},{'src':'http://i.imgur.com/Jbt4I2Z.gif'},
+            {'src':'http://i.imgur.com/CKbSOtO.png'},{'src':'http://i.imgur.com/hd1dUWI.png'},{'src':'http://i.imgur.com/ylaLgZg.gif'},
+            {'src':'http://i.imgur.com/lYIYWaG.gif'},{'src':'http://i.imgur.com/OfDMTt5.gif'},{'src':'http://i.imgur.com/DtZamGL.gif'},
+            {'src':'http://i.imgur.com/2PfclL5.gif'},{'src':'http://i.imgur.com/mjDDoYp.png'},{'src':'http://i.imgur.com/AFAlTnd.gif'},
+            {'src':'http://i.imgur.com/AbXv6rW.gif'},{'src':'http://i.imgur.com/DdGW27Z.png'},{'src':'http://i.imgur.com/1PWsDVr.gif'},
+            {'src':'http://i.imgur.com/qsn9fnc.png'},{'src':'http://i.imgur.com/p9FSUKE.gif'},{'src':'http://i.imgur.com/Uh85EFc.gif'},
+            {'src':'http://i.imgur.com/WVE2soK.png'},{'src':'http://i.imgur.com/ynRV5zk.png'},{'src':'http://i.imgur.com/hXawssJ.gif'},
         ];
             
             var s = [
@@ -445,34 +308,20 @@ function main() {
         
         var o2 = [
             //other2
-            {'src':'http://tweakimg.net/g/s/smile.gif'},
-            {'src':'http://tweakimg.net/g/s/frown.gif'},
-            {'src':'http://tweakimg.net/g/s/redface.gif'},
-            {'src':'http://tweakimg.net/g/s/biggrin.gif'},
-            {'src':'http://tweakimg.net/g/s/biggrin.gif'},
-            {'src':'http://tweakimg.net/g/s/cry.gif'},
-            {'src':'http://tweakimg.net/g/s/devil.gif'},
-            {'src':'http://tweakimg.net/g/s/clown.gif'},
-            {'src':'http://tweakimg.net/g/s/wink.gif'},
-            {'src':'http://tweakimg.net/g/s/puh2.gif'},
-            {'src':'http://tweakimg.net/g/s/yummie.gif'},
-            {'src':'http://tweakimg.net/g/s/shiny.gif'},
-            {'src':'http://tweakimg.net/g/s/heart.gif'},
-            {'src':'http://tweakimg.net/g/s/sleephappy.gif'},
-            {'src':'http://tweakimg.net/g/s/vork.gif'},
-            {'src':'http://tweakimg.net/g/s/rc5.gif'},
-            {'src':'http://tweakimg.net/g/s/yawnee.gif'},
-            {'src':'http://tweakimg.net/g/s/sadley.gif'},
-            {'src':'http://tweakimg.net/g/s/coool.gif'},
-            {'src':'http://tweakimg.net/g/s/confused.gif'},
-            {'src':'http://tweakimg.net/g/s/frusty.gif'},
-            {'src':'http://tweakimg.net/g/s/nosmile2.gif'},
-            {'src':'http://tweakimg.net/g/s/nosmile.gif'},
-            {'src':'http://tweakimg.net/g/s/puh.gif'},
-            {'src':'http://tweakimg.net/g/s/kwijl.gif'},
-            {'src':'http://tweakimg.net/g/s/shutup.gif'},
-            {'src':'http://tweakimg.net/g/s/bonk.gif'},
-            {'src':'http://tweakimg.net/g/s/hypocrite.gif'},
+            {'src':'http://tweakimg.net/g/s/smile.gif'},{'src':'http://tweakimg.net/g/s/frown.gif'},
+            {'src':'http://tweakimg.net/g/s/redface.gif'},{'src':'http://tweakimg.net/g/s/biggrin.gif'},
+            {'src':'http://tweakimg.net/g/s/biggrin.gif'},{'src':'http://tweakimg.net/g/s/cry.gif'},
+            {'src':'http://tweakimg.net/g/s/devil.gif'},{'src':'http://tweakimg.net/g/s/clown.gif'},
+            {'src':'http://tweakimg.net/g/s/wink.gif'},{'src':'http://tweakimg.net/g/s/puh2.gif'},
+            {'src':'http://tweakimg.net/g/s/yummie.gif'},{'src':'http://tweakimg.net/g/s/shiny.gif'},
+            {'src':'http://tweakimg.net/g/s/heart.gif'},{'src':'http://tweakimg.net/g/s/sleephappy.gif'},
+            {'src':'http://tweakimg.net/g/s/vork.gif'},{'src':'http://tweakimg.net/g/s/rc5.gif'},
+            {'src':'http://tweakimg.net/g/s/yawnee.gif'},{'src':'http://tweakimg.net/g/s/sadley.gif'},
+            {'src':'http://tweakimg.net/g/s/coool.gif'},{'src':'http://tweakimg.net/g/s/confused.gif'},
+            {'src':'http://tweakimg.net/g/s/frusty.gif'},{'src':'http://tweakimg.net/g/s/nosmile2.gif'},
+            {'src':'http://tweakimg.net/g/s/nosmile.gif'},{'src':'http://tweakimg.net/g/s/puh.gif'},
+            {'src':'http://tweakimg.net/g/s/kwijl.gif'},{'src':'http://tweakimg.net/g/s/shutup.gif'},
+            {'src':'http://tweakimg.net/g/s/bonk.gif'},{'src':'http://tweakimg.net/g/s/hypocrite.gif'},
             {'src':'http://tweakimg.net/g/s/worshippy.gif'}
         ];
         var emojiData = [
@@ -845,65 +694,103 @@ function main() {
         }
         
         function rainbow() {
-            var iframe;
-            if (document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete')[0]) {
-                iframe = document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_NoAutoComplete')[0];
-            } else if (document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_')[0]) {
-                iframe = document.getElementsByClassName('redactor_textCtrl redactor_MessageEditor redactor_BbCodeWysiwygEditor redactor_')[0];
+            var iframe = document.getElementsByClassName('redactor_textCtrl')[0];
+            var message = iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML;
+            var quoteReg=/(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])/igm;
+            var misc = message.match(quoteReg);
+            var numMisc = (misc === null) ? 0 : misc.length;
+            message = message.replace(quoteReg, "▓");
+            var em = [/:3&lt;3/igm,/&gt;:3/igm,/:'3/igm, 
+                      /x#3/gm,/=3/gm,
+                      /8\)/gm,/&gt;:\(/gm, 
+                      /:poop:/igm, /X\)/igm,
+                      /}:\(/igm, /:\|/gm, 
+                      /-\.-/igm, /:\\/gm,
+                      /(\:\/)(?![\/])/gm, /:'\(/gm,
+                      /:o(?![\w\d])/gm, /D:/gm,
+                      /:O/gm, /X\(/igm,
+                      /\\o\//igm, /o\/(?![\w\d])/igm,
+                      /\\o(?![\w\d])/igm, /&gt;_&lt;/igm,
+                      /B\)/gm, /&lt;3/gm, 
+                      /;3/gm,
+                      /:3/gm];
+            var li = ['<img src="http://i.imgur.com/esFvxar.png">','<img src="http://i.imgur.com/77QKaCF.png">',
+                      '<img src="http://i.imgur.com/3xmvLQB.png">',
+                      '<img src="http://i.imgur.com/uQKnAHL.png">', '<img src="http://i.imgur.com/s2mnHPj.png">',
+                      '<img src="http://i.imgur.com/U7sQeeB.png">', ':mad:',
+                      '<img src="http://i.imgur.com/FDP39zz.png">', '<img src="http://i.imgur.com/X9SqjQ2.png">',
+                      '<img src="http://i.imgur.com/I3AS64C.png">', '<img src="http://i.imgur.com/JICfIFj.png">',
+                      '<img src="http://i.imgur.com/FytXaEh.png">', '<img src="http://i.imgur.com/rrekvUn.png">',
+                      '<img src="http://i.imgur.com/rrekvUn.png">', '<img src="http://i.imgur.com/KwDoZ9A.png">',
+                      '<img src="http://i.imgur.com/qOtWwcH.png">', '<img src="http://i.imgur.com/G3w9kef.png">',
+                      '<img src="http://i.imgur.com/pQpnv0k.png">', '<img src="http://i.imgur.com/AOKKQP1.png">',
+                      '<img src="http://i.imgur.com/ynah5l8.png">', '<img src="http://i.imgur.com/QRr7pgi.png">',
+                      '<img src="http://i.imgur.com/QRr7pgi.png">', '<img src="http://i.imgur.com/mU1RKXd.png">',
+                      '<img src="http://i.imgur.com/5fC1h4r.png">', '<img src="http://i.imgur.com/817AGU4.png">',
+                      '<img src="http://i.imgur.com/aEIFMOD.png">',
+                      '<img src="http://i.imgur.com/xQEgir2.png">'
+                     ];
+            console.log(message);
+            for(x=0;x<em.length;x++){
+                message = message.replace(em[x], li[x]);
+                console.log(message);
             }
-                
-                var message = iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML;
             
-            if (message.indexOf("http") == -1 && message.indexOf("www") == -1 && message.indexOf("@") == -1 && message.indexOf("QUOTE") == -1 && message.indexOf("[/color]") == -1 && message.indexOf("<font color") == -1&& message.indexOf(":") == -1 && message.indexOf("[COLOR") == -1) {
-                iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = MakeSFX(message, false);
-            } else {
-                var quotereg = /(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])|(\[SPOILER\]?[\s\S]*?\[\/SPOILER\])/igm;
-                var imgregex = /(\<img([\s\S]*?)\>)/igm;
-                var linkregex= /(\<a([\s\S]*?)<\/a\>)/igm;
-                var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^<▓▒╗╞§>]+)/igm;
-                var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|\:P/igm;
-                var quoterest = /(\[color=#[\w\d]+\]╞\[\/color\])/im;
-                var imgrest = /(\[color=#[\w\d]+\]§\[\/color\])/im;
-                var linkrest = /(\[color=#[\w\d]+\]╗\[\/color\])/im;
-                var urlrest = /(\[color=#[\w\d]+\]▒\[\/color\])/im;
-                var tagrest = /(\[color=#[\w\d]+\]▓\[\/color\])/im;
-                
-                var quotes = message.match(quotereg);
-                message = message.replace(quotereg, '╞');
-                var imgs = message.match(imgregex);      
-                message = message.replace(imgregex, "§");
-                var links = message.match(linkregex);
-                message = message.replace(linkregex, "╗");
-                var urls = message.match(urlregex);
-                message = message.replace(urlregex, "▒");
-                var misc = message.match(regex);
-                message = message.replace(regex, "▓");
-                
-                message = MakeSFX(message, false);
-                
-                var numQuot = (quotes === null) ? 0 : quotes.length;
-                var numImgs = (imgs === null) ? 0 : imgs.length;
-                var numLink = (links === null) ? 0 : links.length;
-                var numUrls = (urls === null) ? 0 : urls.length;
-                var numMisc = (misc === null) ? 0 : misc.length;
-                
-                for (var a = 0 ; a < numQuot; a++) {
-                    message = message.replace(quoterest, quotes[a]);
-                }
-                for (var b = 0; b < numImgs; b++) {
-                    message = message.replace(imgrest, imgs[b]);
-                }
-                for (var c = 0; c < numLink; c++) {
-                    message = message.replace(linkrest, links[c]);
-                }
-                for (var d = 0; d < numUrls; d++) {
-                    message = message.replace(urlrest, /*" <a href=\"" +*/urls[d]/*+ "\">" +urls[d]+ "</a> "*/);
-                }
-                for (var e = 0; e < numMisc; e++) {
-                    message = message.replace(tagrest, misc[e]);
-                }
-                iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = message;
+            for (var i = 0; i < numMisc; i++) {
+                message = message.replace(/▓/im, misc[i]);
             }
+            iframe.innerHTML=message;
+            
+            /*if (message.indexOf("http") == -1 && message.indexOf("www") == -1 && message.indexOf("@") == -1 && message.indexOf("QUOTE") == -1 && message.indexOf("[/color]") == -1 && message.indexOf("<font color") == -1&& message.indexOf(":") == -1 && message.indexOf("[COLOR") == -1) {
+                iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = MakeSFX(message, false);
+            } else {*/
+            var quotereg = /(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])|(\[SPOILER\]?[\s\S]*?\[\/SPOILER\])/igm;
+            var imgregex = /(\<img([\s\S]*?)\>)/igm;
+            var linkregex= /(\<a([\s\S]*?)<\/a\>)/igm;
+            var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^<▓▒╗╞§>]+)/igm;
+            var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|\:P/igm;
+            var quoterest = /(\[color=#[\w\d]+\]╞\[\/color\])/im;
+            var imgrest = /(\[color=#[\w\d]+\]§\[\/color\])/im;
+            var linkrest = /(\[color=#[\w\d]+\]╗\[\/color\])/im;
+            var urlrest = /(\[color=#[\w\d]+\]▒\[\/color\])/im;
+            var tagrest = /(\[color=#[\w\d]+\]▓\[\/color\])/im;
+            
+            var quotes = message.match(quotereg);
+            message = message.replace(quotereg, '╞');
+            var imgs = message.match(imgregex);      
+            message = message.replace(imgregex, "§");
+            var links = message.match(linkregex);
+            message = message.replace(linkregex, "╗");
+            var urls = message.match(urlregex);
+            message = message.replace(urlregex, "▒");
+            var misc = message.match(regex);
+            message = message.replace(regex, "▓");
+            
+            message = MakeSFX(message, false);
+            
+            var numQuot = (quotes === null) ? 0 : quotes.length;
+            var numImgs = (imgs === null) ? 0 : imgs.length;
+            var numLink = (links === null) ? 0 : links.length;
+            var numUrls = (urls === null) ? 0 : urls.length;
+            var numMisc = (misc === null) ? 0 : misc.length;
+            
+            for (var a = 0 ; a < numQuot; a++) {
+                message = message.replace(quoterest, quotes[a]);
+            }
+            for (var b = 0; b < numImgs; b++) {
+                message = message.replace(imgrest, imgs[b]);
+            }
+            for (var c = 0; c < numLink; c++) {
+                message = message.replace(linkrest, links[c]);
+            }
+            for (var d = 0; d < numUrls; d++) {
+                message = message.replace(urlrest, /*" <a href=\"" +*/urls[d]/*+ "\">" +urls[d]+ "</a> "*/);
+            }
+            for (var e = 0; e < numMisc; e++) {
+                message = message.replace(tagrest, misc[e]);
+            }
+            iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = message;
+            //}
         }
         
         //Ninja Text Viewer
@@ -985,12 +872,12 @@ function main() {
         sidebarInfo.add($('<a href="https://forums.oneplus.net/threads/tool-oneplus-forum-sidebar-mod.208545/#post-8332933">View Changelog</a>'));
         sidebarInfo.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/issues/new">Report an Issue</a>'));
         sidebarInfo.add($('<a href="#" onClick="return false;" id="featureRequest">Request a Feature</a>'));
-	sidebarInfo.add($('<a href="#" onClick="return false;" id="vInfo">Version Info</a>'));
+        sidebarInfo.add($('<a href="#" onClick="return false;" id="vInfo">Version Info</a>'));
         sidebarInfo.add($('<a href="#" onClick="return false;" id="check">Check for updates</a>'));
-	
-	vInfo.addEventListener("click", function(){
-	    alert("Sidebar Version - v" + sidebarVersion);
-	})
+        
+        vInfo.addEventListener("click", function(){
+            alert("Sidebar Version - v" + sidebarVersion);
+        })
         
         featureRequest.addEventListener("click", function(){
             var featureForm = $('<iframe src="https://docs.google.com/forms/d/1W2xyAM3HdwdrAxhsdcSB8BefnPSa6NngRbxU-IZN37w/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
