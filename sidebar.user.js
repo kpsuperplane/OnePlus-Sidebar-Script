@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.3.6
+// @version      2.3.7
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -584,7 +584,7 @@ function main() {
                       /X\(/igm, /\\o\//igm, /o\/(?![\w\d])/igm, 
                       /\\o(?![\w\d])/igm, /&gt;_&lt;/igm, /B\)/gm, 
                       /&lt;3/gm, /;3/gm,/:3/gm,
-                      /-_-/gm,/(o.O)|(O.o)|(O_o)|(o_O)/gm];
+                      /-_-/gm];
             var li = ['<img src="http://i.imgur.com/esFvxar.png">','<img src="http://i.imgur.com/77QKaCF.png">', '<img src="http://i.imgur.com/3xmvLQB.png">',
                       '<img src="http://i.imgur.com/uQKnAHL.png">', '<img src="http://i.imgur.com/s2mnHPj.png">', '<img src="http://i.imgur.com/U7sQeeB.png">',
                       ':mad:', '<img src="http://i.imgur.com/FDP39zz.png">', '<img src="http://i.imgur.com/X9SqjQ2.png">',
@@ -594,7 +594,7 @@ function main() {
                       '<img src="http://i.imgur.com/AOKKQP1.png">', '<img src="http://i.imgur.com/ynah5l8.png">', '<img src="http://i.imgur.com/QRr7pgi.png">',
                       '<img src="http://i.imgur.com/QRr7pgi.png">', '<img src="http://i.imgur.com/mU1RKXd.png">', '<img src="http://i.imgur.com/5fC1h4r.png">',
                       '<img src="http://i.imgur.com/817AGU4.png">', '<img src="http://i.imgur.com/aEIFMOD.png">', '<img src="http://i.imgur.com/xQEgir2.png">',
-                      '<img src="http://i.imgur.com/FytXaEh.png">','o_O'
+                      '<img src="http://i.imgur.com/FytXaEh.png">'
                      ];
             console.log(message);
             for(x=0;x<em.length;x++){
@@ -613,13 +613,15 @@ function main() {
             var quotereg = /(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])|(\[SPOILER\]?[\s\S]*?\[\/SPOILER\])/igm;
             var imgregex = /(\<img([\s\S]*?)\>)/igm;
             var linkregex= /(\<a([\s\S]*?)<\/a\>)/igm;
-            var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^<▓▒╗╞§>]+)/igm;
-            var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|\:P/igm;
+            var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^<▓▒╗╞§>╢]+)/igm;
+            var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])/igm;         
+            var emojir = /\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|\:P|(o\.O)|(O\.o)|(O_o)|(o_O)/gm;
             var quoterest = /(\[color=#[\w\d]+\]╞\[\/color\])/im;
             var imgrest = /(\[color=#[\w\d]+\]§\[\/color\])/im;
             var linkrest = /(\[color=#[\w\d]+\]╗\[\/color\])/im;
             var urlrest = /(\[color=#[\w\d]+\]▒\[\/color\])/im;
             var tagrest = /(\[color=#[\w\d]+\]▓\[\/color\])/im;
+            var emojirest = /(\[color=#[\w\d]+\]╢\[\/color\])/im;
             
             var quotes = message.match(quotereg);
             message = message.replace(quotereg, '╞');
@@ -631,6 +633,8 @@ function main() {
             message = message.replace(urlregex, "▒");
             var misc = message.match(regex);
             message = message.replace(regex, "▓");
+            var emojis = message.match(emojir);
+            message = message.replace(emojir, "╢");
             
             message = MakeSFX(message, false);
             
@@ -639,6 +643,7 @@ function main() {
             var numLink = (links === null) ? 0 : links.length;
             var numUrls = (urls === null) ? 0 : urls.length;
             var numMisc = (misc === null) ? 0 : misc.length;
+            var numEmoj = (emojis === null) ? 0 : emojis.length;
             
             for (var a = 0 ; a < numQuot; a++) {
                 message = message.replace(quoterest, quotes[a]);
@@ -654,6 +659,9 @@ function main() {
             }
             for (var e = 0; e < numMisc; e++) {
                 message = message.replace(tagrest, misc[e]);
+            }
+            for (var f = 0; f < numEmoj; f++) {
+                message = message.replace(emojirest, emojis[f]);
             }
             iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = message;
             //}
