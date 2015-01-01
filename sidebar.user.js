@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.3.7
+// @version      2.3.8
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -23,6 +23,45 @@ function addJQuery(callback) {
     document.body.appendChild(script);
 }
 function main() {
+    function filter() {
+        var iframe = document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0];
+        var quoteReg=/(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])/igm;
+        var message = iframe.innerHTML;
+        var misc = message.match(quoteReg);
+        var numMisc = (misc === null) ? 0 : misc.length;
+        message = message.replace(quoteReg, "▓");
+        var em = [/:3&lt;3/igm, /&gt;:3/igm, /:'3/igm, 
+                  /x#3/gm, /=3/gm, /8\)/gm,
+                  /&gt;:\(/gm, /:poop:/igm, /X\)/igm,
+                  /}:\(/igm, /:\|/gm, /-\.-/igm,
+                  /:\\/gm, /(\:\/)(?![\/])/gm, /:'\(/gm,
+                  /:o(?![\w\d])/gm, /D:/gm, /:O/gm,
+                  /X\(/igm, /\\o\//igm, /o\/(?![\w\d])/igm, 
+                  /\\o(?![\w\d])/igm, /&gt;_&lt;/igm, /B\)/gm, 
+                  /&lt;3/gm, /;3/gm,/:3/gm,
+                  /-_-/gm];
+        var li = ['<img src="http://i.imgur.com/esFvxar.png">','<img src="http://i.imgur.com/77QKaCF.png">', '<img src="http://i.imgur.com/3xmvLQB.png">',
+                  '<img src="http://i.imgur.com/uQKnAHL.png">', '<img src="http://i.imgur.com/s2mnHPj.png">', '<img src="http://i.imgur.com/U7sQeeB.png">',
+                  ':mad:', '<img src="http://i.imgur.com/FDP39zz.png">', '<img src="http://i.imgur.com/X9SqjQ2.png">',
+                  '<img src="http://i.imgur.com/I3AS64C.png">', '<img src="http://i.imgur.com/JICfIFj.png">', '<img src="http://i.imgur.com/FytXaEh.png">',
+                  '<img src="http://i.imgur.com/rrekvUn.png">', '<img src="http://i.imgur.com/rrekvUn.png">', '<img src="http://i.imgur.com/KwDoZ9A.png">',
+                  '<img src="http://i.imgur.com/qOtWwcH.png">', '<img src="http://i.imgur.com/G3w9kef.png">', '<img src="http://i.imgur.com/pQpnv0k.png">',
+                  '<img src="http://i.imgur.com/AOKKQP1.png">', '<img src="http://i.imgur.com/ynah5l8.png">', '<img src="http://i.imgur.com/QRr7pgi.png">',
+                  '<img src="http://i.imgur.com/QRr7pgi.png">', '<img src="http://i.imgur.com/mU1RKXd.png">', '<img src="http://i.imgur.com/5fC1h4r.png">',
+                  '<img src="http://i.imgur.com/817AGU4.png">', '<img src="http://i.imgur.com/aEIFMOD.png">', '<img src="http://i.imgur.com/xQEgir2.png">',
+                  '<img src="http://i.imgur.com/FytXaEh.png">'
+                 ];
+        console.log(message);
+        for(x=0;x<em.length;x++){
+            message = message.replace(em[x], li[x]);
+            console.log(message);
+        }
+        
+        for (var i = 0; i < numMisc; i++) {
+            message = message.replace(/▓/im, misc[i]);
+        }
+        iframe.innerHTML=message;   
+    }
     function update() {
         var re;
         $.ajax({
@@ -243,12 +282,13 @@ function main() {
                 "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0186-myspace.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0189-priidu.gif",
                 //other2
                 'http://tweakimg.net/g/s/smile.gif', 'http://tweakimg.net/g/s/frown.gif', 'http://tweakimg.net/g/s/redface.gif', 'http://tweakimg.net/g/s/biggrin.gif', 
-                'http://tweakimg.net/g/s/biggrin.gif', 'http://tweakimg.net/g/s/cry.gif', 'http://tweakimg.net/g/s/devil.gif', 'http://tweakimg.net/g/s/clown.gif', 'http://tweakimg.net/g/s/wink.gif',
-                'http://tweakimg.net/g/s/puh2.gif', 'http://tweakimg.net/g/s/yummie.gif', 'http://tweakimg.net/g/s/shiny.gif', 'http://tweakimg.net/g/s/heart.gif', 
-                'http://tweakimg.net/g/s/sleephappy.gif', 'http://tweakimg.net/g/s/vork.gif', 'http://tweakimg.net/g/s/rc5.gif', 'http://tweakimg.net/g/s/yawnee.gif', 'http://tweakimg.net/g/s/sadley.gif',
-                'http://tweakimg.net/g/s/coool.gif', 'http://tweakimg.net/g/s/confused.gif', 'http://tweakimg.net/g/s/frusty.gif', 'http://tweakimg.net/g/s/nosmile2.gif',
-                'http://tweakimg.net/g/s/nosmile.gif', 'http://tweakimg.net/g/s/puh.gif', 'http://tweakimg.net/g/s/kwijl.gif', 'http://tweakimg.net/g/s/shutup.gif', 'http://tweakimg.net/g/s/bonk.gif',
-                'http://tweakimg.net/g/s/hypocrite.gif', 'http://tweakimg.net/g/s/worshippy.gif'];
+                'http://tweakimg.net/g/s/biggrin.gif', 'http://tweakimg.net/g/s/cry.gif', 'http://tweakimg.net/g/s/devil.gif', 'http://tweakimg.net/g/s/clown.gif',
+                'http://tweakimg.net/g/s/wink.gif', 'http://tweakimg.net/g/s/puh2.gif', 'http://tweakimg.net/g/s/yummie.gif', 'http://tweakimg.net/g/s/shiny.gif',
+                'http://tweakimg.net/g/s/heart.gif', 'http://tweakimg.net/g/s/sleephappy.gif', 'http://tweakimg.net/g/s/vork.gif', 'http://tweakimg.net/g/s/rc5.gif',
+                'http://tweakimg.net/g/s/yawnee.gif', 'http://tweakimg.net/g/s/sadley.gif', 'http://tweakimg.net/g/s/coool.gif', 'http://tweakimg.net/g/s/confused.gif',
+                'http://tweakimg.net/g/s/frusty.gif', 'http://tweakimg.net/g/s/nosmile2.gif', 'http://tweakimg.net/g/s/nosmile.gif', 'http://tweakimg.net/g/s/puh.gif',
+                'http://tweakimg.net/g/s/kwijl.gif', 'http://tweakimg.net/g/s/shutup.gif', 'http://tweakimg.net/g/s/bonk.gif', 'http://tweakimg.net/g/s/hypocrite.gif',
+                'http://tweakimg.net/g/s/worshippy.gif'];
             for(a=0;a<emojis.length;a++){
                 new Emoji(emojis[a], "emoji");
             }
@@ -264,44 +304,7 @@ function main() {
         }, 300);
         
         $("input.primary").first().click(function (){
-            var iframe = document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0];
-            var quoteReg=/(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])/igm;
-            
-            var message = iframe.innerHTML;
-            var misc = message.match(quoteReg);
-            var numMisc = (misc === null) ? 0 : misc.length;
-            message = message.replace(quoteReg, "▓");
-            var em = [/:3&lt;3/igm, /&gt;:3/igm, /:'3/igm, 
-                      /x#3/gm, /=3/gm, /8\)/gm,
-                      /&gt;:\(/gm, /:poop:/igm, /X\)/igm,
-                      /}:\(/igm, /:\|/gm, /-\.-/igm,
-                      /:\\/gm, /(\:\/)(?![\/])/gm, /:'\(/gm,
-                      /:o(?![\w\d])/gm, /D:/gm, /:O/gm,
-                      /X\(/igm, /\\o\//igm, /o\/(?![\w\d])/igm, 
-                      /\\o(?![\w\d])/igm, /&gt;_&lt;/igm, /B\)/gm, 
-                      /&lt;3/gm, /;3/gm,/:3/gm,
-                      /-_-/gm];
-            var li = ['<img src="http://i.imgur.com/esFvxar.png">','<img src="http://i.imgur.com/77QKaCF.png">', '<img src="http://i.imgur.com/3xmvLQB.png">',
-                      '<img src="http://i.imgur.com/uQKnAHL.png">', '<img src="http://i.imgur.com/s2mnHPj.png">', '<img src="http://i.imgur.com/U7sQeeB.png">',
-                      ':mad:', '<img src="http://i.imgur.com/FDP39zz.png">', '<img src="http://i.imgur.com/X9SqjQ2.png">',
-                      '<img src="http://i.imgur.com/I3AS64C.png">', '<img src="http://i.imgur.com/JICfIFj.png">', '<img src="http://i.imgur.com/FytXaEh.png">',
-                      '<img src="http://i.imgur.com/rrekvUn.png">', '<img src="http://i.imgur.com/rrekvUn.png">', '<img src="http://i.imgur.com/KwDoZ9A.png">',
-                      '<img src="http://i.imgur.com/qOtWwcH.png">', '<img src="http://i.imgur.com/G3w9kef.png">', '<img src="http://i.imgur.com/pQpnv0k.png">',
-                      '<img src="http://i.imgur.com/AOKKQP1.png">', '<img src="http://i.imgur.com/ynah5l8.png">', '<img src="http://i.imgur.com/QRr7pgi.png">',
-                      '<img src="http://i.imgur.com/QRr7pgi.png">', '<img src="http://i.imgur.com/mU1RKXd.png">', '<img src="http://i.imgur.com/5fC1h4r.png">',
-                      '<img src="http://i.imgur.com/817AGU4.png">', '<img src="http://i.imgur.com/aEIFMOD.png">', '<img src="http://i.imgur.com/xQEgir2.png">',
-                      '<img src="http://i.imgur.com/FytXaEh.png">'
-                     ];
-            console.log(message);
-            for(x=0;x<em.length;x++){
-                message = message.replace(em[x], li[x]);
-                console.log(message);
-            }
-            
-            for (var i = 0; i < numMisc; i++) {
-                message = message.replace(/▓/im, misc[i]);
-            }
-            iframe.innerHTML=message;
+            filter();
         });
         
         //Rainbowify
@@ -569,43 +572,9 @@ function main() {
         }
         
         function rainbow() {
+            filter();
             var iframe = document.getElementsByClassName('redactor_textCtrl')[0];
             var message = iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML;
-            var quoteReg = /(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])/igm;
-            var misc = message.match(quoteReg);
-            var numMisc = (misc === null) ? 0 : misc.length;
-            message = message.replace(quoteReg, "▓");
-            var em = [/:3&lt;3/igm, /&gt;:3/igm, /:'3/igm, 
-                      /x#3/gm, /=3/gm, /8\)/gm,
-                      /&gt;:\(/gm, /:poop:/igm, /X\)/igm,
-                      /}:\(/igm, /:\|/gm, /-\.-/igm,
-                      /:\\/gm, /(\:\/)(?![\/])/gm, /:'\(/gm,
-                      /:o(?![\w\d])/gm, /D:/gm, /:O/gm,
-                      /X\(/igm, /\\o\//igm, /o\/(?![\w\d])/igm, 
-                      /\\o(?![\w\d])/igm, /&gt;_&lt;/igm, /B\)/gm, 
-                      /&lt;3/gm, /;3/gm,/:3/gm,
-                      /-_-/gm];
-            var li = ['<img src="http://i.imgur.com/esFvxar.png">','<img src="http://i.imgur.com/77QKaCF.png">', '<img src="http://i.imgur.com/3xmvLQB.png">',
-                      '<img src="http://i.imgur.com/uQKnAHL.png">', '<img src="http://i.imgur.com/s2mnHPj.png">', '<img src="http://i.imgur.com/U7sQeeB.png">',
-                      ':mad:', '<img src="http://i.imgur.com/FDP39zz.png">', '<img src="http://i.imgur.com/X9SqjQ2.png">',
-                      '<img src="http://i.imgur.com/I3AS64C.png">', '<img src="http://i.imgur.com/JICfIFj.png">', '<img src="http://i.imgur.com/FytXaEh.png">',
-                      '<img src="http://i.imgur.com/rrekvUn.png">', '<img src="http://i.imgur.com/rrekvUn.png">', '<img src="http://i.imgur.com/KwDoZ9A.png">',
-                      '<img src="http://i.imgur.com/qOtWwcH.png">', '<img src="http://i.imgur.com/G3w9kef.png">', '<img src="http://i.imgur.com/pQpnv0k.png">',
-                      '<img src="http://i.imgur.com/AOKKQP1.png">', '<img src="http://i.imgur.com/ynah5l8.png">', '<img src="http://i.imgur.com/QRr7pgi.png">',
-                      '<img src="http://i.imgur.com/QRr7pgi.png">', '<img src="http://i.imgur.com/mU1RKXd.png">', '<img src="http://i.imgur.com/5fC1h4r.png">',
-                      '<img src="http://i.imgur.com/817AGU4.png">', '<img src="http://i.imgur.com/aEIFMOD.png">', '<img src="http://i.imgur.com/xQEgir2.png">',
-                      '<img src="http://i.imgur.com/FytXaEh.png">'
-                     ];
-            console.log(message);
-            for(x=0;x<em.length;x++){
-                message = message.replace(em[x], li[x]);
-                console.log(message);
-            }
-            
-            for (var i = 0; i < numMisc; i++) {
-                message = message.replace(/▓/im, misc[i]);
-            }
-            iframe.innerHTML=message;
             
             /*if (message.indexOf("http") == -1 && message.indexOf("www") == -1 && message.indexOf("@") == -1 && message.indexOf("QUOTE") == -1 && message.indexOf("[/color]") == -1 && message.indexOf("<font color") == -1&& message.indexOf(":") == -1 && message.indexOf("[COLOR") == -1) {
                 iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = MakeSFX(message, false);
@@ -614,8 +583,8 @@ function main() {
             var imgregex = /(\<img([\s\S]*?)\>)/igm;
             var linkregex= /(\<a([\s\S]*?)<\/a\>)/igm;
             var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^<▓▒╗╞§>╢]+)/igm;
-            var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])/igm;         
-            var emojir = /\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|\:P|(o\.O)|(O\.o)|(O_o)|(o_O)/gm;
+            var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\:P/igm;         
+            var emojir = /\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|(o\.O)|(O\.o)|(O_o)|(o_O)/gm;
             var quoterest = /(\[color=#[\w\d]+\]╞\[\/color\])/im;
             var imgrest = /(\[color=#[\w\d]+\]§\[\/color\])/im;
             var linkrest = /(\[color=#[\w\d]+\]╗\[\/color\])/im;
@@ -677,24 +646,15 @@ function main() {
             //change ninja text
             var s = document.getElementsByTagName('span');
             for (q = 0; q < s.length; q++) {
-                if (s[q].style.color.indexOf("#ffffff") >= 0 || s[q].style.color.indexOf("255, 255, 255") >= 0 || s[q].style.color.indexOf("white") >= 0)
+                if (s[q].style.color.indexOf("#ffffff") >= 0 || s[q].style.color.indexOf("255, 255, 255") >= 0 || s[q].style.color.indexOf("white") >= 0  || s[q].style.color.indexOf("transparent") >= 0)
                 {
                     s[q].style.color = '#a8a8a8';
                 }
-                if (s[q].style.color.indexOf("#ecebea") >= 0 || s[q].style.color.indexOf("236, 235, 234") >= 0 || s[q].style.color.indexOf("transparent") >= 0)
+                if (s[q].style.color.indexOf("#ecebea") >= 0 || s[q].style.color.indexOf("236, 235, 234") >= 0)
                 {
                     s[q].style.color = '#8a8a8a';
                 }
             }
-            
-            if (document.URL.indexOf("threads") >= 0 || document.URL.indexOf("conversations") >= 0){
-                document.getElementsByClassName('button primary')[0].onclick = waut;
-            }
-        }
-        
-        //function to be activated three seconds after pressing post
-        function waut(){
-            setTimeout(function(){ninja();}, 3000);
         }
         
         
@@ -725,6 +685,7 @@ function main() {
                 options.clicked();
             });
             this.content = this.wrapper.find('.custom-inner');
+            this.clear = function(){this.content.html('');};
             this.add = function(elem, callback) {
                 this.content.append(elem);
                 elem.wrap('<li></li>');
@@ -751,7 +712,7 @@ function main() {
         
         vInfo.addEventListener("click", function(){
             alert("Sidebar Version - v" + sidebarVersion);
-        })
+        });
         
         featureRequest.addEventListener("click", function(){
             var featureForm = $('<iframe src="https://docs.google.com/forms/d/1W2xyAM3HdwdrAxhsdcSB8BefnPSa6NngRbxU-IZN37w/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
@@ -835,74 +796,76 @@ function main() {
             ninja();
         });
         
-        
-        
         //Notifications
         var nBar = new sidebar("Notifications",{
             clicked: function(){getAlertInfo();}
         });
         
-        
         //Alert Info
+        var checkAlerts=true;
         function getAlertInfo() {
-            nBar.add($('<span> On first page of alerts:</span>'));
-            $.get('/account/alerts?page=' + 0, function(data) {
-                var tagNum = $(data).find("h3:contains('tagged')").length;
-                var likeNum = $(data).find("h3:contains('liked')").length;
-                var quoteNum = $(data).find("h3:contains('quoted')").length;
-                var replyNum = $(data).find("h3:contains('replied')").length;
-                var startedNum = $(data).find("h3:contains('started')").length;
-                if(tagNum > 0){nBar.add($('<span> Tags: '+tagNum+'</span>'));}
-                if(likeNum > 0){nBar.add($('<span> Likes: '+likeNum+'</span>'));}
-                if(quoteNum > 0){nBar.add($('<span> Quotes: '+quoteNum+'</span>'));}
-                if(replyNum > 0){nBar.add($('<span> Replies: '+replyNum+'</span>'));}
-                if(startedNum > 0){nBar.add($('<span> Threads Started: '+startedNum+'</span>'));}
-            });
+            if(checkAlerts){
+                nBar.clear();
+                nBar.add($('<span> On first page of alerts:</span>'));
+                $.get('/account/alerts?page=' + 0, function(data) {
+                    var tagNum = $(data).find("h3:contains('tagged')").length;
+                    var likeNum = $(data).find("h3:contains('liked')").length;
+                    var quoteNum = $(data).find("h3:contains('quoted')").length;
+                    var replyNum = $(data).find("h3:contains('replied')").length;
+                    var startedNum = $(data).find("h3:contains('started')").length;
+                    if(tagNum > 0){nBar.add($('<span> Tags: '+tagNum+'</span>'));}
+                    if(likeNum > 0){nBar.add($('<span> Likes: '+likeNum+'</span>'));}
+                    if(quoteNum > 0){nBar.add($('<span> Quotes: '+quoteNum+'</span>'));}
+                    if(replyNum > 0){nBar.add($('<span> Replies: '+replyNum+'</span>'));}
+                    if(startedNum > 0){nBar.add($('<span> Threads Started: '+startedNum+'</span>'));}
+                });
+            }
+            checkAlerts = !checkAlerts;
         }
-    }
-    
-    //Quick PM
-    var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" style="font-size:11px;padding:5px;height:auto;line-height:12px;margin-top:5px;" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
-    $('em.userTitle').after(pmBtn);
-    var numb = $('input.button.PreviewButton.JsOnly').length;
-    for (i = 0; i < numb; i++) {
-        $('input.button.PreviewButton.JsOnly')[i].id = i;
-    }
-    var button = document.getElementsByClassName("button PreviewButton JsOnly");
-    for (i=0; i<button.length; i++){
-        button[i].addEventListener("click", function bob(){ var t = this.id; quickPM($('li.message')[t].getAttribute('data-author'));});
-    }
-    
-    //Sidebar Customizations
-    $('.sidebar .section .widget').each(function(){
-        $(this).children('*').not('h3').wrapAll('<div class="section-wrapper"></div>');
-    });
-    $('body').on('click','.sidebar h3', function(e){
-        e.preventDefault();
-        $(this).next().stop().slideToggle(500, function(){
+        
+        //Quick PM
+        var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" style="font-size:11px;padding:5px;height:auto;line-height:12px;margin-top:5px;" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
+        $('em.userTitle').after(pmBtn);
+        var numb = $('input.button.PreviewButton.JsOnly').length;
+        for (i = 0; i < numb; i++) {
+            $('input.button.PreviewButton.JsOnly')[i].id = i;
+        }
+        var button = document.getElementsByClassName("button PreviewButton JsOnly");
+        for (i=0; i<button.length; i++){
+            button[i].addEventListener("click", function bob(){ var t = this.id; quickPM($('li.message')[t].getAttribute('data-author'));});
+        }
+        
+        //Sidebar Customizations
+        $('.sidebar .section .widget').each(function(){
+            $(this).children('*').not('h3').wrapAll('<div class="section-wrapper"></div>');
+        });
+        $('body').on('click','.sidebar h3', function(e){
+            e.preventDefault();
+            $(this).next().stop().slideToggle(500, function(){
+                if($(window).scrollTop() > $('#top').offset().top-40){
+                    if($(window).scrollTop() + $('.sidebar')[0].scrollHeight + 160 > $(document).height() - 286){
+                        $('.sidebar').removeClass('fixed').css('top', $('.mainContent').height() - $('.sidebar')[0].scrollHeight + 200);
+                    }
+                }
+            }); 
+        });
+        $('#widget-11 .widget_header_small').click(function(){
+            location.href = "/forums/"; 
+        });
+        $(window).scroll(function(){
             if($(window).scrollTop() > $('#top').offset().top-40){
                 if($(window).scrollTop() + $('.sidebar')[0].scrollHeight + 160 > $(document).height() - 286){
                     $('.sidebar').removeClass('fixed').css('top', $('.mainContent').height() - $('.sidebar')[0].scrollHeight + 200);
+                }else{
+                    $('.sidebar').addClass('fixed').css('top', '');
                 }
-            }
-        }); 
-    });
-    $('#widget-11 .widget_header_small').click(function(){
-        location.href = "/forums/"; 
-    });
-    $(window).scroll(function(){
-        if($(window).scrollTop() > $('#top').offset().top-40){
-            if($(window).scrollTop() + $('.sidebar')[0].scrollHeight + 160 > $(document).height() - 286){
-                $('.sidebar').removeClass('fixed').css('top', $('.mainContent').height() - $('.sidebar')[0].scrollHeight + 200);
             }else{
-                $('.sidebar').addClass('fixed').css('top', '');
+                $('.sidebar').removeClass('fixed').css('top', '');
             }
-        }else{
-            $('.sidebar').removeClass('fixed').css('top', '');
-        }
-    }).resize(function(){
-        $('.sidebar').css('left',$('.mainContent').outerWidth()+$('#top').offset().left+10).css('max-height', $(window).height()-110);
-    }).trigger('resize').trigger('scroll');
+        }).resize(function(){
+            $('.sidebar').css('left',$('.mainContent').outerWidth()+$('#top').offset().left+10).css('max-height', $(window).height()-110);
+        }).trigger('resize').trigger('scroll');
+    }
 }
 var $ = jQuery;
 addJQuery(main);
