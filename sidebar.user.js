@@ -695,7 +695,9 @@ function main() {
             };
             $('.sidebar .section:first').after(this.wrapper);
         }
-        
+        if($('#newthread-category').length){
+            $('#newthread-category').appendTo('#top');
+        }
         //Sidebar Info
         var sidebarInfo = new sidebar("Sidebar Help", {
             layout: "twoColumns"
