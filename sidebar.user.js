@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.3.9
+// @version      2.3.10
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -757,13 +757,13 @@ function main() {
                         v1[y] = parseInt(v1[y]);
                     }
                     if (v1[0] < v2[0] || v1[1] < v2[1] || v1[2] < v2[2]) {
-                        var updateText = "New version found! you may need to allow popup windows\nWould you like to view the release page and update?";
+                        var updateText = "New version found! \nWould you like to view the release page and update?";
                         new modal('Update!', updateText, {
                             'Yes': {
                                 type: 'red',
                                 click: function(){
                                     this.close();
-                                    document.getElementById('updateLink').click();
+                                    location.href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/raw/master/sidebar.user.js";
                                 }
                             },
                             'Not Now': {
