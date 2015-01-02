@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.3.10
+// @version      2.3.11
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -78,13 +78,13 @@ function main() {
                     v1[y] = parseInt(v1[y]);
                 }
                 if (v1[0] < v2[0] || v1[1] < v2[1] || v1[2] < v2[2]) {
-                    var updateText = "New version found! you may need to allow popup windows\nWould you like to view the release page and update?";
+                    var updateText = "New version found! \nWould you like to view the release page and update?";
                     new modal('Update!', updateText, {
                         'Yes': {
                             type: 'red',
                             click: function(){
                                 this.close();
-                                document.getElementById('updateLink').click();
+                                location.href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/raw/master/sidebar.user.js";
                             }
                         },
                         'Not Now': {
@@ -743,41 +743,7 @@ function main() {
             update();
         }
         check.addEventListener("click", function(){
-            $.ajax({
-                type : 'GET',
-                url : 'https://forums.oneplus.net/threads/tool-oneplus-forum-sidebar-mod.208545/#post-8332926',
-                success : function (data) {
-                    var ver2 = data.match(/\d\.\d\.\d/i);
-                    var v1 = sidebarVersion.toString().split(".");
-                    var v2 = ver2[0].split(".");
-                    console.log(v1);
-                    console.log(v2);
-                    for(y=0;y<v2.length;y++){
-                        v2[y] = parseInt(v2[y]);
-                        v1[y] = parseInt(v1[y]);
-                    }
-                    if (v1[0] < v2[0] || v1[1] < v2[1] || v1[2] < v2[2]) {
-                        var updateText = "New version found! \nWould you like to view the release page and update?";
-                        new modal('Update!', updateText, {
-                            'Yes': {
-                                type: 'red',
-                                click: function(){
-                                    this.close();
-                                    location.href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/raw/master/sidebar.user.js";
-                                }
-                            },
-                            'Not Now': {
-                                type: 'grey',
-                                click: function(){
-                                    this.close();
-                                }
-                            }
-                        });
-                    }else{
-                        new modal('Update!', "No update found! :3", {'Close': {type: 'grey', click: function(){this.close();}}});
-                    }
-                }
-            });
+            update();
         });
         
         //Quick Links
