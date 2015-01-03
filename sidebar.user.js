@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.4.3
+// @version      2.4.4
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -83,6 +83,9 @@ function main() {
                             click: function(){
                                 this.close();
                                 location.href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/raw/master/sidebar.user.js";
+								setTimeout(function(){
+									location.reload(true);
+								}, 1000);
                             }
                         },
                         'Not Now': {
@@ -92,7 +95,16 @@ function main() {
                             }
                         }
                     });
-                }
+                }else{
+					new modal('No New Updates Found', updateText, {
+                        'Ok': {
+                            type: 'red',
+                            click: function(){
+                                this.close();
+                            }
+                        }
+                    });
+				}
             }
         });
     }
