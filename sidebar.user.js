@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.4.0
+// @version      2.4.1
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -13,11 +13,9 @@ sidebarVersion = GM_info.script.version;
 function addJQuery(callback) {
     //Checks width for mobiles etc
     if ( $( document ).width() > 850){
-        $('<style type="text/css"></style').text('.xenOverlay .xenForm.animateClose{-webkit-transition:300ms cubic-bezier(0.215,.61,.355,1);transition:300ms cubic-bezier(0.215,.61,.355,1);opacity:0;-webkit-transform: scale(0.9,0.9);transform: scale(0.9,0.9);}.xenOverlay .xenForm.animateClose.open{opacity:1;-webkit-transform: scale(1,1);transform: scale(1,1);}.xenOverlay .xenForm{border-radius:3px;box-shadow:0px 0px 600px #000;border-style:none;background:#151515 !important;}.xenOverlay .formOverlay .heading {color: #FFF;background: transparent;padding-left: 0px;border-style:none;}.sidebar{position:absolute;right:0px;}.sidebar.fixed{position:fixed;top:80px;box-sizing:border-box;}.custom-inner li{padding-top:16px;}.custom-inner li:first-child{padding-top: 0px;}.sidebar .section h3{padding:0px;padding-bottom:0px !important;cursor:pointer; color:#000 !important;}.sidebar .section h3 a{color:#000 !important;}#create-thread-button .inner{margin-bottom:30px;}.sidebar .section h3 a:hover{text-decoration:none;}#widget-11 .widget_header_small:hover{text-decoration:underline;}#create-thread-button .inner{margin-bottom:30px;}.sidebar .section .widget{padding:8px 0px 14px 0px;}.sidebar .section .section-wrapper{display:none;padding:10px 0px;}').appendTo('head');
-    }
+        $('<style type="text/css"></style').text('.emoji-active{background:#EEE !important;color:#333 !important;font-weight:bold !important;}#emojis-top a{display: inline-block;padding: 5px 10px 5px;border-radius: 5px;margin-right: 5px;text-decoration: none;}#emojis-top a:hover {background: #EEE;}.mceSmilieSprite{display:inline-block;margin-right:5px;margin-bottom:5px;height:25px;width:auto;transform:scale(1);-webkit-transform:scale(1);transition:200ms;}.mceSmilieSprite:hover{transform:scale(1.3);-webkit-transform:scale(1.3);}.mceSmilieSprite img{display:inline-block;margin:0px;padding:0px;height:100%;width:auto;}.xenOverlay .xenForm.animateClose{-webkit-transition:300ms cubic-bezier(0.215,.61,.355,1);transition:300ms cubic-bezier(0.215,.61,.355,1);opacity:0;-webkit-transform: scale(0.9,0.9);transform: scale(0.9,0.9);}.xenOverlay .xenForm.animateClose.open{opacity:1;-webkit-transform: scale(1,1);transform: scale(1,1);}.xenOverlay .xenForm{border-radius:3px;box-shadow:0px 0px 600px #000;border-style:none;background:#151515 !important;}.xenOverlay .formOverlay .heading {color: #FFF;background: transparent;padding-left: 0px;border-style:none;}.sidebar{position:absolute;right:0px;}.sidebar.fixed{position:fixed;top:80px;box-sizing:border-box;}.custom-inner li{padding-top:16px;}.custom-inner li:first-child{padding-top: 0px;}.sidebar .section h3{padding:0px;padding-bottom:0px !important;cursor:pointer; color:#000 !important;}.sidebar .section h3 a{color:#000 !important;}#create-thread-button .inner{margin-bottom:30px;}.sidebar .section h3 a:hover{text-decoration:none;}#widget-11 .widget_header_small:hover{text-decoration:underline;}#create-thread-button .inner{margin-bottom:30px;}.sidebar .widget .section .secondaryContent{padding: 8px 0px 14px 0px;}.sidebar .section .widget{padding:8px 0px 14px 0px;}.sidebar .section .section-wrapper{display:none;padding:10px 0px;}').appendTo('head');    }
     else {
-        $('<style type="text/css"></style').text('.xenOverlay .xenForm.animateClose{-webkit-transition:300ms cubic-bezier(0.215,.61,.355,1);transition:300ms cubic-bezier(0.215,.61,.355,1);opacity:0;-webkit-transform: scale(0.9,0.9);transform: scale(0.9,0.9);}.xenOverlay .xenForm.animateClose.open{opacity:1;-webkit-transform: scale(1,1);transform: scale(1,1);}.xenOverlay .xenForm{border-radius:3px;box-shadow:0px 0px 600px #000;border-style:none;background:#151515 !important;}.xenOverlay .formOverlay .heading {color: #FFF;background: transparent;padding-left: 0px;border-style:none;}').appendTo('head');
-    }
+        $('<style type="text/css"></style').text('.emoji-active{background:#EEE !important;color:#333 !important;font-weight:bold !important;}#emojis-top a{display: inline-block;padding: 5px 10px 5px;border-radius: 5px;margin-right: 5px;text-decoration: none;}#emojis-top a:hover {background: #EEE;}.mceSmilieSprite{display:inline-block;margin-right:5px;margin-bottom:5px;height:25px;width:auto;transform:scale(1);-webkit-transform:scale(1);transition:200ms;}.mceSmilieSprite:hover{transform:scale(1.3);-webkit-transform:scale(1.3);}.mceSmilieSprite img{display:inline-block;margin:0px;padding:0px;height:100%;width:auto;}.xenOverlay .xenForm.animateClose{-webkit-transition:300ms cubic-bezier(0.215,.61,.355,1);transition:300ms cubic-bezier(0.215,.61,.355,1);opacity:0;-webkit-transform: scale(0.9,0.9);transform: scale(0.9,0.9);}.xenOverlay .xenForm.animateClose.open{opacity:1;-webkit-transform: scale(1,1);transform: scale(1,1);}.xenOverlay .xenForm{border-radius:3px;box-shadow:0px 0px 600px #000;border-style:none;background:#151515 !important;}.xenOverlay .formOverlay .heading {color: #FFF;background: transparent;padding-left: 0px;border-style:none;}').appendTo('head');    }
     var script = document.createElement("script");
     script.textContent = "(" + callback.toString() + ")();";
     document.body.appendChild(script);
@@ -177,131 +175,247 @@ function main() {
     
     //Emoji
     if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0) {
-        /* ------------ EMOJI TEMPLATE ------------- */
-        function Emoji(source, classname) {
-            $('li.smilieCategory').find('ul')
-            .append($('<li></li>')
-                    .append($('<img>')
-                            .attr({
-                                src: source,
-                                'data-smilie': "yes",
-                            }).addClass(classname)
-                           ).addClass("Smilie")
-                   );
-        }
+        var iframe = document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0];
+        var c = [
+            {'src':'http://i.imgur.com/s2mnHPj.png'},{'src':'http://i.imgur.com/xQEgir2.png'},{'src':'http://i.imgur.com/uQKnAHL.png'},
+            {'src':'http://i.imgur.com/77QKaCF.png'},{'src':'http://i.imgur.com/aEIFMOD.png'},{'src':'http://i.imgur.com/3xmvLQB.png'},
+            {'src':'http://i.imgur.com/j8kVjQx.png'},{'src':'http://i.imgur.com/Osrk8Z6.png'},{'src':'http://i.imgur.com/PLXyQoG.png'},
+            {'src':'http://i.imgur.com/Wt6Mt5Y.png'},{'src':'http://i.imgur.com/coW4gmv.png'},{'src':'http://i.imgur.com/U7sQeeB.png'},
+            {'src':'http://i.imgur.com/SOIm2QI.png'},{'src':'http://i.imgur.com/1CQnfI4.png'},{'src':'http://i.imgur.com/n0LxE67.png'},
+            {'src':'http://i.imgur.com/0vO27Us.png'},{'src':'http://i.imgur.com/NJ6VaZd.png'},{'src':'http://i.imgur.com/Iz9dIeF.png'},
+            {'src':'http://i.imgur.com/SCcL49G.png'},{'src':'http://i.imgur.com/jJz11mk.png'},{'src':'http://i.imgur.com/JKsX6sA.png'},
+            {'src':'http://i.imgur.com/TE23JDQ.png'},{'src':'http://i.imgur.com/Z6rEbOj.png'},{'src':'http://i.imgur.com/7x4vE57.png'},
+            {'src':'http://i.imgur.com/4kuBhCa.png'},{'src':'http://i.imgur.com/5ySsWCx.png'},{'src':'http://i.imgur.com/oGC5iz9.png'},
+            {'src':'http://i.imgur.com/mlVCJNQ.png'},{'src':'http://i.imgur.com/exbEJw6.png'},{'src':'http://i.imgur.com/XtcLVi8.png'},
+            {'src':'http://i.imgur.com/oXnPJzK.png'},{'src':'http://i.imgur.com/7nQzs1N.png'},{'src':'http://i.imgur.com/C35tWRr.png'},
+            {'src':'http://i.imgur.com/dTeca6e.png'},{'src':'http://i.imgur.com/kz4sU6E.png'},{'src':'http://i.imgur.com/dXV0bPZ.png'},
+            {'src':'http://i.imgur.com/jpgBiOo.png'},{'src':'http://i.imgur.com/e1rc3vr.png'},{'src':'http://i.imgur.com/Pq6xcYg.png'},
+            {'src':'http://i.imgur.com/hO7m9ga.png'},
+        ];
+            
+            var h = [
+            //hangouts        
+            {'src':'http://i.imgur.com/vpOXVGK.png'},{'src':'http://i.imgur.com/Y1vZjiX.png'},{'src':'http://i.imgur.com/qPVDTQ9.png'},
+            {'src':'http://i.imgur.com/zkaTlAd.png'},{'src':'http://i.imgur.com/scUISw8.png'},{'src':'http://i.imgur.com/xp1jqJf.png'},
+            {'src':'http://i.imgur.com/4Kn0YBJ.png'},{'src':'http://i.imgur.com/hK8EFTv.png'},{'src':'http://i.imgur.com/X9SqjQ2.png'},
+            {'src':'http://i.imgur.com/aYRlrHV.png'},{'src':'http://i.imgur.com/I3AS64C.png'},{'src':'http://i.imgur.com/kJJNiwZ.png'},
+            {'src':'http://i.imgur.com/fKAFbm0.png'},{'src':'http://i.imgur.com/JICfIFj.png'},{'src':'http://i.imgur.com/FytXaEh.png'},
+            {'src':'http://i.imgur.com/rrekvUn.png'},{'src':'http://i.imgur.com/ad6HSLi.png'},{'src':'http://i.imgur.com/ER0gWHb.png'},
+            {'src':'http://i.imgur.com/1wkDeWB.png'},{'src':'http://i.imgur.com/KwDoZ9A.png'},{'src':'http://i.imgur.com/ovqPLQn.png'},
+            {'src':'http://i.imgur.com/qOtWwcH.png'},{'src':'http://i.imgur.com/mU1RKXd.png'},{'src':'http://i.imgur.com/x0pychj.png'},
+            {'src':'http://i.imgur.com/u1WHrgx.png'},{'src':'http://i.imgur.com/G3w9kef.png'},{'src':'http://i.imgur.com/HzTxh21.png'},
+            {'src':'http://i.imgur.com/dFUn4OG.png'},{'src':'http://i.imgur.com/ejes95e.png'},{'src':'http://i.imgur.com/OwA33Zb.png'},
+            {'src':'http://i.imgur.com/kmvVMTC.png'},{'src':'http://i.imgur.com/AX9Rut8.png'},{'src':'http://i.imgur.com/pQpnv0k.png'},
+            {'src':'http://i.imgur.com/pf4L6gk.png'},{'src':'http://i.imgur.com/AOKKQP1.png'},{'src':'http://i.imgur.com/WAaoHfp.png'},
+            {'src':'http://i.imgur.com/GmMXwZB.png'},{'src':'http://i.imgur.com/XPVBoet.png'},{'src':'http://i.imgur.com/jbNBigO.png'},
+            {'src':'http://i.imgur.com/817AGU4.png'},{'src':'http://i.imgur.com/sCKxAV9.png'},{'src':'http://i.imgur.com/vI1c2TU.png'},
+            {'src':'http://i.imgur.com/vP3I9w3.png'},{'src':'http://i.imgur.com/pAUELjY.png'},{'src':'http://i.imgur.com/urJYVoa.png'},
+            {'src':'http://i.imgur.com/kV7PgWJ.png'},{'src':'http://i.imgur.com/esFvxar.png'},{'src':'http://i.imgur.com/zDZkc7W.png'},
+            {'src':'http://i.imgur.com/5fC1h4r.png'},{'src':'http://i.imgur.com/TheqhpC.png'},{'src':'http://i.imgur.com/VJnirgH.png'},
+            {'src':'http://i.imgur.com/xLhnK5d.png'},{'src':'http://i.imgur.com/E9W6WN3.png'},{'src':'http://i.imgur.com/kP2djp2.png'},
+            {'src':'http://i.imgur.com/Qx2wwAi.png'},{'src':'http://i.imgur.com/WwrbsDX.png'},{'src':'http://i.imgur.com/Zj2aBHy.png'},
+            {'src':'http://i.imgur.com/QRr7pgi.png'},{'src':'http://i.imgur.com/ynah5l8.png'},{'src':'http://i.imgur.com/TPqkjBo.png'},
+            {'src':'http://i.imgur.com/mXZQQyR.png'},{'src':'http://i.imgur.com/VOesKVE.png'},{'src':'http://i.imgur.com/sPrcwnI.png'},
+            {'src':'http://i.imgur.com/v3eZTzx.png'},{'src':'http://i.imgur.com/QjrFTOo.png'},{'src':'http://i.imgur.com/Oul1J4D.png'},
+            {'src':'http://i.imgur.com/REaECno.png'},{'src':'http://i.imgur.com/tZD9WDu.png'},{'src':'http://i.imgur.com/1snuG0r.png'},
+            {'src':'http://i.imgur.com/nzAP2JG.png'},{'src':'http://i.imgur.com/j7C4Aq0.png'},{'src':'http://i.imgur.com/tMxIx7S.png'},
+            {'src':'http://i.imgur.com/SJbR6sm.png'},{'src':'http://i.imgur.com/YKlOs0W.png'},{'src':'http://i.imgur.com/WTMNq8v.png'},
+            {'src':'http://i.imgur.com/GWilqh2.png'},{'src':'http://i.imgur.com/Bbsm9n5.png'},{'src':'http://i.imgur.com/pGU6x8S.png'},
+            {'src':'http://i.imgur.com/FDP39zz.png'},{'src':'http://i.imgur.com/79VA6TT.png'},{'src':'http://i.imgur.com/WdCtOnn.png'},
+        ];
         
-        /* ------------ DEFINE EMOJIS ------------- */
-        function EmojiIcons(){
-            var emojis = [
-                //default
-                'http://i.imgur.com/s2mnHPj.png', 'http://i.imgur.com/xQEgir2.png', 'http://i.imgur.com/uQKnAHL.png', 'http://i.imgur.com/77QKaCF.png', 'http://i.imgur.com/aEIFMOD.png', 
-                'http://i.imgur.com/3xmvLQB.png', 'http://i.imgur.com/j8kVjQx.png', 'http://i.imgur.com/U7sQeeB.png', 'http://i.imgur.com/NJ6VaZd.png', 'http://i.imgur.com/JKsX6sA.png',
-                'http://i.imgur.com/Z6rEbOj.png', 'http://i.imgur.com/7x4vE57.png', 'http://i.imgur.com/4kuBhCa.png', 'http://i.imgur.com/5ySsWCx.png', 'http://i.imgur.com/oGC5iz9.png',
-                'http://i.imgur.com/mlVCJNQ.png', 'http://i.imgur.com/exbEJw6.png', 'http://i.imgur.com/XtcLVi8.png', 'http://i.imgur.com/oXnPJzK.png', 'http://i.imgur.com/7nQzs1N.png',
-                'http://i.imgur.com/C35tWRr.png', 'http://i.imgur.com/dTeca6e.png', 'http://i.imgur.com/kz4sU6E.png', 'http://i.imgur.com/dXV0bPZ.png', 'http://i.imgur.com/jpgBiOo.png',
-                'http://i.imgur.com/e1rc3vr.png', 'http://i.imgur.com/Pq6xcYg.png', 'http://i.imgur.com/hO7m9ga.png',
-                //Xat
-                ,"http://i.imgur.com/usDwzaJ.gif", "http://i.imgur.com/Pf3Hb6O.gif",
-                //hangouts
-                'http://i.imgur.com/xp1jqJf.png', 'http://i.imgur.com/Y1vZjiX.png', 'http://i.imgur.com/qPVDTQ9.png', 'http://i.imgur.com/zkaTlAd.png', 'http://i.imgur.com/scUISw8.png', 
-                'http://i.imgur.com/4Kn0YBJ.png', 'http://i.imgur.com/hK8EFTv.png', 'http://i.imgur.com/X9SqjQ2.png', 'http://i.imgur.com/aYRlrHV.png', 'http://i.imgur.com/I3AS64C.png', 
-                'http://i.imgur.com/kJJNiwZ.png', 'http://i.imgur.com/fKAFbm0.png', 'http://i.imgur.com/JICfIFj.png', 'http://i.imgur.com/FytXaEh.png', 'http://i.imgur.com/rrekvUn.png', 
-                'http://i.imgur.com/ad6HSLi.png', 'http://i.imgur.com/ER0gWHb.png', 'http://i.imgur.com/1wkDeWB.png', 'http://i.imgur.com/KwDoZ9A.png', 'http://i.imgur.com/ovqPLQn.png', 
-                'http://i.imgur.com/qOtWwcH.png', 'http://i.imgur.com/mU1RKXd.png', 'http://i.imgur.com/x0pychj.png', 'http://i.imgur.com/u1WHrgx.png', 'http://i.imgur.com/G3w9kef.png', 
-                'http://i.imgur.com/HzTxh21.png', 'http://i.imgur.com/dFUn4OG.png', 'http://i.imgur.com/ejes95e.png', 'http://i.imgur.com/OwA33Zb.png', 'http://i.imgur.com/kmvVMTC.png', 
-                'http://i.imgur.com/AX9Rut8.png', 'http://i.imgur.com/pQpnv0k.png', 'http://i.imgur.com/pf4L6gk.png', 'http://i.imgur.com/AOKKQP1.png', 'http://i.imgur.com/WAaoHfp.png', 
-                'http://i.imgur.com/GmMXwZB.png', 'http://i.imgur.com/XPVBoet.png', 'http://i.imgur.com/jbNBigO.png', 'http://i.imgur.com/817AGU4.png', 'http://i.imgur.com/sCKxAV9.png', 
-                'http://i.imgur.com/vI1c2TU.png', 'http://i.imgur.com/vP3I9w3.png', 'http://i.imgur.com/pAUELjY.png', 'http://i.imgur.com/urJYVoa.png', 'http://i.imgur.com/kV7PgWJ.png', 
-                'http://i.imgur.com/esFvxar.png', 'http://i.imgur.com/zDZkc7W.png', 'http://i.imgur.com/5fC1h4r.png', 'http://i.imgur.com/TheqhpC.png', 'http://i.imgur.com/VJnirgH.png', 
-                'http://i.imgur.com/xLhnK5d.png', 'http://i.imgur.com/E9W6WN3.png', 'http://i.imgur.com/kP2djp2.png', 'http://i.imgur.com/Qx2wwAi.png', 'http://i.imgur.com/WwrbsDX.png', 
-                'http://i.imgur.com/Zj2aBHy.png', 'http://i.imgur.com/QRr7pgi.png', 'http://i.imgur.com/ynah5l8.png', 'http://i.imgur.com/TPqkjBo.png', 'http://i.imgur.com/mXZQQyR.png',
-                'http://i.imgur.com/VOesKVE.png', 'http://i.imgur.com/sPrcwnI.png', 'http://i.imgur.com/v3eZTzx.png', 'http://i.imgur.com/QjrFTOo.png', 'http://i.imgur.com/Oul1J4D.png', 
-                'http://i.imgur.com/REaECno.png', 'http://i.imgur.com/tZD9WDu.png', 'http://i.imgur.com/1snuG0r.png', 'http://i.imgur.com/nzAP2JG.png', 'http://i.imgur.com/j7C4Aq0.png', 
-                'http://i.imgur.com/tMxIx7S.png', 'http://i.imgur.com/SJbR6sm.png', 'http://i.imgur.com/YKlOs0W.png', 'http://i.imgur.com/WTMNq8v.png', 'http://i.imgur.com/GWilqh2.png', 
-                'http://i.imgur.com/Bbsm9n5.png', 'http://i.imgur.com/pGU6x8S.png', 'http://i.imgur.com/FDP39zz.png', 'http://i.imgur.com/79VA6TT.png', 'http://i.imgur.com/WdCtOnn.png',
-                // Other1
-                'http://i.imgur.com/KaCv5op.gif', 'http://i.imgur.com/ejU2fcF.png', 'http://i.imgur.com/bio1pvI.gif', 'http://i.imgur.com/Ltd5iU6.png', 'http://i.imgur.com/T4IgzTY.gif',
-                'http://i.imgur.com/PbUaxYx.png', 'http://i.imgur.com/R8W6I0w.png', 'http://i.imgur.com/xG4RIrA.gif', 'http://i.imgur.com/rbFuPXF.gif', 'http://i.imgur.com/wyYOabT.gif',
-                'http://i.imgur.com/S6UEbHD.gif', 'http://i.imgur.com/4xMO5KD.gif', 'http://i.imgur.com/TwFgi2c.gif', 'http://i.imgur.com/hbETBD0.png', 'http://i.imgur.com/tQ9iHT6.gif', 
-                'http://i.imgur.com/jomyAJ4.gif', 'http://i.imgur.com/1hHjhXy.gif', 'http://i.imgur.com/JBLi3hO.png', 'http://i.imgur.com/2zCelqA.gif', 'http://i.imgur.com/v6wvs7A.gif',
-                'http://i.imgur.com/HN61JpJ.png', 'http://i.imgur.com/p80TRPX.gif', 'http://i.imgur.com/jKIo5cV.gif', 'http://i.imgur.com/qENwY90.gif', 'http://i.imgur.com/3fIiDj2.gif', 
-                'http://i.imgur.com/6t2Edws.png', 'http://i.imgur.com/QFgTdCv.gif', 'http://i.imgur.com/IesFNjq.gif', 'http://i.imgur.com/dqSaOBe.png', 'http://i.imgur.com/LFhYb3I.gif',
-                'http://i.imgur.com/7ggKVAO.gif', 'http://i.imgur.com/AccmU5M.gif', 'http://i.imgur.com/T2CfvSd.gif', 'http://i.imgur.com/ueULm7y.gif', 'http://i.imgur.com/euU0YPC.gif',
-                'http://i.imgur.com/2cgWGlH.gif', 'http://i.imgur.com/MPPaTyz.png', 'http://i.imgur.com/iy5JEtV.gif', 'http://i.imgur.com/ZENu745.gif', 'http://i.imgur.com/nfFXKjo.gif',
-                'http://i.imgur.com/ebWpush.png', 'http://i.imgur.com/ZF06woy.gif', 'http://i.imgur.com/PQ46nnT.gif', 'http://i.imgur.com/ERHUlCz.gif', 'http://i.imgur.com/6RjFMle.gif', 
-                'http://i.imgur.com/f5T2Orb.png', 'http://i.imgur.com/Sjxv94d.gif', 'http://i.imgur.com/j79a9aH.gif', 'http://i.imgur.com/V5cCsWh.png', 'http://i.imgur.com/cMyP5ad.gif', 
-                'http://i.imgur.com/HCRlrTz.gif', 'http://i.imgur.com/UEJ07GO.gif', 'http://i.imgur.com/FhxkvG1.gif', 'http://i.imgur.com/OphqGmp.gif', 'http://i.imgur.com/ltpLsUw.gif',
-                'http://i.imgur.com/L8qFDbk.gif', 'http://i.imgur.com/VdsR7Kd.gif', 'http://i.imgur.com/Qh7HS3l.gif', 'http://i.imgur.com/sR5ERGu.png', 'http://i.imgur.com/NSLcMn7.gif', 
-                'http://i.imgur.com/1goqhMM.gif', 'http://i.imgur.com/HrYLFFB.gif', 'http://i.imgur.com/Jbt4I2Z.gif', 'http://i.imgur.com/CKbSOtO.png', 'http://i.imgur.com/hd1dUWI.png', 
-                'http://i.imgur.com/ylaLgZg.gif', 'http://i.imgur.com/lYIYWaG.gif', 'http://i.imgur.com/OfDMTt5.gif', 'http://i.imgur.com/DtZamGL.gif', 'http://i.imgur.com/2PfclL5.gif',
-                'http://i.imgur.com/mjDDoYp.png', 'http://i.imgur.com/AFAlTnd.gif', 'http://i.imgur.com/AbXv6rW.gif', 'http://i.imgur.com/DdGW27Z.png', 'http://i.imgur.com/1PWsDVr.gif',
-                'http://i.imgur.com/qsn9fnc.png', 'http://i.imgur.com/p9FSUKE.gif', 'http://i.imgur.com/Uh85EFc.gif', 'http://i.imgur.com/WVE2soK.png', 'http://i.imgur.com/ynRV5zk.png',
-                'http://i.imgur.com/hXawssJ.gif',
-                // Skype
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0100-smile.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0101-sadsmile.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0102-bigsmile.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0103-cool.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0105-wink.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0106-crying.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0107-sweating.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0108-speechless.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0109-kiss.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0110-tongueout.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0111-blush.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0112-wondering.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0113-sleepy.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0114-dull.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0115-inlove.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0116-evilgrin.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0117-talking.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0118-yawn.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0119-puke.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0120-doh.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0121-angry.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0122-itwasntme.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0123-party.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0124-worried.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0125-mmm.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0126-nerd.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0127-lipssealed.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0128-hi.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0129-call.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0130-devil.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0131-angel.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0132-envy.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0133-wait.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0134-bear.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0135-makeup.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0136-giggle.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0137-clapping.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0138-thinking.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0139-bow.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0140-rofl.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0141-whew.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0142-happy.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0143-smirk.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0144-nod.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0145-shake.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0146-punch.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0147-emo.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0148-yes.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0149-no.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0150-handshake.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0152-heart.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0153-brokenheart.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0154-mail.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0155-flower.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0156-rain.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0157-sun.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0158-time.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0159-music.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0160-movie.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0161-phone.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0162-coffee.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0163-pizza.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0164-cash.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0165-muscle.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0166-cake.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0167-beer.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0168-drink.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0169-dance.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0170-ninja.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0171-star.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0174-bandit.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0175-drunk.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0176-smoke.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0177-toivo.gif",
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0178-rock.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0179-headbang.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0180-bug.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0181-fubar.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0182-poolparty.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0183-swear.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0184-tmi.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0185-heidy.gif", 
-                "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0186-myspace.gif", "http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0189-priidu.gif",
-                //other2
-                'http://tweakimg.net/g/s/smile.gif', 'http://tweakimg.net/g/s/frown.gif', 'http://tweakimg.net/g/s/redface.gif', 'http://tweakimg.net/g/s/biggrin.gif', 
-                'http://tweakimg.net/g/s/biggrin.gif', 'http://tweakimg.net/g/s/cry.gif', 'http://tweakimg.net/g/s/devil.gif', 'http://tweakimg.net/g/s/clown.gif',
-                'http://tweakimg.net/g/s/wink.gif', 'http://tweakimg.net/g/s/puh2.gif', 'http://tweakimg.net/g/s/yummie.gif', 'http://tweakimg.net/g/s/shiny.gif',
-                'http://tweakimg.net/g/s/heart.gif', 'http://tweakimg.net/g/s/sleephappy.gif', 'http://tweakimg.net/g/s/vork.gif', 'http://tweakimg.net/g/s/rc5.gif',
-                'http://tweakimg.net/g/s/yawnee.gif', 'http://tweakimg.net/g/s/sadley.gif', 'http://tweakimg.net/g/s/coool.gif', 'http://tweakimg.net/g/s/confused.gif',
-                'http://tweakimg.net/g/s/frusty.gif', 'http://tweakimg.net/g/s/nosmile2.gif', 'http://tweakimg.net/g/s/nosmile.gif', 'http://tweakimg.net/g/s/puh.gif',
-                'http://tweakimg.net/g/s/kwijl.gif', 'http://tweakimg.net/g/s/shutup.gif', 'http://tweakimg.net/g/s/bonk.gif', 'http://tweakimg.net/g/s/hypocrite.gif',
-                'http://tweakimg.net/g/s/worshippy.gif'];
-            for(a=0;a<emojis.length;a++){
-                new Emoji(emojis[a], "emoji");
-            }
-        }
+        var o1 = [
+            //other1
+            {'src':'http://i.imgur.com/KaCv5op.gif'},{'src':'http://i.imgur.com/ejU2fcF.png'},{'src':'http://i.imgur.com/bio1pvI.gif'},
+            {'src':'http://i.imgur.com/Ltd5iU6.png'},{'src':'http://i.imgur.com/T4IgzTY.gif'},{'src':'http://i.imgur.com/PbUaxYx.png'},
+            {'src':'http://i.imgur.com/R8W6I0w.png'},{'src':'http://i.imgur.com/xG4RIrA.gif'},{'src':'http://i.imgur.com/rbFuPXF.gif'},
+            {'src':'http://i.imgur.com/wyYOabT.gif'},{'src':'http://i.imgur.com/S6UEbHD.gif'},{'src':'http://i.imgur.com/4xMO5KD.gif'},
+            {'src':'http://i.imgur.com/TwFgi2c.gif'},{'src':'http://i.imgur.com/hbETBD0.png'},{'src':'http://i.imgur.com/tQ9iHT6.gif'},
+            {'src':'http://i.imgur.com/jomyAJ4.gif'},{'src':'http://i.imgur.com/1hHjhXy.gif'},{'src':'http://i.imgur.com/JBLi3hO.png'},
+            {'src':'http://i.imgur.com/2zCelqA.gif'},{'src':'http://i.imgur.com/v6wvs7A.gif'},{'src':'http://i.imgur.com/HN61JpJ.png'},
+            {'src':'http://i.imgur.com/p80TRPX.gif'},{'src':'http://i.imgur.com/jKIo5cV.gif'},{'src':'http://i.imgur.com/qENwY90.gif'},
+            {'src':'http://i.imgur.com/3fIiDj2.gif'},{'src':'http://i.imgur.com/6t2Edws.png'},{'src':'http://i.imgur.com/QFgTdCv.gif'},
+            {'src':'http://i.imgur.com/IesFNjq.gif'},{'src':'http://i.imgur.com/dqSaOBe.png'},{'src':'http://i.imgur.com/LFhYb3I.gif'},
+            {'src':'http://i.imgur.com/7ggKVAO.gif'},{'src':'http://i.imgur.com/AccmU5M.gif'},{'src':'http://i.imgur.com/T2CfvSd.gif'},
+            {'src':'http://i.imgur.com/ueULm7y.gif'},{'src':'http://i.imgur.com/euU0YPC.gif'},{'src':'http://i.imgur.com/2cgWGlH.gif'},
+            {'src':'http://i.imgur.com/MPPaTyz.png'},{'src':'http://i.imgur.com/iy5JEtV.gif'},{'src':'http://i.imgur.com/ZENu745.gif'},
+            {'src':'http://i.imgur.com/nfFXKjo.gif'},{'src':'http://i.imgur.com/ebWpush.png'},{'src':'http://i.imgur.com/ZF06woy.gif'},
+            {'src':'http://i.imgur.com/PQ46nnT.gif'},{'src':'http://i.imgur.com/ERHUlCz.gif'},{'src':'http://i.imgur.com/6RjFMle.gif'},
+            {'src':'http://i.imgur.com/f5T2Orb.png'},{'src':'http://i.imgur.com/Sjxv94d.gif'},{'src':'http://i.imgur.com/j79a9aH.gif'},
+            {'src':'http://i.imgur.com/V5cCsWh.png'},{'src':'http://i.imgur.com/cMyP5ad.gif'},{'src':'http://i.imgur.com/HCRlrTz.gif'},
+            {'src':'http://i.imgur.com/UEJ07GO.gif'},{'src':'http://i.imgur.com/FhxkvG1.gif'},{'src':'http://i.imgur.com/OphqGmp.gif'},
+            {'src':'http://i.imgur.com/ltpLsUw.gif'},{'src':'http://i.imgur.com/L8qFDbk.gif'},{'src':'http://i.imgur.com/VdsR7Kd.gif'},
+            {'src':'http://i.imgur.com/Qh7HS3l.gif'},{'src':'http://i.imgur.com/sR5ERGu.png'},{'src':'http://i.imgur.com/NSLcMn7.gif'},
+            {'src':'http://i.imgur.com/1goqhMM.gif'},{'src':'http://i.imgur.com/HrYLFFB.gif'},{'src':'http://i.imgur.com/Jbt4I2Z.gif'},
+            {'src':'http://i.imgur.com/CKbSOtO.png'},{'src':'http://i.imgur.com/hd1dUWI.png'},{'src':'http://i.imgur.com/ylaLgZg.gif'},
+            {'src':'http://i.imgur.com/lYIYWaG.gif'},{'src':'http://i.imgur.com/OfDMTt5.gif'},{'src':'http://i.imgur.com/DtZamGL.gif'},
+            {'src':'http://i.imgur.com/2PfclL5.gif'},{'src':'http://i.imgur.com/mjDDoYp.png'},{'src':'http://i.imgur.com/AFAlTnd.gif'},
+            {'src':'http://i.imgur.com/AbXv6rW.gif'},{'src':'http://i.imgur.com/DdGW27Z.png'},{'src':'http://i.imgur.com/1PWsDVr.gif'},
+            {'src':'http://i.imgur.com/qsn9fnc.png'},{'src':'http://i.imgur.com/p9FSUKE.gif'},{'src':'http://i.imgur.com/Uh85EFc.gif'},
+            {'src':'http://i.imgur.com/WVE2soK.png'},{'src':'http://i.imgur.com/ynRV5zk.png'},{'src':'http://i.imgur.com/hXawssJ.gif'},
+        ];
+            
+            var s = [
+            //skype
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0100-smile.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0101-sadsmile.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0102-bigsmile.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0103-cool.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0105-wink.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0106-crying.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0107-sweating.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0108-speechless.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0109-kiss.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0110-tongueout.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0111-blush.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0112-wondering.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0113-sleepy.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0114-dull.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0115-inlove.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0116-evilgrin.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0117-talking.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0118-yawn.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0119-puke.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0120-doh.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0121-angry.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0122-itwasntme.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0123-party.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0124-worried.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0125-mmm.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0126-nerd.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0127-lipssealed.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0128-hi.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0129-call.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0130-devil.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0131-angel.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0132-envy.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0133-wait.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0134-bear.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0135-makeup.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0136-giggle.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0137-clapping.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0138-thinking.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0139-bow.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0140-rofl.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0141-whew.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0142-happy.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0143-smirk.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0144-nod.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0145-shake.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0146-punch.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0147-emo.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0148-yes.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0149-no.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0150-handshake.gif'},
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0152-heart.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0153-brokenheart.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0154-mail.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0155-flower.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0156-rain.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0157-sun.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0158-time.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0159-music.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0160-movie.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0161-phone.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0162-coffee.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0163-pizza.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0164-cash.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0165-muscle.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0166-cake.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0167-beer.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0168-drink.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0169-dance.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0170-ninja.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0171-star.gif'},
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0174-bandit.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0175-drunk.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0176-smoke.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0177-toivo.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0178-rock.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0179-headbang.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0180-bug.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0181-fubar.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0182-poolparty.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0183-swear.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0184-tmi.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0185-heidy.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0186-myspace.gif'}, 
+            {'src':'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0189-priidu.gif'},
+        ];
         
-        // Creates the new emoji when emoji button is clicked
-        var writeEmoji = setInterval(function(){
-            if($('div.redactor_smilies').is(':visible')) {
-                console.log("running hfemoji");
-                EmojiIcons();
-                clearInterval(writeEmoji);
+        var o2 = [
+            //other2
+            {'src':'http://tweakimg.net/g/s/smile.gif'},{'src':'http://tweakimg.net/g/s/frown.gif'},
+            {'src':'http://tweakimg.net/g/s/redface.gif'},{'src':'http://tweakimg.net/g/s/biggrin.gif'},
+            {'src':'http://tweakimg.net/g/s/biggrin.gif'},{'src':'http://tweakimg.net/g/s/cry.gif'},
+            {'src':'http://tweakimg.net/g/s/devil.gif'},{'src':'http://tweakimg.net/g/s/clown.gif'},
+            {'src':'http://tweakimg.net/g/s/wink.gif'},{'src':'http://tweakimg.net/g/s/puh2.gif'},
+            {'src':'http://tweakimg.net/g/s/yummie.gif'},{'src':'http://tweakimg.net/g/s/shiny.gif'},
+            {'src':'http://tweakimg.net/g/s/heart.gif'},{'src':'http://tweakimg.net/g/s/sleephappy.gif'},
+            {'src':'http://tweakimg.net/g/s/vork.gif'},{'src':'http://tweakimg.net/g/s/rc5.gif'},
+            {'src':'http://tweakimg.net/g/s/yawnee.gif'},{'src':'http://tweakimg.net/g/s/sadley.gif'},
+            {'src':'http://tweakimg.net/g/s/coool.gif'},{'src':'http://tweakimg.net/g/s/confused.gif'},
+            {'src':'http://tweakimg.net/g/s/frusty.gif'},{'src':'http://tweakimg.net/g/s/nosmile2.gif'},
+            {'src':'http://tweakimg.net/g/s/nosmile.gif'},{'src':'http://tweakimg.net/g/s/puh.gif'},
+            {'src':'http://tweakimg.net/g/s/kwijl.gif'},{'src':'http://tweakimg.net/g/s/shutup.gif'},
+            {'src':'http://tweakimg.net/g/s/bonk.gif'},{'src':'http://tweakimg.net/g/s/hypocrite.gif'},
+            {'src':'http://tweakimg.net/g/s/worshippy.gif'}
+        ];
+        var emojiData = [
+            {
+                name: 'Regular',
+                emojis: c,
+            },
+            {
+                name: 'Hangouts',
+                emojis: h,
+            },
+            {
+                name: 'Skype',
+                emojis: s,
+            },
+            {
+                name: 'Other(1)',
+                emojis: o1,
+            }	,
+            {
+                name: 'Other(2)',
+                emojis: o2,
+            }	
+        ];
+        var emojis = $('<div id="emojis"></div>');
+        if($('input[value="Post Reply"]').length > 0) {
+            $('.submitUnit').before(emojis);
+        }else{
+            $('form.Preview').after(emojis);
+        }
+        emojis = $('#emojis');
+        var emojisTop = $('<div id="emojis-top" style="padding: 10px 0px 0px;"></div>'), emojisContent = $('<div style="padding:10px 0px;max-height:120px;overflow-y:auto;"></div>');
+        emojis.append(emojisTop).append(emojisContent);
+        $.each(emojiData, function(idx, val){
+            var btn = $('<a href="javascript:void(0);">'+val.name+'</a>');
+            emojisTop.append(btn);
+            var cont = $('<div class="emojiContainer"></div>');
+            cont.appendTo(emojisContent);
+            cont.hide();
+            $.each(val.emojis, function(index, emote){
+                var emoji = $('<a href="javascript:void(0);" class="mceSmilieSprite"><img src="'+emote.src+'"/></a>');
+                cont.append(emoji);
+                emoji.click(function(){					
+                    var pp = iframe.getElementsByTagName('p');
+                    pp[pp.length -1].innerHTML = pp[pp.length -1].innerHTML + '<img src="' + emote.src + '">&nbsp;';
+                });	
+            });
+            btn.click(function(){
+                $('.emoji-active').removeClass('emoji-active');
+                $('.emojiContainer').hide();
+                cont.show();
+                btn.addClass('emoji-active');
+            });
+            if(idx === 0){
+                btn.trigger('click');
             }
-        }, 300);
+        });
         
         $("input.primary").first().click(function (){
             filter();
@@ -670,9 +784,9 @@ function main() {
         }
     }
     
-        if($('#newthread-category').length){
-            $('#newthread-category').appendTo('#top');
-        }
+    if($('#newthread-category').length){
+        $('#newthread-category').appendTo('#top');
+    }
     //Checks width for mobiles etc
     if ( $( document ).width() > 850){
         //Sidebar
@@ -805,6 +919,9 @@ function main() {
         
         //Sidebar Customizations
         $('.sidebar .section .widget').each(function(){
+            $(this).children('*').not('h3').wrapAll('<div class="section-wrapper"></div>');
+        });
+        $('.sidebar .widget .section .secondaryContent').each(function(){
             $(this).children('*').not('h3').wrapAll('<div class="section-wrapper"></div>');
         });
         $('body').on('click','.sidebar h3', function(e){
