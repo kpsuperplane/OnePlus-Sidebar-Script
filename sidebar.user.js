@@ -60,7 +60,7 @@ function main() {
         }
         iframe.innerHTML=message;   
     }
-    function update() {
+    function update(manual) {
         var re;
         $.ajax({
             type : 'GET',
@@ -96,14 +96,16 @@ function main() {
                         }
                     });
                 }else{
-					new modal('No New Updates Found', updateText, {
-                        'Ok': {
-                            type: 'red',
-                            click: function(){
-                                this.close();
-                            }
-                        }
-                    });
+					if(manual){
+						new modal('No New Updates Found', updateText, {
+							'Ok': {
+								type: 'red',
+								click: function(){
+									this.close();
+								}
+							}
+						});
+					}
 				}
             }
         });
@@ -869,7 +871,7 @@ function main() {
             update();
         }
         check.addEventListener("click", function(){
-            update();
+            update(true);
         });
         
         //Fan Gatherings
