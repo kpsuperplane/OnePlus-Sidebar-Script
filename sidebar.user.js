@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.4.2
+// @version      2.4.3
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -859,6 +859,24 @@ function main() {
         check.addEventListener("click", function(){
             update();
         });
+        
+        //Fan Gatherings
+        var fanGather = new sidebar("Fan Gatherings", {
+            layout: "twoColumns"
+        });
+        fanGather.add($('<a href="/threads/aussie-thread.48896/">Australia</a>'));
+        fanGather.add($('<a href="/threads/club-canada.62048/">Canada</a>'));
+        fanGather.add($('<a href="/threads/members-from-croatia-or-balkan.9557/">Croatia / Balkan</a>'));
+        fanGather.add($('<a href="/threads/greek-fan-community.117867/">Greece</a>'));
+        fanGather.add($('<a href="/threads/members-from-hungary.3057/">Hungary</a>'));
+        fanGather.add($('<a href="/threads/club-india.61073/">India</a>'));
+        fanGather.add($('<a href="/threads/its-our-movement-now-were-ind-one-sia-plus.14364/">Indonesia</a>'));
+        fanGather.add($('<a href="/threads/members-from-ireland.1698/">Ireland</a>'));
+        fanGather.add($('<a href="/threads/malaysia-opo-fan-club.23332/">Malaysia</a>'));
+        fanGather.add($('<a href="/threads/member-from-poland.1699/">Poland</a>'));
+        fanGather.add($('<a href="/threads/romania-fans-invites.9703/">Romania</a>'));
+        fanGather.add($('<a href="/threads/opo-fans-from-singapore.35482/">Singapore</a>'));
+        fanGather.add($('<a href="/threads/turkey-opo-fans.44672/">Turkey</a>'));
         
         //Quick Links
         var quickLinks = new sidebar("Quick Links", {
