@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.4.4
+// @version      2.4.5
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -29,7 +29,7 @@ function main() {
         var numMisc = (misc === null) ? 0 : misc.length;
         message = message.replace(quoteReg, "▓");
         var em = [/:3&lt;3/igm, /&gt;:3/igm, /:'3/igm, 
-                  /x#3/gm, /=3/gm, /8\)/gm,
+                  /x3/igm, /=3/gm, /8\)/gm,
                   /&gt;:\(/gm, /:poop:/igm, /X\)/igm,
                   /}:\(/igm, /:\|/gm, /-\.-/igm,
                   /:\\/gm, /(\:\/)(?![\/])/gm, /:'\(/gm,
@@ -61,7 +61,6 @@ function main() {
         iframe.innerHTML=message;   
     }
     function update(manual) {
-        var re;
         $.ajax({
             type : 'GET',
             url : 'https://forums.oneplus.net/threads/tool-oneplus-forum-sidebar-mod.208545/#post-8332926',
@@ -83,9 +82,9 @@ function main() {
                             click: function(){
                                 this.close();
                                 location.href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/raw/master/sidebar.user.js";
-								setTimeout(function(){
-									location.reload(true);
-								}, 1000);
+                                setTimeout(function(){
+                                    location.reload(true);
+                                }, 1000);
                             }
                         },
                         'Not Now': {
@@ -96,17 +95,17 @@ function main() {
                         }
                     });
                 }else{
-					if(manual){
-						new modal('No New Updates Found', updateText, {
-							'Ok': {
-								type: 'red',
-								click: function(){
-									this.close();
-								}
-							}
-						});
-					}
-				}
+                    if(manual){
+                        new modal('No New Updates Found', updateText, {
+                            'Ok': {
+                                type: 'red',
+                                click: function(){
+                                    this.close();
+                                }
+                            }
+                        });
+                    }
+                }
             }
         });
     }
@@ -188,6 +187,7 @@ function main() {
     
     
     //Emoji
+    document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0].onblur=function(){filter();};
     if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0) {
         var iframe = document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0];
         var c = [
@@ -431,10 +431,12 @@ function main() {
             }
         });
         
-        $("input.primary").first().click(function (){
-            filter();
-        });
-        
+        $('input[value="Reply to Thread"]').click(function(){filter();});
+        $('input[value="Reply to Conversation"]').click(function (){filter();});             	
+        $('input[value="Post Reply"]').click(
+            function(){filter();
+                       setTimeout(function(){document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0].onblur=function(){filter();};},3000);
+                      });        
         //Rainbowify
         function tohex(decval) {
             var l, h;
@@ -790,7 +792,8 @@ function main() {
         if(window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
             var rainbowfyBtn = $('&nbsp;<button class="button">Rainbowfy</button>');
             $('input[value="Post Reply"]').after(rainbowfyBtn);
-            
+            $('input[value="Reply to Thread"]').after(rainbowfyBtn);
+            $('input[value="Reply to Conversation"]').after(rainbowfyBtn);
             rainbowfyBtn.click(function(e) {
                 e.preventDefault();
                 rainbow();
