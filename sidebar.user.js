@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.4.7
+// @version      2.4.8
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -29,7 +29,7 @@ function main() {
         var numMisc = (misc === null) ? 0 : misc.length;
         message = message.replace(quoteReg, "▓");
         var em = [/:3&lt;3/igm, /&gt;:3/igm, /:'3/igm, 
-                  /x#3/gm, /=3/gm, /8\)/gm,
+                  /x3/igm, /=3/gm, /8\)/gm,
                   /&gt;:\(/gm, /:poop:/igm, /X\)/igm,
                   /}:\(/igm, /:\|/gm, /-\.-/igm,
                   /:\\/gm, /(\:\/)(?![\/])/gm, /:'\(/gm,
@@ -188,7 +188,7 @@ function main() {
     
     
     //Emoji
-    if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0) {
+    if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0 || $('input[value="Create Thread"]').length > 0) {
         var iframe = document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0];
         
         var c = [
@@ -334,11 +334,7 @@ function main() {
             }	
         ];
         var emojis = $('<div id="emojis"></div>');
-        if($('input[value="Post Reply"]').length > 0) {
-            $('.submitUnit').before(emojis);
-        }else{
-            $('form.Preview').after(emojis);
-        }
+        $('.submitUnit:first').before(emojis);
         emojis = $('#emojis');
         var emojisTop = $('<div id="emojis-top" style="padding: 10px 0px 0px;"></div>'), emojisContent = $('<div style="padding:10px 0px;max-height:120px;overflow-y:auto;"></div>');
         emojis.append(emojisTop).append(emojisContent);
@@ -641,9 +637,6 @@ function main() {
             var iframe = document.getElementsByClassName('redactor_textCtrl')[0];
             var message = iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML;
             
-            /*if (message.indexOf("http") == -1 && message.indexOf("www") == -1 && message.indexOf("@") == -1 && message.indexOf("QUOTE") == -1 && message.indexOf("[/color]") == -1 && message.indexOf("<font color") == -1&& message.indexOf(":") == -1 && message.indexOf("[COLOR") == -1) {
-                iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = MakeSFX(message, false);
-            } else {*/
             var quotereg = /(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])|(\[SPOILER\]?[\s\S]*?\[\/SPOILER\])/igm;
             var imgregex = /(\<img([\s\S]*?)\>)/igm;
             var linkregex= /(\<a([\s\S]*?)<\/a\>)/igm;
@@ -698,40 +691,32 @@ function main() {
                 message = message.replace(emojirest, emojis[f]);
             }
             iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = message;
-            //}
         }
         
-        //Ninja Text Viewer
-        function ninja() {
-            //change signature color because above changed it as well
-            var c = document.getElementsByClassName('signature');
-            for (d = 0; d < c.length; d++) {
-                c[d].style.color = 'black';
-            }
-            //change ninja text
-            var s = document.getElementsByTagName('span');
-            for (q = 0; q < s.length; q++) {
-                if (s[q].style.color.indexOf("#ffffff") >= 0 || s[q].style.color.indexOf("255, 255, 255") >= 0 || s[q].style.color.indexOf("white") >= 0  || s[q].style.color.indexOf("transparent") >= 0)
-                {
-                    s[q].style.color = '#a8a8a8';
-                }
-                if (s[q].style.color.indexOf("#ecebea") >= 0 || s[q].style.color.indexOf("236, 235, 234") >= 0)
-                {
-                    s[q].style.color = '#8a8a8a';
-                }
-            }
-        }
-        
-        
-        //Rainbowfy Text
+        //Add rainbow button
         if(window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
             var rainbowfyBtn = $('&nbsp;<button class="button">Rainbowfy</button>');
-            $('input[value="Post Reply"]').after(rainbowfyBtn);
-            
+            $('input[type=submit]:first').after(rainbowfyBtn);
             rainbowfyBtn.click(function(e) {
                 e.preventDefault();
                 rainbow();
             });
+        }
+    }
+    
+    //Ninja Text Viewer
+    function ninja() {
+        //change ninja text
+        var s = document.getElementsByTagName('span');
+        for (q = 0; q < s.length; q++) {
+            if (s[q].style.color.indexOf("#ffffff") >= 0 || s[q].style.color.indexOf("255, 255, 255") >= 0 || s[q].style.color.indexOf("white") >= 0  || s[q].style.color.indexOf("transparent") >= 0)
+            {
+                s[q].style.color = '#a8a8a8';
+            }
+            if (s[q].style.color.indexOf("#ecebea") >= 0 || s[q].style.color.indexOf("236, 235, 234") >= 0)
+            {
+                s[q].style.color = '#8a8a8a';
+            }
         }
     }
     
