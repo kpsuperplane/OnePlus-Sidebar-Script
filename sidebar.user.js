@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.4.8
+// @version      2.4.9
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -29,7 +29,7 @@ function main() {
         var numMisc = (misc === null) ? 0 : misc.length;
         message = message.replace(quoteReg, "▓");
         var em = [/:3&lt;3/igm, /&gt;:3/igm, /:'3/igm, 
-                  /x3/igm, /=3/gm, /8\)/gm,
+                  /x#3/gm, /=3/gm, /8\)/gm,
                   /&gt;:\(/gm, /:poop:/igm, /X\)/igm,
                   /}:\(/igm, /:\|/gm, /-\.-/igm,
                   /:\\/gm, /(\:\/)(?![\/])/gm, /:'\(/gm,
@@ -202,7 +202,6 @@ function main() {
             'http://i.imgur.com/kz4sU6E.png','http://i.imgur.com/dXV0bPZ.png','http://i.imgur.com/jpgBiOo.png','http://i.imgur.com/e1rc3vr.png','http://i.imgur.com/Pq6xcYg.png',
             'http://i.imgur.com/hO7m9ga.png'];
         
-        
         var h = [
             //hangouts
             'http://i.imgur.com/vpOXVGK.png','http://i.imgur.com/Y1vZjiX.png','http://i.imgur.com/qPVDTQ9.png','http://i.imgur.com/zkaTlAd.png','http://i.imgur.com/scUISw8.png',
@@ -245,13 +244,12 @@ function main() {
         
         var o2 =[
             //other2
-            'http://tweakimg.net/g/s/smile.gif','http://tweakimg.net/g/s/frown.gif','http://tweakimg.net/g/s/redface.gif','http://tweakimg.net/g/s/biggrin.gif',
-            'http://tweakimg.net/g/s/biggrin.gif','http://tweakimg.net/g/s/cry.gif','http://tweakimg.net/g/s/devil.gif','http://tweakimg.net/g/s/clown.gif','http://tweakimg.net/g/s/wink.gif',
-            'http://tweakimg.net/g/s/puh2.gif','http://tweakimg.net/g/s/yummie.gif','http://tweakimg.net/g/s/shiny.gif','http://tweakimg.net/g/s/heart.gif',
-            'http://tweakimg.net/g/s/sleephappy.gif','http://tweakimg.net/g/s/vork.gif','http://tweakimg.net/g/s/rc5.gif','http://tweakimg.net/g/s/yawnee.gif','http://tweakimg.net/g/s/sadley.gif',
-            'http://tweakimg.net/g/s/coool.gif','http://tweakimg.net/g/s/confused.gif','http://tweakimg.net/g/s/frusty.gif','http://tweakimg.net/g/s/nosmile2.gif',
-            'http://tweakimg.net/g/s/nosmile.gif','http://tweakimg.net/g/s/puh.gif','http://tweakimg.net/g/s/kwijl.gif','http://tweakimg.net/g/s/shutup.gif','http://tweakimg.net/g/s/bonk.gif',
-            'http://tweakimg.net/g/s/hypocrite.gif','http://tweakimg.net/g/s/worshippy.gif'];
+            'http://i.imgur.com/COG3I9X.gif','http://i.imgur.com/8Rd6nJf.gif','http://i.imgur.com/x6qX0iH.gif','http://i.imgur.com/Q3tdtjD.gif','http://i.imgur.com/9tAbXnQ.gif',
+            'http://i.imgur.com/SytGnYR.gif','http://i.imgur.com/3cSjRYd.gif','http://i.imgur.com/BuSbsme.gif','http://i.imgur.com/N0ZkFjs.gif','http://i.imgur.com/UprdpYz.gif',
+            'http://i.imgur.com/AcnPHLP.gif','http://i.imgur.com/Qw7gfYs.gif','http://i.imgur.com/zpFDqqL.gif','http://i.imgur.com/qaxKlZR.gif','http://i.imgur.com/HFkts5E.gif',
+            'http://i.imgur.com/eb7f1gV.gif','http://i.imgur.com/7wGKDC1.gif','http://i.imgur.com/bmXjNOf.gif','http://i.imgur.com/B4LZWzN.gif','http://i.imgur.com/9vIt1FN.gif',
+            'http://i.imgur.com/WV7oiuS.gif','http://i.imgur.com/lFf92El.gif','http://i.imgur.com/n2p9dM0.gif','http://i.imgur.com/9eUJPdm.gif','http://i.imgur.com/hEHocBG.gif',
+            'http://i.imgur.com/76mwtQe.gif','http://i.imgur.com/WEri5K1.gif','http://i.imgur.com/MHEm5T0.gif','http://i.imgur.com/yBvrFiU.gif'];
         
         var s = [
             //skype
@@ -307,6 +305,52 @@ function main() {
             'http://i.imgur.com/3eVe3Wq.gif','http://i.imgur.com/XNnrx2G.gif','http://i.imgur.com/CVlVruI.gif','http://i.imgur.com/oZjPqJE.gif','http://i.imgur.com/O6593II.gif',
             'http://i.imgur.com/wYRa0l7.gif','http://i.imgur.com/rMTzB9t.gif','http://i.imgur.com/0ziK8JD.gif'];
         
+        var chocojis = [
+            'http://i.imgur.com/BlfnwZO.gif'];
+        
+        var twitch = [
+            "http://static-cdn.jtvnw.net/emoticons/v1/354/1.0","http://static-cdn.jtvnw.net/emoticons/v1/3792/1.0","http://static-cdn.jtvnw.net/emoticons/v1/50/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/74/1.0","http://static-cdn.jtvnw.net/emoticons/v1/9809/1.0","http://static-cdn.jtvnw.net/emoticons/v1/32035/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/9800/1.0","http://static-cdn.jtvnw.net/emoticons/v1/9801/1.0","http://static-cdn.jtvnw.net/emoticons/v1/22639/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/1905/1.0","http://static-cdn.jtvnw.net/emoticons/v1/30/1.0","http://static-cdn.jtvnw.net/emoticons/v1/86/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/1904/1.0","http://static-cdn.jtvnw.net/emoticons/v1/24/1.0","http://static-cdn.jtvnw.net/emoticons/v1/38/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/69/1.0","http://static-cdn.jtvnw.net/emoticons/v1/243/1.0","http://static-cdn.jtvnw.net/emoticons/v1/881/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/4057/1.0","http://static-cdn.jtvnw.net/emoticons/v1/27602/1.0","http://static-cdn.jtvnw.net/emoticons/v1/21/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/973/1.0","http://static-cdn.jtvnw.net/emoticons/v1/33/1.0","http://static-cdn.jtvnw.net/emoticons/v1/170/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/73/1.0","http://static-cdn.jtvnw.net/emoticons/v1/29695/1.0","http://static-cdn.jtvnw.net/emoticons/v1/1903/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/20/1.0","http://static-cdn.jtvnw.net/emoticons/v1/4339/1.0","http://static-cdn.jtvnw.net/emoticons/v1/72/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/360/1.0","http://static-cdn.jtvnw.net/emoticons/v1/30260/1.0","http://static-cdn.jtvnw.net/emoticons/v1/42/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/65/1.0","http://static-cdn.jtvnw.net/emoticons/v1/39/1.0","http://static-cdn.jtvnw.net/emoticons/v1/244/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/48/1.0","http://static-cdn.jtvnw.net/emoticons/v1/168/1.0","http://static-cdn.jtvnw.net/emoticons/v1/9802/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/32/1.0","http://static-cdn.jtvnw.net/emoticons/v1/3632/1.0","http://static-cdn.jtvnw.net/emoticons/v1/20225/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/68/1.0","http://static-cdn.jtvnw.net/emoticons/v1/30259/1.0","http://static-cdn.jtvnw.net/emoticons/v1/357/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/27301/1.0","http://static-cdn.jtvnw.net/emoticons/v1/169/1.0","http://static-cdn.jtvnw.net/emoticons/v1/90/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/15/1.0","http://static-cdn.jtvnw.net/emoticons/v1/26/1.0","http://static-cdn.jtvnw.net/emoticons/v1/9803/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/25/1.0","http://static-cdn.jtvnw.net/emoticons/v1/1902/1.0","http://static-cdn.jtvnw.net/emoticons/v1/40/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/1901/1.0","http://static-cdn.jtvnw.net/emoticons/v1/41/1.0","http://static-cdn.jtvnw.net/emoticons/v1/5248/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/5249/1.0","http://static-cdn.jtvnw.net/emoticons/v1/5250/1.0","http://static-cdn.jtvnw.net/emoticons/v1/5251/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/5252/1.0","http://static-cdn.jtvnw.net/emoticons/v1/5253/1.0","http://static-cdn.jtvnw.net/emoticons/v1/30134/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/9804/1.0","http://static-cdn.jtvnw.net/emoticons/v1/28/1.0","http://static-cdn.jtvnw.net/emoticons/v1/29/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/9805/1.0","http://static-cdn.jtvnw.net/emoticons/v1/45/1.0","http://static-cdn.jtvnw.net/emoticons/v1/44/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/13084/1.0","http://static-cdn.jtvnw.net/emoticons/v1/91/1.0","http://static-cdn.jtvnw.net/emoticons/v1/66/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/356/1.0","http://static-cdn.jtvnw.net/emoticons/v1/16/1.0","http://static-cdn.jtvnw.net/emoticons/v1/22998/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/3668/1.0","http://static-cdn.jtvnw.net/emoticons/v1/19/1.0","http://static-cdn.jtvnw.net/emoticons/v1/3412/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/27509/1.0","http://static-cdn.jtvnw.net/emoticons/v1/27/1.0","http://static-cdn.jtvnw.net/emoticons/v1/4240/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/9808/1.0","http://static-cdn.jtvnw.net/emoticons/v1/36/1.0","http://static-cdn.jtvnw.net/emoticons/v1/92/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/88/1.0","http://static-cdn.jtvnw.net/emoticons/v1/358/1.0","http://static-cdn.jtvnw.net/emoticons/v1/28328/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/47/1.0","http://static-cdn.jtvnw.net/emoticons/v1/30252/1.0","http://static-cdn.jtvnw.net/emoticons/v1/27679/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/1900/1.0","http://static-cdn.jtvnw.net/emoticons/v1/22/1.0","http://static-cdn.jtvnw.net/emoticons/v1/245/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/4338/1.0","http://static-cdn.jtvnw.net/emoticons/v1/361/1.0","http://static-cdn.jtvnw.net/emoticons/v1/9807/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/9806/1.0","http://static-cdn.jtvnw.net/emoticons/v1/87/1.0","http://static-cdn.jtvnw.net/emoticons/v1/27903/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/52/1.0","http://static-cdn.jtvnw.net/emoticons/v1/51/1.0","http://static-cdn.jtvnw.net/emoticons/v1/1906/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/355/1.0","http://static-cdn.jtvnw.net/emoticons/v1/14706/1.0","http://static-cdn.jtvnw.net/emoticons/v1/46/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/17/1.0","http://static-cdn.jtvnw.net/emoticons/v1/37/1.0","http://static-cdn.jtvnw.net/emoticons/v1/31/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/34/1.0","http://static-cdn.jtvnw.net/emoticons/v1/1899/1.0","http://static-cdn.jtvnw.net/emoticons/v1/18/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/70/1.0","http://static-cdn.jtvnw.net/emoticons/v1/7427/1.0","http://static-cdn.jtvnw.net/emoticons/v1/1898/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/67/1.0","http://static-cdn.jtvnw.net/emoticons/v1/359/1.0","http://static-cdn.jtvnw.net/emoticons/v1/171/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/49/1.0","http://static-cdn.jtvnw.net/emoticons/v1/3666/1.0","http://static-cdn.jtvnw.net/emoticons/v1/71/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/166/1.0","http://static-cdn.jtvnw.net/emoticons/v1/1896/1.0","http://static-cdn.jtvnw.net/emoticons/v1/167/1.0",
+            "http://static-cdn.jtvnw.net/emoticons/v1/1897/1.0","http://static-cdn.jtvnw.net/emoticons/v1/28087/1.0","http://static-cdn.jtvnw.net/emoticons/v1/4337/1.0"]
         var emojiData = [
             {
                 name: 'Regular',
@@ -323,6 +367,14 @@ function main() {
             {
                 name: 'Potatojis',
                 emojis: potatojis,
+            },
+            {
+                name: 'Chocojis',
+                emojis: chocojis,
+            },
+            {
+                name: 'Twitchemotes',
+                emojis: twitch,
             },
             {
                 name: 'Other(1)',
@@ -363,6 +415,7 @@ function main() {
             }
         });
         $('div.emojiContainer:eq(3) img').each(function(ii){this.style.height="40px"});
+        $('div.emojiContainer:eq(4) img').each(function(ii){this.style.height="40px"});
         
         $("input.primary").first().click(function (){
             filter();
@@ -696,7 +749,7 @@ function main() {
         //Add rainbow button
         if(window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
             var rainbowfyBtn = $('&nbsp;<button class="button">Rainbowfy</button>');
-            $('input[type=submit]:first').after(rainbowfyBtn);
+            $('.submitUnit:first input[type=submit]:first').after(rainbowfyBtn);
             rainbowfyBtn.click(function(e) {
                 e.preventDefault();
                 rainbow();
