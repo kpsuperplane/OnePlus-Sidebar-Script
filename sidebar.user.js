@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.4.9
+// @version      2.5.0
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -296,17 +296,80 @@ function main() {
             'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0184-tmi.gif', 'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0185-heidy.gif', 
             'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0186-myspace.gif', 'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0189-priidu.gif'];
         
-        var potatojis = [
+        var blankojis = [
             'http://i.imgur.com/9LNul5R.gif','http://i.imgur.com/1jndLAj.gif','http://i.imgur.com/QHCHpHA.gif','http://i.imgur.com/1Nav1ce.gif','http://i.imgur.com/DCuXvUq.gif',
-            'http://i.imgur.com/bNdMBsI.gif','http://i.imgur.com/Xbn5YEK.gif','http://i.imgur.com/hNWvGZk.gif','http://i.imgur.com/1zlQ76l.gif','http://i.imgur.com/G0tSt54.gif',
-            'http://i.imgur.com/W0NqIo3.gif','http://i.imgur.com/bmwWFS5.gif','http://i.imgur.com/ZhT509S.gif','http://i.imgur.com/mBjTEMY.gif','http://i.imgur.com/5HgsPXX.gif',
-            'http://i.imgur.com/nVTd2QL.gif','http://i.imgur.com/DmWMVY2.gif','http://i.imgur.com/W0LOdYV.gif','http://i.imgur.com/jOII0bs.gif','http://i.imgur.com/PO3Etb7.gif',
-            'http://i.imgur.com/Sh5R6VF.gif','http://i.imgur.com/WF29Jd3.gif','http://i.imgur.com/PAE1lWZ.gif','http://i.imgur.com/CaDhzdW.gif','http://i.imgur.com/L5ORgJs.gif',
-            'http://i.imgur.com/3eVe3Wq.gif','http://i.imgur.com/XNnrx2G.gif','http://i.imgur.com/CVlVruI.gif','http://i.imgur.com/oZjPqJE.gif','http://i.imgur.com/O6593II.gif',
-            'http://i.imgur.com/wYRa0l7.gif','http://i.imgur.com/rMTzB9t.gif','http://i.imgur.com/0ziK8JD.gif'];
+            'http://i.imgur.com/bNdMBsI.gif','http://i.imgur.com/Xbn5YEK.gif','http://i.imgur.com/1zlQ76l.gif','http://i.imgur.com/G0tSt54.gif','http://i.imgur.com/W0NqIo3.gif',
+            'http://i.imgur.com/bmwWFS5.gif','http://i.imgur.com/ZhT509S.gif','http://i.imgur.com/mBjTEMY.gif','http://i.imgur.com/5HgsPXX.gif','http://i.imgur.com/W0LOdYV.gif',
+            'http://i.imgur.com/WF29Jd3.gif','http://i.imgur.com/PAE1lWZ.gif','http://i.imgur.com/CVlVruI.gif','http://i.imgur.com/wYRa0l7.gif','http://i.imgur.com/BlfnwZO.gif'];
         
-        var chocojis = [
-            'http://i.imgur.com/BlfnwZO.gif'];
+        var onion = [
+            "http://emoticoner.com/files/emoticons/onion-head/admire-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/admire2-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/ahaaah-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/angel1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/angel2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/bad-atmosphere-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/beaten-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/beg-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/big-eye-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/bike-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/bird-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/bled1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/bled2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/bleeding-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/blocked-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/bsod-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/bye1-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/bye2-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/cheer1-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/cheer2-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/cheer3-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/confused-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/congrats-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/cool-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/cruch-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/crying1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/crying2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/crying3-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/cute1-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/cute2-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/dead-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/depressed1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/depressed2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/desperate1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/desperate2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/dong-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/dreaming-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/dying-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/eaten-alive-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/eating-me-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/embarrassed1-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/embarrassed2-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/embarrassed3-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/embarrassed4-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/evil-smile-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/expulsion-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/falling-asleep-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/freezing-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/frozen-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/full-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/ghost-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/good-job-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/good-luck-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/happy-birth-day1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/happy-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/hate-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/hehe-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/hell-yes-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/help-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/hi-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/hot1-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/hot2-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/hypnosis-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/ill-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/info-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/innocent-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/kick-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/kicked1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/kicked2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/lie-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/lol2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/lonely-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/love-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/meh-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/nonono-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/noooo-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/not-listening-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/objection-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/oh-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/payup-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/pff1-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/pff2-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/pointing-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/pretty-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/punch-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/push-up-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/relax1-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/relax2-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/robot-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/running-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/scared-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/scary-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/serenade-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/shock1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/shock2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/shy-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/sigh-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/silence-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/sleeping-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/smoking1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/smoking2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/spa-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/starving-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/steal-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/stoned-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/stress-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/studying-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/super-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/super-sayan-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/sweating-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/sweetdrop-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/tar-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/uhuhuh-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/victory-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/vomiting-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/wait-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/waiting-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/warning-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/washing-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/wet-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/wew-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/whaaat1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/whaaat2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/whaaat3-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/what-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/whip-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/whistling-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/woa-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/work-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/wow1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/wow2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/lol1-onion-head-emoticon.gif",
+            "http://emoticoner.com/files/emoticons/onion-head/yawn-onion-head-emoticon.gif"];
         
         var twitch = [
             "http://static-cdn.jtvnw.net/emoticons/v1/354/1.0","http://static-cdn.jtvnw.net/emoticons/v1/3792/1.0","http://static-cdn.jtvnw.net/emoticons/v1/50/1.0",
@@ -351,6 +414,7 @@ function main() {
             "http://static-cdn.jtvnw.net/emoticons/v1/49/1.0","http://static-cdn.jtvnw.net/emoticons/v1/3666/1.0","http://static-cdn.jtvnw.net/emoticons/v1/71/1.0",
             "http://static-cdn.jtvnw.net/emoticons/v1/166/1.0","http://static-cdn.jtvnw.net/emoticons/v1/1896/1.0","http://static-cdn.jtvnw.net/emoticons/v1/167/1.0",
             "http://static-cdn.jtvnw.net/emoticons/v1/1897/1.0","http://static-cdn.jtvnw.net/emoticons/v1/28087/1.0","http://static-cdn.jtvnw.net/emoticons/v1/4337/1.0"]
+        
         var emojiData = [
             {
                 name: 'Regular',
@@ -365,12 +429,12 @@ function main() {
                 emojis: s,
             },
             {
-                name: 'Potatojis',
-                emojis: potatojis,
+                name: 'potat/chocojis',
+                emojis: blankojis,
             },
             {
-                name: 'Chocojis',
-                emojis: chocojis,
+                name: 'onion face',
+                emojis: onion,
             },
             {
                 name: 'Twitchemotes',
@@ -416,6 +480,7 @@ function main() {
         });
         $('div.emojiContainer:eq(3) img').each(function(ii){this.style.height="40px"});
         $('div.emojiContainer:eq(4) img').each(function(ii){this.style.height="40px"});
+        $('div.emojiContainer:eq(5) img').each(function(ii){this.style.height="40px"});
         
         $("input.primary").first().click(function (){
             filter();
