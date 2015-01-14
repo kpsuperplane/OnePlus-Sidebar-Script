@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.5.0
+// @version      2.5.1
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -21,6 +21,12 @@ function addJQuery(callback) {
     document.body.appendChild(script);
 }
 function main() {
+    var Konami=function(callback){var konami={addEvent:function(obj,type,fn,ref_obj){if(obj.addEventListener)
+        obj.addEventListener(type,fn,false);else if(obj.attachEvent){obj["e"+type+fn]=fn;obj[type+fn]=function(){obj["e"+type+fn](window.event,ref_obj);};obj.attachEvent("on"+type,obj[type+fn]);}},input:"",pattern:"38384040373937396665",load:function(link){this.addEvent(document,"keydown",function(e,ref_obj){if(ref_obj)konami=ref_obj;konami.input+=e?e.keyCode:event.keyCode;if(konami.input.length>konami.pattern.length)
+            konami.input=konami.input.substr((konami.input.length-konami.pattern.length));if(konami.input==konami.pattern){konami.code(link);konami.input="";e.preventDefault();return false;}},this);this.iphone.load(link);},code:function(link){window.location=link;},iphone:{start_x:0,start_y:0,stop_x:0,stop_y:0,tap:false,capture:false,orig_keys:"",keys:["UP","UP","DOWN","DOWN","LEFT","RIGHT","LEFT","RIGHT","TAP","TAP"],code:function(link){konami.code(link);},load:function(link){this.orig_keys=this.keys;konami.addEvent(document,"touchmove",function(e){if(e.touches.length==1&&konami.iphone.capture===true){var touch=e.touches[0];konami.iphone.stop_x=touch.pageX;konami.iphone.stop_y=touch.pageY;konami.iphone.tap=false;konami.iphone.capture=false;konami.iphone.check_direction();}});konami.addEvent(document,"touchend",function(evt){if(konami.iphone.tap===true)konami.iphone.check_direction(link);},false);konami.addEvent(document,"touchstart",function(evt){konami.iphone.start_x=evt.changedTouches[0].pageX;konami.iphone.start_y=evt.changedTouches[0].pageY;konami.iphone.tap=true;konami.iphone.capture=true;});},check_direction:function(link){x_magnitude=Math.abs(this.start_x-this.stop_x);y_magnitude=Math.abs(this.start_y-this.stop_y);x=((this.start_x-this.stop_x)<0)?"RIGHT":"LEFT";y=((this.start_y-this.stop_y)<0)?"DOWN":"UP";result=(x_magnitude>y_magnitude)?x:y;result=(this.tap===true)?"TAP":result;if(result==this.keys[0])this.keys=this.keys.slice(1,this.keys.length);if(this.keys.length===0){this.keys=this.orig_keys;this.code(link);}}}};typeof callback==="string"&&konami.load(callback);if(typeof callback==="function"){konami.code=callback;konami.load();}
+                                  return konami;};
+    var easter_egg = new Konami(function() {alert('Potato is proud of you. :3')});
+    
     function filter() {
         var iframe = document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0];
         var quoteReg=/(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])/igm;
@@ -110,6 +116,7 @@ function main() {
             }
         });
     }
+    
     function modal(title, content, btns){
         var overlayObj = $('<div style="position: fixed;margin: auto;top: 0;left: 0;width: 100%;height: 100%;z-index: 209998;opacity: 0.9;filter: alpha(opacity=90);background-color: rgb(255,255,255);"></div>');
         var modalObj = $('<div class="xenOverlay" style="display: block;position: fixed;left: 50%;width: 600px;z-index:209999;margin-left: -300px;top: 50%;height: auto;"><form class="formOverlay xenForm animateClose"><div class="heading" id="redactor_modal_header">'+title+'</div><div id="redactor_modal_inner"><dl class="ctrlUnit"><div class="modal-inner-content"></div></dl><dl class="ctrlUnit submitUnit modal-btn-wrapper"></dl></div></form></div>');
@@ -185,7 +192,6 @@ function main() {
             }
         });
     }
-    
     
     //Emoji
     if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0 || $('input[value="Create Thread"]').length > 0) {
@@ -465,7 +471,7 @@ function main() {
                 cont.append(emoji);
                 emoji.click(function(){
                     var pp = iframe.getElementsByTagName('p');
-                    pp[pp.length -1].innerHTML = pp[pp.length -1].innerHTML + '<img src="' + emote + '">&nbsp;';
+                    pp[pp.length -1].innerHTML = pp[pp.length -1].innerHTML + ' <img src="' + emote + '"> ';
                 });	
             });
             btn.click(function(){
@@ -478,13 +484,16 @@ function main() {
                 btn.trigger('click');
             }
         });
-        $('div.emojiContainer:eq(3) img').each(function(ii){this.style.height="40px"});
-        $('div.emojiContainer:eq(4) img').each(function(ii){this.style.height="40px"});
-        $('div.emojiContainer:eq(5) img').each(function(ii){this.style.height="40px"});
+        $('div.emojiContainer:eq(3) img').each(function(ii){this.style.height="40px";});
+        $('div.emojiContainer:eq(4) img').each(function(ii){this.style.height="40px";});
+        $('div.emojiContainer:eq(5) img').each(function(ii){this.style.height="40px";});
         
         $("input.primary").first().click(function (){
             filter();
         });
+        var egg = $('<a href="javascript:void(0);"></a>');
+        egg.click(function(){alert('Magikarp used splash but nothing happened');});
+        $('#emojis-top').append(egg);
         
         //Rainbowify
         function tohex(decval) {
@@ -755,11 +764,13 @@ function main() {
             var iframe = document.getElementsByClassName('redactor_textCtrl')[0];
             var message = iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML;
             
+            message = message.replace(/(&nbsp;)/gi, ' ');
+            
             var quotereg = /(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])|(\[SPOILER\]?[\s\S]*?\[\/SPOILER\])/igm;
             var imgregex = /(\<img([\s\S]*?)\>)/igm;
             var linkregex= /(\<a([\s\S]*?)<\/a\>)/igm;
-            var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^<▓▒╗╞§>╢]+)/igm;
-            var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S]+))|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\:P/igm;         
+            var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^ @&<▓▒╗╞§>╢]+)/igm;
+            var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S][^ @&<▓▒╗╞§>╢]+))|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\:P/igm;         
             var emojir = /\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|(o\.O)|(O\.o)|(O_o)|(o_O)/gm;
             var quoterest = /(\[color=#[\w\d]+\]╞\[\/color\])/im;
             var imgrest = /(\[color=#[\w\d]+\]§\[\/color\])/im;
@@ -767,19 +778,25 @@ function main() {
             var urlrest = /(\[color=#[\w\d]+\]▒\[\/color\])/im;
             var tagrest = /(\[color=#[\w\d]+\]▓\[\/color\])/im;
             var emojirest = /(\[color=#[\w\d]+\]╢\[\/color\])/im;
-            
+            console.log(message);
             var quotes = message.match(quotereg);
             message = message.replace(quotereg, '╞');
+            console.log(message);
             var imgs = message.match(imgregex);      
             message = message.replace(imgregex, "§");
+            console.log(message);
             var links = message.match(linkregex);
             message = message.replace(linkregex, "╗");
+            console.log(message);
             var urls = message.match(urlregex);
             message = message.replace(urlregex, "▒");
+            console.log(message);
             var misc = message.match(regex);
             message = message.replace(regex, "▓");
+            console.log(message);
             var emojis = message.match(emojir);
             message = message.replace(emojir, "╢");
+            console.log(message);
             
             message = MakeSFX(message, false);
             
@@ -792,21 +809,27 @@ function main() {
             
             for (var a = 0 ; a < numQuot; a++) {
                 message = message.replace(quoterest, quotes[a]);
+                console.log(message);
             }
             for (var b = 0; b < numImgs; b++) {
                 message = message.replace(imgrest, imgs[b]);
+                console.log(message);
             }
             for (var c = 0; c < numLink; c++) {
                 message = message.replace(linkrest, links[c]);
+                console.log(message);
             }
             for (var d = 0; d < numUrls; d++) {
                 message = message.replace(urlrest, /*" <a href=\"" +*/urls[d]/*+ "\">" +urls[d]+ "</a> "*/);
+                console.log(message);
             }
             for (var e = 0; e < numMisc; e++) {
                 message = message.replace(tagrest, misc[e]);
+                console.log(message);
             }
             for (var f = 0; f < numEmoj; f++) {
                 message = message.replace(emojirest, emojis[f]);
+                console.log(message);
             }
             iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = message;
         }
