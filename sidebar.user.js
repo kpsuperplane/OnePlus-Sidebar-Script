@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.5.1
+// @version      2.5.2
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -21,16 +21,18 @@ function addJQuery(callback) {
     document.body.appendChild(script);
 }
 function main() {
+    
     var Konami=function(callback){var konami={addEvent:function(obj,type,fn,ref_obj){if(obj.addEventListener)
         obj.addEventListener(type,fn,false);else if(obj.attachEvent){obj["e"+type+fn]=fn;obj[type+fn]=function(){obj["e"+type+fn](window.event,ref_obj);};obj.attachEvent("on"+type,obj[type+fn]);}},input:"",pattern:"38384040373937396665",load:function(link){this.addEvent(document,"keydown",function(e,ref_obj){if(ref_obj)konami=ref_obj;konami.input+=e?e.keyCode:event.keyCode;if(konami.input.length>konami.pattern.length)
             konami.input=konami.input.substr((konami.input.length-konami.pattern.length));if(konami.input==konami.pattern){konami.code(link);konami.input="";e.preventDefault();return false;}},this);this.iphone.load(link);},code:function(link){window.location=link;},iphone:{start_x:0,start_y:0,stop_x:0,stop_y:0,tap:false,capture:false,orig_keys:"",keys:["UP","UP","DOWN","DOWN","LEFT","RIGHT","LEFT","RIGHT","TAP","TAP"],code:function(link){konami.code(link);},load:function(link){this.orig_keys=this.keys;konami.addEvent(document,"touchmove",function(e){if(e.touches.length==1&&konami.iphone.capture===true){var touch=e.touches[0];konami.iphone.stop_x=touch.pageX;konami.iphone.stop_y=touch.pageY;konami.iphone.tap=false;konami.iphone.capture=false;konami.iphone.check_direction();}});konami.addEvent(document,"touchend",function(evt){if(konami.iphone.tap===true)konami.iphone.check_direction(link);},false);konami.addEvent(document,"touchstart",function(evt){konami.iphone.start_x=evt.changedTouches[0].pageX;konami.iphone.start_y=evt.changedTouches[0].pageY;konami.iphone.tap=true;konami.iphone.capture=true;});},check_direction:function(link){x_magnitude=Math.abs(this.start_x-this.stop_x);y_magnitude=Math.abs(this.start_y-this.stop_y);x=((this.start_x-this.stop_x)<0)?"RIGHT":"LEFT";y=((this.start_y-this.stop_y)<0)?"DOWN":"UP";result=(x_magnitude>y_magnitude)?x:y;result=(this.tap===true)?"TAP":result;if(result==this.keys[0])this.keys=this.keys.slice(1,this.keys.length);if(this.keys.length===0){this.keys=this.orig_keys;this.code(link);}}}};typeof callback==="string"&&konami.load(callback);if(typeof callback==="function"){konami.code=callback;konami.load();}
                                   return konami;};
-    var easter_egg = new Konami(function() {alert('Potato is proud of you. :3')});
+    var easter_egg = new Konami(function() {alert('Potato is proud of you. :3');});
     
     function filter() {
-        var iframe = document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0];
+        var iframe = $('iframe.redactor_textCtrl').contents().find("body");
+        var message = iframe.html();
+        message = message.replace(/\[ATTACH(=full)?\](\d{1,6})\[\/ATTACH\]/igm, "<img src=\"https://forums.oneplus.net/attachments/$2\">");
         var quoteReg=/(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])/igm;
-        var message = iframe.innerHTML;
         var misc = message.match(quoteReg);
         var numMisc = (misc === null) ? 0 : misc.length;
         message = message.replace(quoteReg, "▓");
@@ -64,7 +66,16 @@ function main() {
         for (var i = 0; i < numMisc; i++) {
             message = message.replace(/▓/im, misc[i]);
         }
-        iframe.innerHTML=message;   
+        iframe.html(message);   
+    }
+    function attToImg(){
+        var att = $("a:contains('View attachment')");
+        for(var i = 0; i<att.length;i++){
+            var a = att[i].toString();
+            console.log(a);
+            var a2 = $("a[href='"+a+"']");
+            a2.replaceWith("<img src="+a+">");
+        }
     }
     function update(manual) {
         var re;
@@ -195,7 +206,7 @@ function main() {
     
     //Emoji
     if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0 || $('input[value="Create Thread"]').length > 0) {
-        var iframe = document.getElementsByClassName('redactor_textCtrl')[0].contentWindow.document.getElementsByTagName('body')[0];
+        var iframe = $('iframe.redactor_textCtrl').contents().find("body");
         
         var c = [
             'http://i.imgur.com/s2mnHPj.png','http://i.imgur.com/xQEgir2.png','http://i.imgur.com/uQKnAHL.png','http://i.imgur.com/77QKaCF.png','http://i.imgur.com/aEIFMOD.png',
@@ -470,8 +481,8 @@ function main() {
                 var emoji = $('<a href="javascript:void(0);" class="mceSmilieSprite"><img src="'+emote+'"/></a>');
                 cont.append(emoji);
                 emoji.click(function(){
-                    var pp = iframe.getElementsByTagName('p');
-                    pp[pp.length -1].innerHTML = pp[pp.length -1].innerHTML + ' <img src="' + emote + '"> ';
+                    var pp = $('iframe.redactor_textCtrl').contents().find("body").find('p').last();
+                    pp.html(pp.html() + ' <img src="' + emote + '"> ');
                 });	
             });
             btn.click(function(){
@@ -761,8 +772,8 @@ function main() {
         
         function rainbow() {
             filter();
-            var iframe = document.getElementsByClassName('redactor_textCtrl')[0];
-            var message = iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML;
+            var iframe = $('iframe.redactor_textCtrl').contents().find("body");
+            var message = iframe.html();
             
             message = message.replace(/(&nbsp;)/gi, ' ');
             
@@ -831,7 +842,7 @@ function main() {
                 message = message.replace(emojirest, emojis[f]);
                 console.log(message);
             }
-            iframe.contentWindow.document.getElementsByTagName('body')[0].innerHTML = message;
+            iframe.html(message);
         }
         
         //Add rainbow button
@@ -999,6 +1010,8 @@ function main() {
             }
             checkAlerts = !checkAlerts;
         }
+        //Turn attachments to images
+        attToImg();        
         
         //Quick PM
         var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" style="font-size:11px;padding:5px;height:auto;line-height:12px;margin-top:5px;" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
