@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.5.2
+// @version      2.5.3
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -891,6 +891,7 @@ function main() {
             });
             this.content = this.wrapper.find('.custom-inner');
             this.clear = function(){this.content.html('');};
+            this.custom = function(html){this.content.html(html);};
             this.add = function(elem, callback) {
                 this.content.append(elem);
                 elem.wrap('<li></li>');
@@ -1010,6 +1011,15 @@ function main() {
             }
             checkAlerts = !checkAlerts;
         }
+        
+        //get rid of big picture if there
+        if($(".sidebar img[src*='content.oneplus.net/media']").length > 0){
+            var picture = new sidebar("News");
+            picture.custom("<div id='picture'></div>");
+            $(".sidebar img[src*='content.oneplus.net/media']").parent().parent().insertAfter($("#picture"));
+        }
+        
+        
         //Turn attachments to images
         attToImg();        
         
@@ -1045,6 +1055,12 @@ function main() {
         $('#widget-11 .widget_header_small').click(function(){
             location.href = "/forums/"; 
         });
+        $('#widget-11 ul.xenforo-list-2cols').append(
+            "<li><a href=\"/forums/oxygenos/\">OxygenOS</a></li><li><a href=\"/forums/accessories/\">Accessories</a></li><li><a href=\"/forums/introduce-yourself/\">Introduce Yourself</a></li>");
+        $('#widget-11 ul.xenforo-list-2cols li:eq(0)').after("<li><a href=\"/forums/contests/\">Contests</a></li>");
+        $("#widget-11 ul.xenforo-list-2cols li:eq(7)").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(2)"));
+        $("#widget-11 ul.xenforo-list-2cols li:eq(8)").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(5)"));
+        $("#widget-11 ul.xenforo-list-2cols li:eq(8)").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(6)"));
         $(window).scroll(function(){
             if($(window).scrollTop() > $('#top').offset().top-40){
                 if($(window).scrollTop() + $('.sidebar')[0].scrollHeight + 160 > $(document).height() - 286){
