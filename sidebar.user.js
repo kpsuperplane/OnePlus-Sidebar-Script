@@ -8,6 +8,7 @@
 // @grant        none
 // @license      MIT License; http://opensource.org/licenses/MIT
 // ==/UserScript==
+//MOD CHECKING IS IN QUICK LINKS
 //ADD JQUERY SCRIPT ADAPTED FROM https://gist.github.com/eristoddle/4440713
 sidebarVersion = GM_info.script.version;
 function addJQuery(callback) {
