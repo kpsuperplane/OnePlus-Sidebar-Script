@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.5.3
+// @version      2.5.5
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -980,6 +980,68 @@ function main() {
         quickLinks.add($('<a href="/account/likes">Likes Received</a>'));
         quickLinks.add($('<a href="/account/avatar">Change Avatar</a>'));
         quickLinks.add($('<a href="#" onClick="return false;" id="ninjaTextBtn">View Ninja Text</a>'));
+		quickLinks.add($('<a href="javascript:void(0);">Tag mods</a>'), function(elem) {
+            elem.click(function() {
+                var offline = ["@Andrew Z", "@An.I.Am", "@Cervantes", "@domi39", "@elkolonel", "@domifer", "@Gerardo Miele", "@GregOrevo", "@Hanson Lee", "@Garzla", "@Jevoly", "@Lucy L", "@kovalski", "@moonwitch", "@muddy46", "@NeverSettle", "@mcsememo", "@Noel", "@oalexander", "@pizdek", "@puma95", "@Robert W", "@saimon", "@script", "@Seijmo", "@So_ony", "@thedocbob", "@thepanttherlady", "@Viljanteri", "@ZIoTibia"];
+                
+                var newOffline = [];
+                
+                var mods = [{id: 19, name: "@Adam Krisko"}, {id: 26837, name: "@AlexGuroff"}, {id: 21293, name: "@BeAlive75"}, {id: 20674, name: "@BrettPlusOne"}, {id: 1354, name: "@Chinda"}, {id: 51241, name: "@Chris05"}, {id: 66944, name: "@Dexter Morgan"}, {id: 42948, name: "@DRCH"}, {id: 36247, name: "@drmartin"}, {id: 1507, name: "@dsmonteiro"}, {id: 6897, name: "@Fabio.Mar"}, {id: 9492, name: "@finaldentiny"}, {id: 2587, name: "@Hige"}, {id: 29429, name: "@inffy"}, {id: 2097, name: "@izaka"}, {id: 1502, name: "@J0han"}, {id: 3594, name: "@kaptainen"}, {id: 103473, name: "@kp1234"}, {id: 4541, name: "@maccamania"}, {id: 22710, name: "@Maica"}, {id: 515, name: "@Mark Falsing"}, {id: 25748, name: "@Martin Hotmann"}, {id: 115324, name: "@Mike9966"}, {id: 1021, name: "@nguser"}, {id: 11401, name: "@nirgale"}, {id: 151804, name: "@pablofg1978"}, {id: 3187, name: "@pablomoreno"}, {id: 20124, name: "@Plenkske"}, {id: 59953, name: "@PLPeeters"}, {id: 185495, name: "@Ponds186"}, {id: 19254, name: "@Pringles"}, {id: 1621, name: "@Rahul"}, {id: 645, name: "@ram gupta"}, {id: 4980, name: "@ravi4ever"}, {id: 3167, name: "@RubixRae"}, {id: 1783, name: "@Sam_in_PGH"}, {id: 41614, name: "@Sergiorodrigues1974"}, {id: 5567, name: "@Skizz"}, {id: 71200, name: "@sp99"}, {id: 981, name: "@Sparkolo"}, {id: 4701, name: "@stfsad"}, {id: 3234, name: "@Vinkel"}, {id: 2404, name: "@viraaj11"}, {id: 11423, name: "@Waterdroid"}, {id: 5826, name: "@wtfhsf"}, {id: 7504, name: "@xaser240"}, {id: 37378, name: "@youbi"}];
+                
+                var done = 0;
+                
+                var online = [];
+                
+                var baseUrl1 = "https://forums.oneplus.net/members/";
+                var baseUrl2 = "/?card=1&_xfNoRedirect=1&_xfToken=";
+                var baseUrl3 = "&_xfResponseType=json";
+                
+                function finished() {
+                    var onlines = "";
+                    for(var i = 0; i < online.length; i++) {
+                        onlines += online[i] + " ";
+                    }
+                    alert(onlines + "should be online and have been inserted in your post. Go post :3");
+                    $('iframe.redactor_textCtrl').contents().find("body").html($('iframe.redactor_textCtrl').contents().find("body").html() + onlines);
+                }
+                
+                var checkDone = setInterval(function(){
+                    if (done == mods.length) {
+                        console.log("Finished mods");
+                        finished();
+                        clearInterval(checkDone);
+                    }
+                }, 300);
+                
+                for (var x = 0; x < mods.length; x++) {
+                    try {
+                        var token = document.getElementsByName('_xfToken')[0].getAttribute('value');
+                        $.get(baseUrl1 + mods[x].id + baseUrl2 + token + baseUrl3,
+                            function (data) {
+                                var ap;
+                                var name;
+                                try {
+                                    ap = (data.templateHtml.match(/data-diff="(\d+)"/igm)[0].match(/\d+/igm)[0]) / 60;
+                                    name = data.templateHtml.match(/dir="auto">(.*?)<\/a>/igm)[0].match(/>(.*?)</)[0];
+                                    name = name.substring(1, name.length - 1);
+                                    console.log("@" + name + " was seen " + (ap) + " minutes ago.");
+                                    if (ap < 11) online.push("@" + name);
+                                } catch (e) {
+                                    name = data.templateHtml.match(/dir="auto">(.*?)<\/a>/igm)[0].match(/>(.*?)</)[0];
+                                    name = name.substring(1, name.length - 1);
+                                    console.log("ERRR" + name);
+                                    newOffline.push("@" + name);
+                                }
+                                done++;
+                            }
+                        );
+                    } catch (e) {
+                        console.log("err");
+                    }
+                }
+            });
+        });
+        
         
         ninjaTextBtn.addEventListener("click",function(){
             ninja();
