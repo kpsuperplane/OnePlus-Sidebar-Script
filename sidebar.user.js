@@ -102,7 +102,7 @@ function main() {
                                 location.href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/raw/master/sidebar.user.js";
                                 setTimeout(function(){
                                     location.reload(true);
-                                }, 1000);
+                                }, 3000);
                             }
                         },
                         'Not Now': {
