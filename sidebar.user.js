@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.7.3
+// @version      2.7.4
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -17,7 +17,12 @@ function addJQuery(callback) {
     else {
         $('<style type="text/css"></style').text('.emoji-active{background:#EEE !important;color:#333 !important;font-weight:bold !important;}#emojis-top a{display: inline-block;padding: 5px 10px 5px;border-radius: 5px;margin-right: 5px;text-decoration: none;}#emojis-top a:hover {background: #EEE;}.mceSmilieSprite{display:inline-block;margin-right:5px;margin-bottom:5px;height:25px;width:auto;transform:scale(1);-webkit-transform:scale(1);transition:200ms;}#emojis .mceSmilieSprite:hover{transform:scale(1.3);-webkit-transform:scale(1.3);}.mceSmilieSprite img{display:inline-block;margin:0px;padding:0px;height:100%;width:auto;}.xenOverlay .xenForm.animateClose{-webkit-transition:300ms cubic-bezier(0.215,.61,.355,1);transition:300ms cubic-bezier(0.215,.61,.355,1);opacity:0;-webkit-transform: scale(0.9,0.9);transform: scale(0.9,0.9);}.xenOverlay .xenForm.animateClose.open{opacity:1;-webkit-transform: scale(1,1);transform: scale(1,1);}.xenOverlay .xenForm{border-radius:3px;box-shadow:0px 0px 600px #000;border-style:none;background:#151515 !important;}.xenOverlay .formOverlay .heading {color: #FFF;background: transparent;padding-left: 0px;border-style:none;}').appendTo('head');    }
     var script = document.createElement("script");
-    script.textContent = "(" + callback.toString() + ")();";
+	var scriptData = callback.toString();
+	var position = scriptData.indexOf("{")+1;
+	scriptData = [scriptData.slice(0, position), 'var sidebarVersion = "'+sidebarVersion+'";', scriptData.slice(position)].join('');
+	//
+	console.log(scriptData);
+    script.textContent = "(" + scriptData + ")();";
     document.body.appendChild(script);
 }
 function main() {
