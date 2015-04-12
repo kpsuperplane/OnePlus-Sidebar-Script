@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.7.4
+// @version      2.7.5
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -17,23 +17,23 @@ function addJQuery(callback) {
     else {
         $('<style type="text/css"></style').text('.emoji-active{background:#EEE !important;color:#333 !important;font-weight:bold !important;}#emojis-top a{display: inline-block;padding: 5px 10px 5px;border-radius: 5px;margin-right: 5px;text-decoration: none;}#emojis-top a:hover {background: #EEE;}.mceSmilieSprite{display:inline-block;margin-right:5px;margin-bottom:5px;height:25px;width:auto;transform:scale(1);-webkit-transform:scale(1);transition:200ms;}#emojis .mceSmilieSprite:hover{transform:scale(1.3);-webkit-transform:scale(1.3);}.mceSmilieSprite img{display:inline-block;margin:0px;padding:0px;height:100%;width:auto;}.xenOverlay .xenForm.animateClose{-webkit-transition:300ms cubic-bezier(0.215,.61,.355,1);transition:300ms cubic-bezier(0.215,.61,.355,1);opacity:0;-webkit-transform: scale(0.9,0.9);transform: scale(0.9,0.9);}.xenOverlay .xenForm.animateClose.open{opacity:1;-webkit-transform: scale(1,1);transform: scale(1,1);}.xenOverlay .xenForm{border-radius:3px;box-shadow:0px 0px 600px #000;border-style:none;background:#151515 !important;}.xenOverlay .formOverlay .heading {color: #FFF;background: transparent;padding-left: 0px;border-style:none;}').appendTo('head');    }
     var script = document.createElement("script");
-	var scriptData = callback.toString();
-	var position = scriptData.indexOf("{")+1;
-	scriptData = [scriptData.slice(0, position), 'var sidebarVersion = "'+sidebarVersion+'";', scriptData.slice(position)].join('');
-	//
-	console.log(scriptData);
+    var scriptData = callback.toString();
+    var position = scriptData.indexOf("{")+1;
+    scriptData = [scriptData.slice(0, position), 'var sidebarVersion = "'+sidebarVersion+'";', scriptData.slice(position)].join('');
+    //
+    console.log(scriptData);
     script.textContent = "(" + scriptData + ")();";
     document.body.appendChild(script);
 }
 function main() {
-	/*!
+    /*!
 	 * jQuery Cookie Plugin v1.4.1
 	 * https://github.com/carhartl/jquery-cookie
 	 *
 	 * Copyright 2006, 2014 Klaus Hartl
 	 * Released under the MIT license
 	 */
-	 !function(e){"function"==typeof define&&define.amd?define(["jquery"],e):"object"==typeof exports?module.exports=e(require("jquery")):e(jQuery)}(function(e){function n(e){return u.raw?e:encodeURIComponent(e)}function o(e){return u.raw?e:decodeURIComponent(e)}function i(e){return n(u.json?JSON.stringify(e):String(e))}function t(e){0===e.indexOf('"')&&(e=e.slice(1,-1).replace(/\\"/g,'"').replace(/\\\\/g,"\\"));try{return e=decodeURIComponent(e.replace(c," ")),u.json?JSON.parse(e):e}catch(n){}}function r(n,o){var i=u.raw?n:t(n);return e.isFunction(o)?o(i):i}var c=/\+/g,u=e.cookie=function(t,c,s){if(arguments.length>1&&!e.isFunction(c)){if(s=e.extend({},u.defaults,s),"number"==typeof s.expires){var a=s.expires,d=s.expires=new Date;d.setMilliseconds(d.getMilliseconds()+864e5*a)}return document.cookie=[n(t),"=",i(c),s.expires?"; expires="+s.expires.toUTCString():"",s.path?"; path="+s.path:"",s.domain?"; domain="+s.domain:"",s.secure?"; secure":""].join("")}for(var f=t?void 0:{},p=document.cookie?document.cookie.split("; "):[],l=0,m=p.length;m>l;l++){var x=p[l].split("="),g=o(x.shift()),j=x.join("=");if(t===g){f=r(j,c);break}t||void 0===(j=r(j))||(f[g]=j)}return f};u.defaults={},e.removeCookie=function(n,o){return e.cookie(n,"",e.extend({},o,{expires:-1})),!e.cookie(n)}});
+    !function(e){"function"==typeof define&&define.amd?define(["jquery"],e):"object"==typeof exports?module.exports=e(require("jquery")):e(jQuery)}(function(e){function n(e){return u.raw?e:encodeURIComponent(e)}function o(e){return u.raw?e:decodeURIComponent(e)}function i(e){return n(u.json?JSON.stringify(e):String(e))}function t(e){0===e.indexOf('"')&&(e=e.slice(1,-1).replace(/\\"/g,'"').replace(/\\\\/g,"\\"));try{return e=decodeURIComponent(e.replace(c," ")),u.json?JSON.parse(e):e}catch(n){}}function r(n,o){var i=u.raw?n:t(n);return e.isFunction(o)?o(i):i}var c=/\+/g,u=e.cookie=function(t,c,s){if(arguments.length>1&&!e.isFunction(c)){if(s=e.extend({},u.defaults,s),"number"==typeof s.expires){var a=s.expires,d=s.expires=new Date;d.setMilliseconds(d.getMilliseconds()+864e5*a)}return document.cookie=[n(t),"=",i(c),s.expires?"; expires="+s.expires.toUTCString():"",s.path?"; path="+s.path:"",s.domain?"; domain="+s.domain:"",s.secure?"; secure":""].join("")}for(var f=t?void 0:{},p=document.cookie?document.cookie.split("; "):[],l=0,m=p.length;m>l;l++){var x=p[l].split("="),g=o(x.shift()),j=x.join("=");if(t===g){f=r(j,c);break}t||void 0===(j=r(j))||(f[g]=j)}return f};u.defaults={},e.removeCookie=function(n,o){return e.cookie(n,"",e.extend({},o,{expires:-1})),!e.cookie(n)}});
     var Konami=function(callback){var konami={addEvent:function(obj,type,fn,ref_obj){if(obj.addEventListener)
         obj.addEventListener(type,fn,false);else if(obj.attachEvent){obj["e"+type+fn]=fn;obj[type+fn]=function(){obj["e"+type+fn](window.event,ref_obj);};obj.attachEvent("on"+type,obj[type+fn]);}},input:"",pattern:"38384040373937396665",load:function(link){this.addEvent(document,"keydown",function(e,ref_obj){if(ref_obj)konami=ref_obj;konami.input+=e?e.keyCode:event.keyCode;if(konami.input.length>konami.pattern.length)
             konami.input=konami.input.substr((konami.input.length-konami.pattern.length));if(konami.input==konami.pattern){konami.code(link);konami.input="";e.preventDefault();return false;}},this);this.iphone.load(link);},code:function(link){window.location=link;},iphone:{start_x:0,start_y:0,stop_x:0,stop_y:0,tap:false,capture:false,orig_keys:"",keys:["UP","UP","DOWN","DOWN","LEFT","RIGHT","LEFT","RIGHT","TAP","TAP"],code:function(link){konami.code(link);},load:function(link){this.orig_keys=this.keys;konami.addEvent(document,"touchmove",function(e){if(e.touches.length==1&&konami.iphone.capture===true){var touch=e.touches[0];konami.iphone.stop_x=touch.pageX;konami.iphone.stop_y=touch.pageY;konami.iphone.tap=false;konami.iphone.capture=false;konami.iphone.check_direction();}});konami.addEvent(document,"touchend",function(evt){if(konami.iphone.tap===true)konami.iphone.check_direction(link);},false);konami.addEvent(document,"touchstart",function(evt){konami.iphone.start_x=evt.changedTouches[0].pageX;konami.iphone.start_y=evt.changedTouches[0].pageY;konami.iphone.tap=true;konami.iphone.capture=true;});},check_direction:function(link){x_magnitude=Math.abs(this.start_x-this.stop_x);y_magnitude=Math.abs(this.start_y-this.stop_y);x=((this.start_x-this.stop_x)<0)?"RIGHT":"LEFT";y=((this.start_y-this.stop_y)<0)?"DOWN":"UP";result=(x_magnitude>y_magnitude)?x:y;result=(this.tap===true)?"TAP":result;if(result==this.keys[0])this.keys=this.keys.slice(1,this.keys.length);if(this.keys.length===0){this.keys=this.orig_keys;this.code(link);}}}};typeof callback==="string"&&konami.load(callback);if(typeof callback==="function"){konami.code=callback;konami.load();}
@@ -507,6 +507,7 @@ function main() {
                 btn.trigger('click');
             }
         });
+
         $('div.emojiContainer:eq(3) img').each(function(ii){this.style.height="40px";});
         $('div.emojiContainer:eq(4) img').each(function(ii){this.style.height="40px";});
         $('div.emojiContainer:eq(5) img').each(function(ii){this.style.height="40px";});
@@ -514,123 +515,21 @@ function main() {
         $("input.primary").first().click(function (){
             filter();
         });
+
         var egg = $('<a href="javascript:void(0);"></a>');
         egg.click(function(){alert('Magikarp used splash but nothing happened');});
         $('#emojis-top').append(egg);
 
         //Rainbowify
-        function tohex(decval) {
-            var l, h;
-            var str = "";
-            l = Math.floor(decval % 16);
-            h = Math.floor(decval / 16);
-            if (h < 10) {
-                str = "" + h;
-            }
-            if (h > 9) {
-                switch (h) {
-                    case 10:
-                        str = "A";
-                        break;
-                    case 11:
-                        str = "B";
-                        break;
-                    case 12:
-                        str = "C";
-                        break;
-                    case 13:
-                        str = "D";
-                        break;
-                    case 14:
-                        str = "E";
-                        break;
-                    case 15:
-                        str = "F";
-                        break;
-                    default:
-                        str = "X";
-                        break;
-                }
-            }
-            if (l < 10) {
-                str = str + "" + l;
-            }
-            if (l > 9) {
-                switch (l) {
-                    case 10:
-                        str += "A";
-                        break;
-                    case 11:
-                        str += "B";
-                        break;
-                    case 12:
-                        str += "C";
-                        break;
-                    case 13:
-                        str += "D";
-                        break;
-                    case 14:
-                        str += "E";
-                        break;
-                    case 15:
-                        str += "F";
-                        break;
-                    default:
-                        str += "X";
-                        break;
-                }
-            }
-            return str;
+        function tohex(dec) {
+            var hexString = Math.round(dec).toString(16);
+            if (hexString.length == 1)
+                hexString = "0" + hexString;
+            return hexString.toUpperCase()
         }
 
-        function todec(hexval) {
-            var l, h;
-            hexstr = new String(hexval).toUpperCase();
-            switch (hexstr.charAt(0)) {
-                case "A":
-                    h = 10;
-                    break;
-                case "B":
-                    h = 11;
-                    break;
-                case "C":
-                    h = 12;
-                    break;
-                case "D":
-                    h = 13;
-                    break;
-                case "E":
-                    h = 14;
-                    break;
-                case "F":
-                    h = 15;
-                    break;
-                default:
-                    h = eval(hexstr.charAt(0));
-            }
-            switch (hexstr.charAt(1)) {
-                case "A":
-                    l = 10;
-                    break;
-                case "B":
-                    l = 11;
-                    break;
-                case "C":
-                    l = 12;
-                    break;
-                case "D":
-                    l = 13;
-                    break;
-                case "E":
-                    l = 14;
-                    break;
-                case "F":
-                    l = 15;
-                    break;
-                default:
-                    l = eval(hexstr.charAt(1));
-            }
-            return l + 16 * h;
+        function todec(hex){
+            return parseInt(hex, 16);
         }
 
         function hexToRGB(hexval) {
@@ -1116,35 +1015,35 @@ function main() {
             clicked: function(){getAlertInfo();}
         });
 
-		//Lollipop
-		var lollipopBtn = {
-			wrapper: $('<form action="account/toggle-visibility" method="post" class="AutoValidator visibilityForm"><label><input type="checkbox" name="visible" value="1">Lollipop!</label></form>'),
-			style : $('<style type="text/css"></style>'),
-			css :'#content>.pageWidth>.pageContent {background: transparent !important;}.PageNav .scrollable {margin-top: -5px !important;padding: 5px 0px !important;}.PageNav a, .itemPageNav a {background: transparent !important;border-style: none !important;box-shadow: none !important;color: #344 !important;margin-top: -2px !important;padding: 4px !important;transition: all 200ms !important; width:19px !important; letter-spacing: 0.2px!important;font-size:12px;}body .itemPageNav a{width:auto !important;}.PageNav a.currentPage {color: rgb(235,0,40) !important;font-weight: bold !important;}.PageNav a:hover, .itemPageNav a:hover {background: rgb(235,0,40) !important;box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 2px 0px, rgba(0, 0, 0, 0.239216) 0px 2px 4px 0px !important;color: #FFF !important;}.mainContent {background: #FFF !important;border-radius: 2px !important;box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 2px 0px, rgba(0, 0, 0, 0.239216) 0px 2px 4px 0px !important;padding: 20px !important;}.navPopup,#AccountMenu {border-style: none !important;box-shadow: rgb(229, 229, 229) 0px -4px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 8px 0px, rgba(0, 0, 0, 0.239216) 0px 8px 16px 0px  !important;}.neversettle-image {background-image: none !important;}.redbutton .inner, input[type="submit"], button, .button {box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 2px 0px, rgba(0, 0, 0, 0.239216) 0px 2px 4px 0px !important;transition: all 200ms !important;}.redbutton .inner:hover, input[type="submit"]:hover, button:hover, .button:hover {box-shadow: rgb(229, 229, 229) 0px -2px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 4px 0px, rgba(0, 0, 0, 0.239216) 0px 4px 8px 0px !important;}.sidebar .secondaryContent {background: transparent !important;border-style: none !important;padding: 0px !important;}.sidebar .section {border-radius: 2px !important;box-shadow: none !important;margin: 0px !important;margin-top: 20px !important;opacity: 0.8 !important;padding: 5px 10px 10px 5px !important;transition: all 200ms !important;}.sidebar .section:hover {background: #FFF !important;box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 2px 0px, rgba(0, 0, 0, 0.239216) 0px 2px 4px 0px !important;box-sizing: content-box !important;margin-bottom: 5px !important;margin-left: -5px !important;margin-top: 15px !important;opacity: 1 !important;padding: 10px !important;}.sidebar .section:hover a {color: rgb(235,0,40) !important;}.sidebar a {color: #444 !important;transition: all 200ms !important;}.sticky-wrapper>#header-sticky, .sticky-wrapper>#header-sticky.stuck {background-color: #FFF !important;box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 2px 0px, rgba(0, 0, 0, 0.239216) 0px 2px 4px 0px  !important;padding-bottom: 6px !important;position: fixed !important;top: 0 !important;width: 100% !important;}body {background: rgb(240, 240, 240) !important;}header {height: auto !important;}'
-		};
-		lollipopBtn.style.appendTo('head');
-		if($.cookie('lollipop') == 'undefined'){
-			$.cookie('lollipop', 'false', { expires: 60 * 1000 });
-		}
-		$('.col2.blockLinksList').first().append(lollipopBtn.wrapper);
-		lollipopBtn.inner = lollipopBtn.wrapper.find('input').first();
-		if($.cookie('lollipop') == 'false'){
-			lollipopBtn.inner.prop('checked', false);
-			lollipopBtn.style.html('');
-		}else{
-			lollipopBtn.inner.prop('checked', true);
-			lollipopBtn.style.html(lollipopBtn.css);
-		}
-		lollipopBtn.inner.click(function(){
-			if(lollipopBtn.inner.prop('checked') == false){
-				$.cookie('lollipop', 'false', { expires: 60 * 1000 });
-				lollipopBtn.style.html('');
-			}else{
-				$.cookie('lollipop', 'true', { expires: 60 * 1000 });
-				lollipopBtn.style.html(lollipopBtn.css);
-			} 
-		});
-		
+        //Lollipop
+        var lollipopBtn = {
+            wrapper: $('<form action="account/toggle-visibility" method="post" class="AutoValidator visibilityForm"><label><input type="checkbox" name="visible" value="1">Lollipop!</label></form>'),
+            style : $('<style type="text/css"></style>'),
+            css :'#content>.pageWidth>.pageContent {background: transparent !important;}.PageNav .scrollable {margin-top: -5px !important;padding: 5px 0px !important;}.PageNav a, .itemPageNav a {background: transparent !important;border-style: none !important;box-shadow: none !important;color: #344 !important;margin-top: -2px !important;padding: 4px !important;transition: all 200ms !important; width:19px !important; letter-spacing: 0.2px!important;font-size:12px;}body .itemPageNav a{width:auto !important;}.PageNav a.currentPage {color: rgb(235,0,40) !important;font-weight: bold !important;}.PageNav a:hover, .itemPageNav a:hover {background: rgb(235,0,40) !important;box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 2px 0px, rgba(0, 0, 0, 0.239216) 0px 2px 4px 0px !important;color: #FFF !important;}.mainContent {background: #FFF !important;border-radius: 2px !important;box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 2px 0px, rgba(0, 0, 0, 0.239216) 0px 2px 4px 0px !important;padding: 20px !important;}.navPopup,#AccountMenu {border-style: none !important;box-shadow: rgb(229, 229, 229) 0px -4px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 8px 0px, rgba(0, 0, 0, 0.239216) 0px 8px 16px 0px  !important;}.neversettle-image {background-image: none !important;}.redbutton .inner, input[type="submit"], button, .button {box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 2px 0px, rgba(0, 0, 0, 0.239216) 0px 2px 4px 0px !important;transition: all 200ms !important;}.redbutton .inner:hover, input[type="submit"]:hover, button:hover, .button:hover {box-shadow: rgb(229, 229, 229) 0px -2px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 4px 0px, rgba(0, 0, 0, 0.239216) 0px 4px 8px 0px !important;}.sidebar .secondaryContent {background: transparent !important;border-style: none !important;padding: 0px !important;}.sidebar .section {border-radius: 2px !important;box-shadow: none !important;margin: 0px !important;margin-top: 20px !important;opacity: 0.8 !important;padding: 5px 10px 10px 5px !important;transition: all 200ms !important;}.sidebar .section:hover {background: #FFF !important;box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 2px 0px, rgba(0, 0, 0, 0.239216) 0px 2px 4px 0px !important;box-sizing: content-box !important;margin-bottom: 5px !important;margin-left: -5px !important;margin-top: 15px !important;opacity: 1 !important;padding: 10px !important;}.sidebar .section:hover a {color: rgb(235,0,40) !important;}.sidebar a {color: #444 !important;transition: all 200ms !important;}.sticky-wrapper>#header-sticky, .sticky-wrapper>#header-sticky.stuck {background-color: #FFF !important;box-shadow: rgb(229, 229, 229) 0px -1px 0px 0px, rgba(0, 0, 0, 0.117647) 0px 0px 2px 0px, rgba(0, 0, 0, 0.239216) 0px 2px 4px 0px  !important;padding-bottom: 6px !important;position: fixed !important;top: 0 !important;width: 100% !important;}body {background: rgb(240, 240, 240) !important;}header {height: auto !important;}'
+        };
+        lollipopBtn.style.appendTo('head');
+        if($.cookie('lollipop') == 'undefined'){
+            $.cookie('lollipop', 'false', { expires: 60 * 1000 });
+        }
+        $('.col2.blockLinksList').first().append(lollipopBtn.wrapper);
+        lollipopBtn.inner = lollipopBtn.wrapper.find('input').first();
+        if($.cookie('lollipop') == 'false'){
+            lollipopBtn.inner.prop('checked', false);
+            lollipopBtn.style.html('');
+        }else{
+            lollipopBtn.inner.prop('checked', true);
+            lollipopBtn.style.html(lollipopBtn.css);
+        }
+        lollipopBtn.inner.click(function(){
+            if(lollipopBtn.inner.prop('checked') == false){
+                $.cookie('lollipop', 'false', { expires: 60 * 1000 });
+                lollipopBtn.style.html('');
+            }else{
+                $.cookie('lollipop', 'true', { expires: 60 * 1000 });
+                lollipopBtn.style.html(lollipopBtn.css);
+            } 
+        });
+
         //Alert Info
         var checkAlerts=true;
         function getAlertInfo() {
@@ -1235,7 +1134,7 @@ function main() {
         $("#widget-12 ul.xenforo-list-2cols li:eq(7)").insertBefore($("#widget-12 ul.xenforo-list-2cols li:eq(4)"));
         $("#widget-12 ul.xenforo-list-2cols li:eq(11)").insertBefore($("#widget-12 ul.xenforo-list-2cols li:eq(5)"));
         $("#widget-12 ul.xenforo-list-2cols li:eq(12)").insertBefore($("#widget-12 ul.xenforo-list-2cols li:eq(7)"));
-        
+
         $(window).scroll(function(){
             if($(window).scrollTop() > $('#top').offset().top-40){
                 if($(window).scrollTop() + $('.sidebar')[0].scrollHeight + 160 > $(document).height() - 286){
