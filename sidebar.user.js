@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.7.5
+// @version      2.7.6
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -493,8 +493,7 @@ function main() {
                 var emoji = $('<a href="javascript:void(0);" class="mceSmilieSprite"><img src="'+emote+'"/></a>');
                 cont.append(emoji);
                 emoji.click(function(){
-                    var pp = $('iframe.redactor_textCtrl').contents().find("body").find('p').last();
-                    pp.html(pp.html() + ' <img src="' + emote + '"> ');
+                    $('#ctrl_message_html').execCommand('inserthtml', '<img src="' + emote + '">');
                 });	
             });
             btn.click(function(){
@@ -525,7 +524,7 @@ function main() {
             var hexString = Math.round(dec).toString(16);
             if (hexString.length == 1)
                 hexString = "0" + hexString;
-            return hexString.toUpperCase()
+            return hexString.toUpperCase();
         }
 
         function todec(hex){
@@ -610,7 +609,7 @@ function main() {
 
             for (i = 0; i < j; i++) {
                 if (instr.charAt(i) == "<") in_tag = 1;
-                if (in_tag == 0) {
+                if (in_tag === 0) {
                     k = scale * i;
                     getSFXColor(k);
                     r = g_r;
@@ -630,17 +629,17 @@ function main() {
                         }
                     }
                     if (outputHTML) {
-                        if (i % res == 0) {
+                        if (i % res === 0) {
                             outstr = outstr + "<font color='#" + tempstr + "'>";
                             oignumi = 1;
                         }
                         outstr = outstr + temp;
-                        if ((i + 1) % res == 0) {
+                        if ((i + 1) % res === 0) {
                             outstr = outstr + "</font>";
                             oignumi = 0;
                         }
                     } else {
-                        if (i % res == 0) {
+                        if (i % res === 0) {
                             outstr = outstr + "[color=#" + tempstr + "]";
                             oignumi = 1;
                         }
@@ -666,7 +665,7 @@ function main() {
             var lum;
             ctl.style.backgroundColor = ctl.value;
             hexToRGB(ctl.value);
-            lum = .29 * g_r + .57 * g_g + .14 * g_b;
+            lum = 0.29 * g_r + 0.57 * g_g + 0.14 * g_b;
             if (lum < 96) {
                 ctl.style.color = "#FFFFFF";
             } else {
@@ -895,7 +894,7 @@ function main() {
             elem.click(function() {
                 var c = confirm("This is going send many http requests and is not recommended on slow internet.");
                 if(c){
-                    var offline = [{id: 720, name: "@Andrew Z"}, {id: 76118, name: "@Cervantes"}, {id: 67255, name: "@elkolonel"}, {id: 4428, name: "@domifer"}, {id: 2053, name: "@Gerardo Miele"}, {id: 1404, name: "@GregOrevo"}, {id: 1141, name: "@Hanson Lee"}, {id: 190760, name: "@kovalski"}, {id: 5675, name: "@moonwitch"}, {id: 4219, name: "@NeverSettle"}, {id: 139254, name: "@mcsememo"}, {id: 1039, name: "@Noel"}, {id: 11608, name: "@pizdek"}, {id: 1580, name: "@puma95"}, {id: 7, name: "@Robert W"}, {id: 5916, name: "@saimon"}, {id: 1678, name: "@Seijmo"}, {id: 37656, name: "@So_ony"}, {id: 15636, name: "@thepanttherlady"}, {id: 5691, name: "@Viljanteri"}];
+                    var offline = [{id: 720, name: "@Andrew Z"}, {id: 76118, name: "@Cervantes"}, {id: 67255, name: "@elkolonel"}, {id: 4428, name: "@domifer"}, {id: 2053, name: "@Gerardo Miele"}, {id: 1404, name: "@GregOrevo"}, {id: 1141, name: "@Hanson Lee"}, {id: 190760, name: "@kovalski"}, {id: 5675, name: "@moonwitch"}, {id: 4219, name: "@volteon"}, {id: 139254, name: "@mcsememo"}, {id: 1039, name: "@Noel"}, {id: 11608, name: "@pizdek"}, {id: 1580, name: "@puma95"}, {id: 7, name: "@Robert W"}, {id: 5916, name: "@saimon"}, {id: 1678, name: "@Seijmo"}, {id: 37656, name: "@So_ony"}, {id: 15636, name: "@thepanttherlady"}, {id: 5691, name: "@Viljanteri"}];
 
                     var semiOffline = [{id: 15177, name: "@An.I.Am"}, {id: 8619, name: "@Garzla"}, {id: 327804, name: "@Lucy L"}, {id: 1362, name: "@muddy46"}, {id: 25387, name: "@Jevoly"}, {id: 206057, name: "@oalexander"}, {id: 24503, name: "@thedocbob"}, {id: 326, name: "@script"}, {id: 248737, name: "@ZIoTibia"}];
 
