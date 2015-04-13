@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.7.6
+// @version      2.7.7
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -174,6 +174,7 @@ function main() {
         overlayObj.hide().appendTo('body').fadeIn(300);
         modalObj.find('.xenForm').addClass('open');
     }
+                       
     function quickPM(user) {
         var pm_title = $('<input id="title" class="textCtrl" type="text" style="width:50%;"/><br>');
         var pm_msg = $('<textarea id="message" class="textCtrl" style="height: 100px;resize: none;display:block;width:100%;"></textarea>');
@@ -215,6 +216,16 @@ function main() {
             }
         });
     }
+                       
+    // Control & enter to post
+    $(document).keypress(13,function(e) {
+        if(e.shiftKey){
+            $( "#QuickReply" ).submit();
+        }
+    });
+    $( "#QuickReply" ).submit(function( event ) {
+        event.preventDefault();
+    });
 
     //Emoji
     if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0 || $('input[value="Create Thread"]').length > 0) {
