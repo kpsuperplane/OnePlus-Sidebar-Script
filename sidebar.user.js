@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.8.2
+// @version      2.8.3
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -12,7 +12,7 @@
 $(document).ready(function () {
     if(GM_info === undefined)
         //MAKE SURE TO UPDATE THIS NUMBER
-        sidebarVersion = "2.8.2";
+        sidebarVersion = "2.8.3";
     else
         sidebarVersion = GM_info.script.version;
     
@@ -1298,6 +1298,7 @@ $(document).ready(function () {
             $("#widget-11 ul.xenforo-list-2cols li:eq(7)").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(2)"));
             $("#widget-11 ul.xenforo-list-2cols li:eq(8)").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(5)"));
             $("#widget-11 ul.xenforo-list-2cols li:eq(8)").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(6)"));
+            $("<li><a href=\"/forums/cyanogen-os-12/\">Cyanogen OS 12</a></li>").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(4)"));
             
             $('#widget-12 .widget_header_small').click(function(){
                 location.href = "/forums/#language.33"; 
