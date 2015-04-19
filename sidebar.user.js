@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.8.4
+// @version      2.8.5
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -12,10 +12,10 @@
 $(document).ready(function () {
     if(GM_info === undefined)
         //MAKE SURE TO UPDATE THIS NUMBER
-        sidebarVersion = "2.8.4";
+        sidebarVersion = "2.8.5";
     else
         sidebarVersion = GM_info.script.version;
-    
+
     function addJQuery(callback) {
         //Checks width for mobiles etc
         if ( $( document ).width() > 850){
@@ -45,7 +45,7 @@ $(document).ready(function () {
                 konami.input=konami.input.substr((konami.input.length-konami.pattern.length));if(konami.input==konami.pattern){konami.code(link);konami.input="";e.preventDefault();return false;}},this);this.iphone.load(link);},code:function(link){window.location=link;},iphone:{start_x:0,start_y:0,stop_x:0,stop_y:0,tap:false,capture:false,orig_keys:"",keys:["UP","UP","DOWN","DOWN","LEFT","RIGHT","LEFT","RIGHT","TAP","TAP"],code:function(link){konami.code(link);},load:function(link){this.orig_keys=this.keys;konami.addEvent(document,"touchmove",function(e){if(e.touches.length==1&&konami.iphone.capture===true){var touch=e.touches[0];konami.iphone.stop_x=touch.pageX;konami.iphone.stop_y=touch.pageY;konami.iphone.tap=false;konami.iphone.capture=false;konami.iphone.check_direction();}});konami.addEvent(document,"touchend",function(evt){if(konami.iphone.tap===true)konami.iphone.check_direction(link);},false);konami.addEvent(document,"touchstart",function(evt){konami.iphone.start_x=evt.changedTouches[0].pageX;konami.iphone.start_y=evt.changedTouches[0].pageY;konami.iphone.tap=true;konami.iphone.capture=true;});},check_direction:function(link){x_magnitude=Math.abs(this.start_x-this.stop_x);y_magnitude=Math.abs(this.start_y-this.stop_y);x=((this.start_x-this.stop_x)<0)?"RIGHT":"LEFT";y=((this.start_y-this.stop_y)<0)?"DOWN":"UP";result=(x_magnitude>y_magnitude)?x:y;result=(this.tap===true)?"TAP":result;if(result==this.keys[0])this.keys=this.keys.slice(1,this.keys.length);if(this.keys.length===0){this.keys=this.orig_keys;this.code(link);}}}};typeof callback==="string"&&konami.load(callback);if(typeof callback==="function"){konami.code=callback;konami.load();}
                                       return konami;};
         var easter_egg = new Konami(function() {alert('Potato is proud of you. :3');});
-        
+
         function filter() {
             var iframe = $('iframe.redactor_textCtrl').contents().find("body");
             var message = iframe.html();
@@ -80,7 +80,7 @@ $(document).ready(function () {
                 message = message.replace(em[x], li[x]);
                 console.log(message);
             }
-            
+
             for (var i = 0; i < numMisc; i++) {
                 message = message.replace(/▓/im, misc[i]);
             }
@@ -145,7 +145,7 @@ $(document).ready(function () {
                 }
             });
         }
-        
+
         function modal(title, content, btns){
             var overlayObj = $('<div style="position: fixed;margin: auto;top: 0;left: 0;width: 100%;height: 100%;z-index: 209998;opacity: 0.9;filter: alpha(opacity=90);background-color: rgb(255,255,255);"></div>');
             var modalObj = $('<div class="xenOverlay" style="display: block;position: fixed;left: 50%;width: 600px;z-index:209999;margin-left: -300px;top: 50%;height: auto;"><form class="formOverlay xenForm animateClose"><div class="heading" id="redactor_modal_header">'+title+'</div><div id="redactor_modal_inner"><dl class="ctrlUnit"><div class="modal-inner-content"></div></dl><dl class="ctrlUnit submitUnit modal-btn-wrapper"></dl></div></form></div>');
@@ -180,7 +180,7 @@ $(document).ready(function () {
             overlayObj.hide().appendTo('body').fadeIn(300);
             modalObj.find('.xenForm').addClass('open');
         }
-        
+
         function quickPM(user) {
             var pm_title = $('<input id="title" class="textCtrl" type="text" style="width:50%;"/><br>');
             var pm_msg = $('<textarea id="message" class="textCtrl" style="height: 100px;resize: none;display:block;width:100%;"></textarea>');
@@ -222,7 +222,7 @@ $(document).ready(function () {
                 }
             });
         }
-        
+
         // Shift & enter to post
         $(document).keypress(function(e) {
             var code = e.keyCode || e.which;
@@ -232,15 +232,15 @@ $(document).ready(function () {
                 }
             }
         });
-        
+
         $( "#QuickReply" ).submit(function( event ) {
             event.preventDefault();
         });
-        
+
         //Emoji
         if ($('input[value="Post Reply"]').length > 0 || $('input[value="Reply to Conversation"]').length > 0 || $('input[value="Reply to Thread"]').length > 0 || $('input[value="Create Thread"]').length > 0) {
             var iframe = $('iframe.redactor_textCtrl').contents().find("body");
-            
+
             var c = [
                 'http://i.imgur.com/s2mnHPj.png','http://i.imgur.com/xQEgir2.png','http://i.imgur.com/uQKnAHL.png','http://i.imgur.com/77QKaCF.png','http://i.imgur.com/aEIFMOD.png',
                 'http://i.imgur.com/3xmvLQB.png','http://i.imgur.com/9woDg2j.png','http://i.imgur.com/j8kVjQx.png','http://i.imgur.com/Osrk8Z6.png','http://i.imgur.com/PLXyQoG.png',
@@ -251,7 +251,7 @@ $(document).ready(function () {
                 'http://i.imgur.com/XtcLVi8.png','http://i.imgur.com/oXnPJzK.png','http://i.imgur.com/7nQzs1N.png','http://i.imgur.com/C35tWRr.png','http://i.imgur.com/dTeca6e.png',
                 'http://i.imgur.com/kz4sU6E.png','http://i.imgur.com/dXV0bPZ.png','http://i.imgur.com/jpgBiOo.png','http://i.imgur.com/e1rc3vr.png','http://i.imgur.com/Pq6xcYg.png',
                 'http://i.imgur.com/hO7m9ga.png'];
-            
+
             var h = [
                 //hangouts
                 'http://i.imgur.com/vpOXVGK.png','http://i.imgur.com/Y1vZjiX.png','http://i.imgur.com/qPVDTQ9.png','http://i.imgur.com/zkaTlAd.png','http://i.imgur.com/scUISw8.png',
@@ -271,7 +271,7 @@ $(document).ready(function () {
                 'http://i.imgur.com/j7C4Aq0.png','http://i.imgur.com/tMxIx7S.png','http://i.imgur.com/SJbR6sm.png','http://i.imgur.com/YKlOs0W.png','http://i.imgur.com/WTMNq8v.png',
                 'http://i.imgur.com/GWilqh2.png','http://i.imgur.com/Bbsm9n5.png','http://i.imgur.com/pGU6x8S.png','http://i.imgur.com/FDP39zz.png','http://i.imgur.com/79VA6TT.png',
                 'http://i.imgur.com/WdCtOnn.png'];
-            
+
             var o1 = [
                 //other1
                 'http://i.imgur.com/KaCv5op.gif','http://i.imgur.com/ejU2fcF.png','http://i.imgur.com/bio1pvI.gif','http://i.imgur.com/Ltd5iU6.png','http://i.imgur.com/T4IgzTY.gif',
@@ -291,7 +291,7 @@ $(document).ready(function () {
                 'http://i.imgur.com/mjDDoYp.png','http://i.imgur.com/AFAlTnd.gif','http://i.imgur.com/AbXv6rW.gif','http://i.imgur.com/DdGW27Z.png','http://i.imgur.com/1PWsDVr.gif',
                 'http://i.imgur.com/qsn9fnc.png','http://i.imgur.com/p9FSUKE.gif','http://i.imgur.com/Uh85EFc.gif','http://i.imgur.com/WVE2soK.png','http://i.imgur.com/ynRV5zk.png',
                 'http://i.imgur.com/hXawssJ.gif'];
-            
+
             var o2 =[
                 //other2
                 'http://i.imgur.com/COG3I9X.gif','http://i.imgur.com/8Rd6nJf.gif','http://i.imgur.com/x6qX0iH.gif','http://i.imgur.com/Q3tdtjD.gif','http://i.imgur.com/9tAbXnQ.gif',
@@ -300,7 +300,7 @@ $(document).ready(function () {
                 'http://i.imgur.com/eb7f1gV.gif','http://i.imgur.com/7wGKDC1.gif','http://i.imgur.com/bmXjNOf.gif','http://i.imgur.com/B4LZWzN.gif','http://i.imgur.com/9vIt1FN.gif',
                 'http://i.imgur.com/WV7oiuS.gif','http://i.imgur.com/lFf92El.gif','http://i.imgur.com/n2p9dM0.gif','http://i.imgur.com/9eUJPdm.gif','http://i.imgur.com/hEHocBG.gif',
                 'http://i.imgur.com/76mwtQe.gif','http://i.imgur.com/WEri5K1.gif','http://i.imgur.com/MHEm5T0.gif','http://i.imgur.com/yBvrFiU.gif'];
-            
+
             var s = [
                 //skype
                 'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0100-smile.gif', 'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0101-sadsmile.gif',
@@ -345,13 +345,13 @@ $(document).ready(function () {
                 'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0182-poolparty.gif', 'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0183-swear.gif',
                 'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0184-tmi.gif', 'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0185-heidy.gif', 
                 'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0186-myspace.gif', 'http://factoryjoe.s3.amazonaws.com/emoticons/emoticon-0189-priidu.gif'];
-            
+
             var blankojis = [
                 'http://i.imgur.com/9LNul5R.gif','http://i.imgur.com/1jndLAj.gif','http://i.imgur.com/QHCHpHA.gif','http://i.imgur.com/1Nav1ce.gif','http://i.imgur.com/DCuXvUq.gif',
                 'http://i.imgur.com/bNdMBsI.gif','http://i.imgur.com/Xbn5YEK.gif','http://i.imgur.com/1zlQ76l.gif','http://i.imgur.com/G0tSt54.gif','http://i.imgur.com/W0NqIo3.gif',
                 'http://i.imgur.com/bmwWFS5.gif','http://i.imgur.com/ZhT509S.gif','http://i.imgur.com/mBjTEMY.gif','http://i.imgur.com/5HgsPXX.gif','http://i.imgur.com/W0LOdYV.gif',
                 'http://i.imgur.com/WF29Jd3.gif','http://i.imgur.com/PAE1lWZ.gif','http://i.imgur.com/CVlVruI.gif','http://i.imgur.com/wYRa0l7.gif','http://i.imgur.com/BlfnwZO.gif'];
-            
+
             var onion = [
                 "http://emoticoner.com/files/emoticons/onion-head/admire-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/admire2-onion-head-emoticon.gif",
                 "http://emoticoner.com/files/emoticons/onion-head/ahaaah-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/angel1-onion-head-emoticon.gif",
@@ -420,7 +420,7 @@ $(document).ready(function () {
                 "http://emoticoner.com/files/emoticons/onion-head/work-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/wow1-onion-head-emoticon.gif",
                 "http://emoticoner.com/files/emoticons/onion-head/wow2-onion-head-emoticon.gif","http://emoticoner.com/files/emoticons/onion-head/lol1-onion-head-emoticon.gif",
                 "http://emoticoner.com/files/emoticons/onion-head/yawn-onion-head-emoticon.gif"];
-            
+
             var twitch = [
                 "http://static-cdn.jtvnw.net/emoticons/v1/354/1.0","http://static-cdn.jtvnw.net/emoticons/v1/3792/1.0","http://static-cdn.jtvnw.net/emoticons/v1/50/1.0",
                 "http://static-cdn.jtvnw.net/emoticons/v1/74/1.0","http://static-cdn.jtvnw.net/emoticons/v1/9809/1.0","http://static-cdn.jtvnw.net/emoticons/v1/32035/1.0",
@@ -464,7 +464,7 @@ $(document).ready(function () {
                 "http://static-cdn.jtvnw.net/emoticons/v1/49/1.0","http://static-cdn.jtvnw.net/emoticons/v1/3666/1.0","http://static-cdn.jtvnw.net/emoticons/v1/71/1.0",
                 "http://static-cdn.jtvnw.net/emoticons/v1/166/1.0","http://static-cdn.jtvnw.net/emoticons/v1/1896/1.0","http://static-cdn.jtvnw.net/emoticons/v1/167/1.0",
                 "http://static-cdn.jtvnw.net/emoticons/v1/1897/1.0","http://static-cdn.jtvnw.net/emoticons/v1/28087/1.0","http://static-cdn.jtvnw.net/emoticons/v1/4337/1.0"];
-            
+
             var emojiData = [
                 {
                     name: 'Regular',
@@ -527,19 +527,19 @@ $(document).ready(function () {
                     btn.trigger('click');
                 }
             });
-            
+
             $('div.emojiContainer:eq(3) img').each(function(ii){this.style.height="40px";});
             $('div.emojiContainer:eq(4) img').each(function(ii){this.style.height="40px";});
             $('div.emojiContainer:eq(5) img').each(function(ii){this.style.height="40px";});
-            
+
             $("input.primary").first().click(function (){
                 filter();
             });
-            
+
             var egg = $('<a href="javascript:void(0);"></a>');
             egg.click(function(){alert('Magikarp used splash but nothing happened');});
             $('#emojis-top').append(egg);
-            
+
             //Rainbowify
             function tohex(dec) {
                 var hexString = Math.round(dec).toString(16);
@@ -547,19 +547,7 @@ $(document).ready(function () {
                     hexString = "0" + hexString;
                 return hexString.toUpperCase();
             }
-            
-            function todec(hex){
-                return parseInt(hex, 16);
-            }
-            
-            function hexToRGB(hexval) {
-                str = new String(hexval).toUpperCase();
-                if (str.charAt(0) == "#") str = str.substr(1);
-                g_r = todec(str.substr(0, 2));
-                g_g = todec(str.substr(2, 2));
-                g_b = todec(str.substr(4, 2));
-            }
-            
+
             function getSFXColor(k) {
                 var r, g, b, k1, min, max;
                 k1 = k;
@@ -596,26 +584,9 @@ $(document).ready(function () {
                 g_g = g;
                 g_b = b;
             }
-            
-            function setOutSizeIndicator(divtext) {
-                document.getElementById("charssub").setAttribute("id", "oldsub");
-                var newdiv = document.createElement("div");
-                newdiv.setAttribute("id", "charssub");
-                var newtext = document.createTextNode(divtext);
-                newdiv.appendChild(newtext);
-                document.getElementById("chars").appendChild(newdiv);
-                document.getElementById("chars").removeChild(document.getElementById("oldsub"));
-            }
-            
-            function preview() {}
-            
+
             function MakeSFX(inputString, outputHTML) {
-                var r, g, b;
-                var i, j, k, l;
-                var x, scale, res;
-                var min, max;
-                var in_tag = 0;
-                var oignumi = 0;
+                var r, g, b, i, j, k, l, scale, res, min, max, in_tag = 0, oignumi = 0;
                 temp = new String("");
                 var numreps = 1;
                 if (numreps < 1) numreps = 1;
@@ -625,10 +596,10 @@ $(document).ready(function () {
                 tempstr = new String("");
                 res = 1;
                 j = instr.length;
-                scale = Math.PI * (2 * eval(numreps) - .21) / j;
+                scale = Math.PI * (2 * eval(numreps) - 0.21) / j;
                 g_cstyle = 0;
-                
-                for (i = 0; i < j; i++) {
+
+                for (i = 0; i < j; i++) {	
                     if (instr.charAt(i) == "<") in_tag = 1;
                     if (in_tag === 0) {
                         k = scale * i;
@@ -681,50 +652,31 @@ $(document).ready(function () {
                 }
                 return outstr;
             }
-            
-            function UpdateRGB(ctl) {
-                var lum;
-                ctl.style.backgroundColor = ctl.value;
-                hexToRGB(ctl.value);
-                lum = 0.29 * g_r + 0.57 * g_g + 0.14 * g_b;
-                if (lum < 96) {
-                    ctl.style.color = "#FFFFFF";
-                } else {
-                    ctl.style.color = "#000000";
-                }
-                preview();
-            }
-            
-            function flipbkg(ctl) {
-                if (prevbkc == "#FFFFFF") prevbkc = "#000000";
-                else prevbkc = "#FFFFFF";
-                ctl.style.backgroundColor = prevbkc;
-            }
-            
+
             function rainbow() {
                 filter();
                 var iframe = $('iframe.redactor_textCtrl').contents().find("body");
                 var message = iframe.html();
-                
+
                 message = message.replace(/(&nbsp;)/gi, ' ');
-                
-                var quotereg = /(\[QUOTE\]?[\s\S]*?\[\/QUOTE\])|(\[SPOILER\]?[\s\S]*?\[\/SPOILER\])/igm;
-                var imgregex = /(\<img([\s\S]*?)\>)/igm;
-                var linkregex= /(\<a([\s\S]*?)<\/a\>)/igm;
-                var urlregex = /(((f|ht)tps?:\/\/)(.*?)[\S][^ @&<▓▒╗╞§>╢]+)/igm;
-                var regex =/(\@(\badam kristo\b|\bHanson Lee\b|[\S][^ @&<▓▒╗╞§>╢]+))|(\[IMG\]?[\s\S]*?\[\/IMG\])|(\[MEDIA\]?[\s\S]*?\[\/MEDIA\])|(\[PHP\]?[\s\S]*?\[\/PHP\])|(\[CODE\]?[\s\S]*?\[\/CODE\])|(\[HTML\]?[\s\S]*?\[\/HTML\])|(\[COLOR\]?[\s\S]*?\[\/COLOR\])|\:P/igm;         
+
+                var quotereg = /\[(QUOTE|SPOILER|IMG|MEDIA|PHP|CODE|HTML|COLOR|USER|EMAIL)\]?[\s\S]*?\[\/\1\]/igm;
+                var imgregex = /<img([\s\S]*?)>/igm;
+                var linkregex = /<a([\s\S]*?)<\/a>/igm;
+                var urlregex = /((f|ht)tps?:\/\/)(.*?)[\S][^ @&<▓▒╗╞§>╢]+/igm;
+                var regex = /(\@(\badam kristo\b|\bHanson Lee\b|[\S][^ @&<▓▒╗╞§>╢]+))|\:P/igm;
                 var emojir = /\;\)|\:D|\:\(|8\-\)|\:\)|(\:\/)(?![\/])|(o\.O)|(O\.o)|(O_o)|(o_O)/gm;
-                var quoterest = /(\[color=#[\w\d]+\]╞\[\/color\])/im;
-                var imgrest = /(\[color=#[\w\d]+\]§\[\/color\])/im;
-                var linkrest = /(\[color=#[\w\d]+\]╗\[\/color\])/im;
-                var urlrest = /(\[color=#[\w\d]+\]▒\[\/color\])/im;
-                var tagrest = /(\[color=#[\w\d]+\]▓\[\/color\])/im;
-                var emojirest = /(\[color=#[\w\d]+\]╢\[\/color\])/im;
+                var quoterest = /<font color=["']#[\w\d]+["']>╞<\/font>/im;
+                var imgrest = /<font color=["']#[\w\d]+["']>§<\/font>/im;
+                var linkrest = /<font color=["']#[\w\d]+["']>╗<\/font>/im;
+                var urlrest = /<font color=["']#[\w\d]+["']>▒<\/font>/im;
+                var tagrest = /<font color=["']#[\w\d]+["']>▓<\/font>/im;
+                var emojirest = /<font color=["']#[\w\d]+["']>╢<\/font>/im;
                 console.log(message);
                 var quotes = message.match(quotereg);
                 message = message.replace(quotereg, '╞');
                 console.log(message);
-                var imgs = message.match(imgregex);      
+                var imgs = message.match(imgregex);
                 message = message.replace(imgregex, "§");
                 console.log(message);
                 var links = message.match(linkregex);
@@ -739,17 +691,17 @@ $(document).ready(function () {
                 var emojis = message.match(emojir);
                 message = message.replace(emojir, "╢");
                 console.log(message);
-                
-                message = MakeSFX(message, false);
-                
+
+                message = MakeSFX(message, true);
+
                 var numQuot = (quotes === null) ? 0 : quotes.length;
                 var numImgs = (imgs === null) ? 0 : imgs.length;
                 var numLink = (links === null) ? 0 : links.length;
                 var numUrls = (urls === null) ? 0 : urls.length;
                 var numMisc = (misc === null) ? 0 : misc.length;
                 var numEmoj = (emojis === null) ? 0 : emojis.length;
-                
-                for (var a = 0 ; a < numQuot; a++) {
+
+                for (var a = 0; a < numQuot; a++) {
                     message = message.replace(quoterest, quotes[a]);
                     console.log(message);
                 }
@@ -762,7 +714,7 @@ $(document).ready(function () {
                     console.log(message);
                 }
                 for (var d = 0; d < numUrls; d++) {
-                    message = message.replace(urlrest, /*" <a href=\"" +*/urls[d]/*+ "\">" +urls[d]+ "</a> "*/);
+                    message = message.replace(urlrest, '<a href="' + urls[d] + '">' + MakeSFX(urls[d], true) + '</a>');
                     console.log(message);
                 }
                 for (var e = 0; e < numMisc; e++) {
@@ -775,18 +727,30 @@ $(document).ready(function () {
                 }
                 iframe.html(message);
             }
-            
+
+            jQuery.fn.outerTag = function (s) {
+                return $(this).html().replace($($(this).children()[0]).html(), '');
+            };
+
+            iframe.contents().find("font").each(function () {
+                if ($(this).children().length == 1) {
+                    if ($(this).outerTag().indexOf("font") > -1 || $(this).outerTag().indexOf("font") > -1) {
+                        $(this).children().unwrap();
+                    }
+                }else if($(this).children().length > 1){
+
+                }
+            });
             //Add rainbow button
-            if(window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
-                var rainbowfyBtn = $('&nbsp;<button class="button">Rainbowfy</button>');
+            if (window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
+                var rainbowfyBtn = $('&nbsp;<li class="button" input="rainbow">Rainbowfy</li>');
                 $('.submitUnit:first input[type=submit]:first').after(rainbowfyBtn);
-                rainbowfyBtn.click(function(e) {
-                    e.preventDefault();
+                rainbowfyBtn.click(function (e) {
                     rainbow();
                 });
             }
         }
-        
+
         //Ninja Text Viewer
         function ninja() {
             //change ninja text
@@ -802,7 +766,7 @@ $(document).ready(function () {
                 }
             }
         }
-        
+
         if($('#newthread-category').length){
             $('#newthread-category').appendTo('#top');
         }
@@ -832,7 +796,7 @@ $(document).ready(function () {
                 };
                 $('.sidebar .section:first').after(this.wrapper);
             }
-            
+
             //Top Dropdown
             function dropdown(){
                 this.button = $('<a href="javascript:void(0);" class="navLink NoPopupGadget" rel="Menu"></a>');
@@ -903,11 +867,11 @@ $(document).ready(function () {
             sidebarInfo.add($('<a href="#" onClick="return false;" id="featureRequest">Request a Feature</a>'));
             sidebarInfo.add($('<a href="#" onClick="return false;" id="vInfo">Version Info</a>'));
             sidebarInfo.add($('<a href="#" onClick="return false;" id="check">Check for updates</a>'));
-            
+
             vInfo.addEventListener("click", function(){
                 alert("Sidebar Version - v" + sidebarVersion);
             });
-            
+
             featureRequest.addEventListener("click", function(){
                 var featureForm = $('<iframe src="https://docs.google.com/forms/d/1W2xyAM3HdwdrAxhsdcSB8BefnPSa6NngRbxU-IZN37w/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
                 new modal('Feature Request Form', featureForm, {
@@ -919,7 +883,7 @@ $(document).ready(function () {
                     }
                 });		
             });
-            
+
             eUpdates.addEventListener("click", function(){
                 var emailForm = $('<center><iframe src="https://docs.google.com/forms/d/1NmKqdgBI-rcZviGtNawZRva1KsLUOWpP8b_kfli653E/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
                 new modal('Email Update Form', emailForm, {
@@ -937,7 +901,7 @@ $(document).ready(function () {
             check.addEventListener("click", function(){
                 update(true);
             });
-            
+
             //Fan Gatherings
             var fanGather = new sidebar("Fan Gatherings", {
                 layout: "twoColumns"
@@ -955,7 +919,7 @@ $(document).ready(function () {
             fanGather.add($('<a href="/threads/romania-fans-invites.9703/">Romania</a>'));
             fanGather.add($('<a href="/threads/opo-fans-from-singapore.35482/">Singapore</a>'));
             fanGather.add($('<a href="/threads/turkey-opo-fans.44672/">Turkey</a>'));
-            
+
             //Quick Links
             var quickLinks = new sidebar("Quick Links", {
                 layout: "twoColumns"
@@ -974,19 +938,19 @@ $(document).ready(function () {
                     var c = confirm("This is going send many http requests and is not recommended on slow internet.");
                     if(c){
                         var offline = [{id: 720, name: "@Andrew Z"}, {id: 76118, name: "@Cervantes"}, {id: 67255, name: "@elkolonel"}, {id: 4428, name: "@domifer"}, {id: 2053, name: "@Gerardo Miele"}, {id: 1404, name: "@GregOrevo"}, {id: 1141, name: "@Hanson Lee"}, {id: 190760, name: "@kovalski"}, {id: 5675, name: "@moonwitch"}, {id: 4219, name: "@volteon"}, {id: 139254, name: "@mcsememo"}, {id: 1039, name: "@Noel"}, {id: 11608, name: "@pizdek"}, {id: 1580, name: "@puma95"}, {id: 7, name: "@Robert W"}, {id: 5916, name: "@saimon"}, {id: 1678, name: "@Seijmo"}, {id: 37656, name: "@So_ony"}, {id: 15636, name: "@thepanttherlady"}, {id: 5691, name: "@Viljanteri"}];
-                        
+
                         var semiOffline = [{id: 15177, name: "@An.I.Am"}, {id: 8619, name: "@Garzla"}, {id: 327804, name: "@Lucy L"}, {id: 1362, name: "@muddy46"}, {id: 25387, name: "@Jevoly"}, {id: 206057, name: "@oalexander"}, {id: 24503, name: "@thedocbob"}, {id: 326, name: "@script"}, {id: 248737, name: "@ZIoTibia"}];
-                        
+
                         var mods = [{id: 19, name: "@Adam Krisko"}, {id: 26837, name: "@AlexGuroff"}, {id: 21293, name: "@BeAlive75"}, {id: 20674, name: "@BrettPlusOne"}, {id: 1354, name: "@Chinda"}, {id: 51241, name: "@Chris05"}, {id: 66944, name: "@Dexter Morgan"}, {id: 42948, name: "@DRCH"}, {id: 36247, name: "@drmartin"}, {id: 1507, name: "@dsmonteiro"}, {id: 6897, name: "@Fabio.Mar"}, {id: 9492, name: "@finaldentiny"}, {id: 83211, name: "@gaster"}, {id: 2587, name: "@Hige"}, {id: 29429, name: "@inffy"}, {id: 2097, name: "@izaka"}, {id: 1502, name: "@J0han"}, {id: 3594, name: "@kaptainen"}, {id: 103473, name: "@kp1234"}, {id: 4541, name: "@maccamania"}, {id: 22710, name: "@Maica"}, {id: 515, name: "@Mark Falsing"}, {id: 25748, name: "@Martin Hotmann"}, {id: 115324, name: "@Mike9966"}, {id: 1021, name: "@nguser"}, {id: 11401, name: "@nirgale"}, {id: 151804, name: "@pablofg1978"}, {id: 3187, name: "@pablomoreno"}, {id: 20124, name: "@Plenkske"}, {id: 59953, name: "@PLPeeters"}, {id: 185495, name: "@Ponds186"}, {id: 19254, name: "@Pringles"}, {id: 23345, name: "@purplesticks"}, {id: 1621, name: "@Rahul"}, {id: 645, name: "@ram gupta"}, {id: 4980, name: "@ravi4ever"}, {id: 32740, name: "@rikardo1979"}, {id: 3167, name: "@RubixRae"}, {id: 1783, name: "@Sam_in_PGH"}, {id: 41614, name: "@Sergiorodrigues1974"}, {id: 5567, name: "@Skizz"}, {id: 71200, name: "@sp99"}, {id: 981, name: "@Sparkolo"}, {id: 4701, name: "@stfsad"}, {id: 3234, name: "@Vinkel"}, {id: 2404, name: "@viraaj11"}, {id: 11423, name: "@Waterdroid"}, {id: 5826, name: "@wtfhsf"}, {id: 7504, name: "@xaser240"}, {id: 37378, name: "@youbi"}];
-                        
+
                         var done = 0;
-                        
+
                         var online = [];
-                        
+
                         var baseUrl1 = "https://forums.oneplus.net/members/";
                         var baseUrl2 = "/?card=1&_xfNoRedirect=1&_xfToken=";
                         var baseUrl3 = "&_xfResponseType=json";
-                        
+
                         function finished() {
                             var onlines = "";
                             for(var i = 0; i < online.length; i++) {
@@ -995,7 +959,7 @@ $(document).ready(function () {
                             alert(onlines + "should be online and have been inserted in your post. Go post :3");
                             $('iframe.redactor_textCtrl').contents().find("body").html($('iframe.redactor_textCtrl').contents().find("body").html() + onlines);
                         }
-                        
+
                         var checkDone = setInterval(function(){
                             if (done == (offline.length + mods.length + semiOffline.length)) {
                                 console.log("Finished mods");
@@ -1003,7 +967,7 @@ $(document).ready(function () {
                                 clearInterval(checkDone);
                             }
                         }, 300);
-                        
+
                         for (var x = 0; x < mods.length; x++) {
                             try {
                                 var token = document.getElementsByName('_xfToken')[0].getAttribute('value');
@@ -1029,7 +993,7 @@ $(document).ready(function () {
                                 console.log("err");
                             }
                         }
-                        
+
                         for (var x = 0; x < offline.length; x++) {
                             try {
                                 $.get("https://forums.oneplus.net/search/member?user_id=" + offline[x].id,
@@ -1054,7 +1018,7 @@ $(document).ready(function () {
                                 console.log("err");
                             }
                         }
-                        
+
                         for (var x = 0; x < semiOffline.length; x++) {
                             try {
                                 $.get(baseUrl1 + semiOffline[x].id + "/recent-Content",
@@ -1082,17 +1046,17 @@ $(document).ready(function () {
                     }
                 });
             });
-            
-            
+
+
             ninjaTextBtn.addEventListener("click",function(){
                 ninja();
             });
-            
+
             //Notifications
             var nBar = new sidebar("Notifications",{
                 clicked: function(){getAlertInfo();}
             });
-            
+
             //Theming
             function themeEngine(){
                 var themeControl = new dropdown();
@@ -1202,7 +1166,7 @@ $(document).ready(function () {
                                         applyTheme();
                                         saveTheme();
                                         this.close();
-                                        
+
                                     }
                                 }
                             },
@@ -1215,7 +1179,7 @@ $(document).ready(function () {
                         });
                     });
                 };
-                
+
                 if(localStorage.getItem('themes') === null || !IsJsonString(localStorage.getItem('themes'))){
                     localStorage.setItem('themes', JSON.stringify(themes));
                 }else{
@@ -1224,7 +1188,7 @@ $(document).ready(function () {
                 init();
             }
             themeEngine();
-            
+
             //Alert Info
             var checkAlerts=true;
             function getAlertInfo() {
@@ -1246,18 +1210,18 @@ $(document).ready(function () {
                 }
                 checkAlerts = !checkAlerts;
             }
-            
+
             //get rid of big picture if there
             if($(".sidebar img[src*='content.oneplus.net/media']").length > 0){
                 var picture = new sidebar("News");
                 picture.custom("<div id='picture'></div>");
                 $(".sidebar img[src*='content.oneplus.net/media']").parent().parent().insertAfter($("#picture"));
             }
-            
-            
+
+
             //Turn attachments to images
             attToImg();        
-            
+
             //Quick PM
             var pmBtn = $('<input type="button" value="Quick PM" accesskey="s" style="font-size:11px;padding:5px;height:auto;line-height:12px;margin-top:5px;" class="button PreviewButton JsOnly" href="#"  id="number[0]">');
             $('em.userTitle').after(pmBtn);
@@ -1269,7 +1233,7 @@ $(document).ready(function () {
             for (i=0; i<button.length; i++){
                 button[i].addEventListener("click", function bob(){ var t = this.id; quickPM($('li.message')[t].getAttribute('data-author'));});
             }
-            
+
             //Sidebar Customizations
             $('.sidebar .section .widget').each(function(){
                 $(this).children('*').not('h3').wrapAll('<div class="section-wrapper"></div>');
@@ -1299,7 +1263,7 @@ $(document).ready(function () {
             $("#widget-11 ul.xenforo-list-2cols li:eq(8)").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(5)"));
             $("#widget-11 ul.xenforo-list-2cols li:eq(8)").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(6)"));
             $("<li><a href=\"/forums/cyanogenmod-11s/\">CyanogenMod 11S</a></li>").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(4)"));
-            
+
             $('#widget-12 .widget_header_small').click(function(){
                 location.href = "/forums/#language.33"; 
             });
@@ -1316,7 +1280,7 @@ $(document).ready(function () {
             $("#widget-12 ul.xenforo-list-2cols li:eq(7)").insertBefore($("#widget-12 ul.xenforo-list-2cols li:eq(4)"));
             $("#widget-12 ul.xenforo-list-2cols li:eq(11)").insertBefore($("#widget-12 ul.xenforo-list-2cols li:eq(5)"));
             $("#widget-12 ul.xenforo-list-2cols li:eq(12)").insertBefore($("#widget-12 ul.xenforo-list-2cols li:eq(7)"));
-            
+
             $(window).scroll(function(){
                 if($(window).scrollTop() > $('#top').offset().top-40){
                     if($(window).scrollTop() + $('.sidebar')[0].scrollHeight + 160 > $(document).height() - 286){
