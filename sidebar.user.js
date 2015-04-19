@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.8.5
+// @version      2.8.6
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -12,7 +12,7 @@
 $(document).ready(function () {
     if(GM_info === undefined)
         //MAKE SURE TO UPDATE THIS NUMBER
-        sidebarVersion = "2.8.5";
+        sidebarVersion = "2.8.6";
     else
         sidebarVersion = GM_info.script.version;
 
@@ -726,21 +726,20 @@ $(document).ready(function () {
                     console.log(message);
                 }
                 iframe.html(message);
-            }
 
-            jQuery.fn.outerTag = function (s) {
-                return $(this).html().replace($($(this).children()[0]).html(), '');
-            };
+                jQuery.fn.outerTag = function (s) {
+                    return $(this).html().replace($($(this).children()[0]).html(), '');
+                };
 
-            iframe.contents().find("font").each(function () {
-                if ($(this).children().length == 1) {
-                    if ($(this).outerTag().indexOf("font") > -1 || $(this).outerTag().indexOf("font") > -1) {
-                        $(this).children().unwrap();
+                iframe.contents().find("font").each(function () {
+                    if ($(this).children().length == 1) {
+                        if ($(this).outerTag().indexOf("font") > -1 || $(this).outerTag().indexOf("font") > -1) {
+                            $(this).children().unwrap();
+                        }
                     }
-                }else if($(this).children().length > 1){
-
-                }
-            });
+                });
+            }
+            
             //Add rainbow button
             if (window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
                 var rainbowfyBtn = $('&nbsp;<li class="button" input="rainbow">Rainbowfy</li>');
