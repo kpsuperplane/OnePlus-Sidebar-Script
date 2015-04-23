@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.8.6
+// @version      2.8.7
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -10,9 +10,9 @@
 // ==/UserScript==
 //ADD JQUERY SCRIPT ADAPTED FROM https://gist.github.com/eristoddle/4440713
 $(document).ready(function () {
+    //MAKE SURE TO UPDATE THIS NUMBER
     if(GM_info === undefined)
-        //MAKE SURE TO UPDATE THIS NUMBER
-        sidebarVersion = "2.8.6";
+        sidebarVersion = "2.8.7";
     else
         sidebarVersion = GM_info.script.version;
 
@@ -543,8 +543,7 @@ $(document).ready(function () {
             //Rainbowify
             function tohex(dec) {
                 var hexString = Math.round(dec).toString(16);
-                if (hexString.length == 1)
-                    hexString = "0" + hexString;
+                if (hexString.length == 1) hexString = "0" + hexString;
                 return hexString.toUpperCase();
             }
 
@@ -588,18 +587,14 @@ $(document).ready(function () {
             function MakeSFX(inputString, outputHTML) {
                 var r, g, b, i, j, k, l, scale, res, min, max, in_tag = 0, oignumi = 0;
                 temp = new String("");
-                var numreps = 1;
-                if (numreps < 1) numreps = 1;
-                if (numreps > 10) numreps = 10;
                 instr = inputString;
                 outstr = new String("");
                 tempstr = new String("");
                 res = 1;
                 j = instr.length;
-                scale = Math.PI * (2 * eval(numreps) - 0.21) / j;
-                g_cstyle = 0;
+                scale = Math.PI * 1.79 / j;
 
-                for (i = 0; i < j; i++) {	
+                for (i = 0; i < j; i++) {
                     if (instr.charAt(i) == "<") in_tag = 1;
                     if (in_tag === 0) {
                         k = scale * i;
@@ -653,12 +648,16 @@ $(document).ready(function () {
                 return outstr;
             }
 
-            function rainbow() {
-                filter();
+            function rainbow(highlighted, higlightedText) {
+                var message;
                 var iframe = $('iframe.redactor_textCtrl').contents().find("body");
-                var message = iframe.html();
-
-                message = message.replace(/(&nbsp;)/gi, ' ');
+                if (!highlighted) {
+                    filter();
+                    message = iframe.html();
+                } else {
+                    message = higlightedText;
+                }
+                message = message.replace(/&nbsp;/igm, ' ');
 
                 var quotereg = /\[(QUOTE|SPOILER|IMG|MEDIA|PHP|CODE|HTML|COLOR|USER|EMAIL)\]?[\s\S]*?\[\/\1\]/igm;
                 var imgregex = /<img([\s\S]*?)>/igm;
@@ -725,27 +724,54 @@ $(document).ready(function () {
                     message = message.replace(emojirest, emojis[f]);
                     console.log(message);
                 }
-                iframe.html(message);
 
-                jQuery.fn.outerTag = function (s) {
-                    return $(this).html().replace($($(this).children()[0]).html(), '');
+                if (!highlighted)
+                    iframe.html(message);
+
+                jQuery.fn.outerHTML = function (s) {
+                    return s
+                    ? this.before(s).remove()
+                    : jQuery("<p>").append(this.eq(0).clone()).html();
                 };
 
-                iframe.contents().find("font").each(function () {
-                    if ($(this).children().length == 1) {
-                        if ($(this).outerTag().indexOf("font") > -1 || $(this).outerTag().indexOf("font") > -1) {
-                            $(this).children().unwrap();
+                jQuery.fn.outerTag = function (s) {
+                    return $(this).outerHTML().replace($(this).html(), '');
+                };
+
+                jQuery.fn.tag = function (s) {
+                    return $(this).outerTag().match(/<\/(.*?)>/)[1];
+                };
+                if (!highlighted) {
+                    iframe.contents().find("font").each(function () {
+                        if ($(this).children().length == 1) {
+                            if ($(this).outerTag().indexOf("font") > -1 || $(this).outerTag().indexOf("font") > -1) {
+                                $(this).children().unwrap();
+                            }
+                        } else if ($(this).children().length > 1) {
+                            var allFont = true;
+                            $(this).children().each(function () {
+                                if ($(this).tag() != "font")
+                                    allFont = false;
+                            });
+                            if (allFont) {
+                                $(this).children().unwrap();
+                            }
                         }
-                    }
-                });
+                    });
+                } else {
+                    return message;
+                }
             }
-            
+
             //Add rainbow button
             if (window.location.href.indexOf("thread") > -1 || window.location.href.indexOf("conversation") > -1) {
                 var rainbowfyBtn = $('&nbsp;<li class="button" input="rainbow">Rainbowfy</li>');
                 $('.submitUnit:first input[type=submit]:first').after(rainbowfyBtn);
                 rainbowfyBtn.click(function (e) {
-                    rainbow();
+                    if ($('#ctrl_message_html').data('redactor').getSelection().toString().length == 0)
+                        rainbow(false, null);
+                    else
+                        $('#ctrl_message_html').execCommand('inserthtml', rainbow(true,$('#ctrl_message_html').data('redactor').getSelection().toString()));
                 });
             }
         }
