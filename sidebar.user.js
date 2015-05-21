@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.8.7
+// @version      2.8.8
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -12,7 +12,7 @@
 $(document).ready(function () {
     //MAKE SURE TO UPDATE THIS NUMBER
     if(GM_info === undefined)
-        sidebarVersion = "2.8.7";
+        sidebarVersion = "2.8.8";
     else
         sidebarVersion = GM_info.script.version;
 
@@ -966,7 +966,7 @@ $(document).ready(function () {
 
                         var semiOffline = [{id: 15177, name: "@An.I.Am"}, {id: 8619, name: "@Garzla"}, {id: 327804, name: "@Lucy L"}, {id: 1362, name: "@muddy46"}, {id: 25387, name: "@Jevoly"}, {id: 206057, name: "@oalexander"}, {id: 24503, name: "@thedocbob"}, {id: 326, name: "@script"}, {id: 248737, name: "@ZIoTibia"}];
 
-                        var mods = [{id: 19, name: "@Adam Krisko"}, {id: 26837, name: "@AlexGuroff"}, {id: 21293, name: "@BeAlive75"}, {id: 20674, name: "@BrettPlusOne"}, {id: 1354, name: "@Chinda"}, {id: 51241, name: "@Chris05"}, {id: 66944, name: "@Dexter Morgan"}, {id: 42948, name: "@DRCH"}, {id: 36247, name: "@drmartin"}, {id: 1507, name: "@dsmonteiro"}, {id: 6897, name: "@Fabio.Mar"}, {id: 9492, name: "@finaldentiny"}, {id: 83211, name: "@gaster"}, {id: 2587, name: "@Hige"}, {id: 29429, name: "@inffy"}, {id: 2097, name: "@izaka"}, {id: 1502, name: "@J0han"}, {id: 3594, name: "@kaptainen"}, {id: 103473, name: "@kp1234"}, {id: 4541, name: "@maccamania"}, {id: 22710, name: "@Maica"}, {id: 515, name: "@Mark Falsing"}, {id: 25748, name: "@Martin Hotmann"}, {id: 115324, name: "@Mike9966"}, {id: 1021, name: "@nguser"}, {id: 11401, name: "@nirgale"}, {id: 151804, name: "@pablofg1978"}, {id: 3187, name: "@pablomoreno"}, {id: 20124, name: "@Plenkske"}, {id: 59953, name: "@PLPeeters"}, {id: 185495, name: "@Ponds186"}, {id: 19254, name: "@Pringles"}, {id: 23345, name: "@purplesticks"}, {id: 1621, name: "@Rahul"}, {id: 645, name: "@ram gupta"}, {id: 4980, name: "@ravi4ever"}, {id: 32740, name: "@rikardo1979"}, {id: 3167, name: "@RubixRae"}, {id: 1783, name: "@Sam_in_PGH"}, {id: 41614, name: "@Sergiorodrigues1974"}, {id: 5567, name: "@Skizz"}, {id: 71200, name: "@sp99"}, {id: 981, name: "@Sparkolo"}, {id: 4701, name: "@stfsad"}, {id: 3234, name: "@Vinkel"}, {id: 2404, name: "@viraaj11"}, {id: 11423, name: "@Waterdroid"}, {id: 5826, name: "@wtfhsf"}, {id: 7504, name: "@xaser240"}, {id: 37378, name: "@youbi"}];
+                        var mods = [{id: 314947, name: "@Tamashi"}, {id: 19, name: "@Adam Krisko"}, {id: 26837, name: "@AlexGuroff"}, {id: 21293, name: "@BeAlive75"}, {id: 20674, name: "@BrettPlusOne"}, {id: 1354, name: "@Chinda"}, {id: 51241, name: "@Chris05"}, {id: 66944, name: "@Dexter Morgan"}, {id: 42948, name: "@DRCH"}, {id: 36247, name: "@drmartin"}, {id: 1507, name: "@dsmonteiro"}, {id: 6897, name: "@Fabio.Mar"}, {id: 9492, name: "@finaldentiny"}, {id: 83211, name: "@gaster"}, {id: 2587, name: "@Hige"}, {id: 29429, name: "@inffy"}, {id: 2097, name: "@izaka"}, {id: 1502, name: "@J0han"}, {id: 3594, name: "@kaptainen"}, {id: 103473, name: "@kp1234"}, {id: 4541, name: "@maccamania"}, {id: 22710, name: "@Maica"}, {id: 515, name: "@Mark Falsing"}, {id: 25748, name: "@Martin Hotmann"}, {id: 115324, name: "@Mike9966"}, {id: 1021, name: "@nguser"}, {id: 11401, name: "@nirgale"}, {id: 151804, name: "@pablofg1978"}, {id: 3187, name: "@pablomoreno"}, {id: 20124, name: "@Plenkske"}, {id: 59953, name: "@PLPeeters"}, {id: 185495, name: "@Ponds186"}, {id: 19254, name: "@Pringles"}, {id: 23345, name: "@purplesticks"}, {id: 1621, name: "@Rahul"}, {id: 645, name: "@ram gupta"}, {id: 4980, name: "@ravi4ever"}, {id: 32740, name: "@rikardo1979"}, {id: 3167, name: "@RubixRae"}, {id: 1783, name: "@Sam_in_PGH"}, {id: 41614, name: "@Sergiorodrigues1974"}, {id: 5567, name: "@Skizz"}, {id: 71200, name: "@sp99"}, {id: 981, name: "@Sparkolo"}, {id: 4701, name: "@stfsad"}, {id: 3234, name: "@Vinkel"}, {id: 2404, name: "@viraaj11"}, {id: 11423, name: "@Waterdroid"}, {id: 5826, name: "@wtfhsf"}, {id: 7504, name: "@xaser240"}, {id: 37378, name: "@youbi"}];
 
                         var done = 0;
 
