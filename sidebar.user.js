@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.8.8
+// @version      2.8.9
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -12,7 +12,7 @@
 $(document).ready(function () {
     //MAKE SURE TO UPDATE THIS NUMBER
     if(GM_info === undefined)
-        sidebarVersion = "2.8.8";
+        sidebarVersion = "2.8.9";
     else
         sidebarVersion = GM_info.script.version;
 
@@ -1072,14 +1072,8 @@ $(document).ready(function () {
                 });
             });
 
-
             ninjaTextBtn.addEventListener("click",function(){
                 ninja();
-            });
-
-            //Notifications
-            var nBar = new sidebar("Notifications",{
-                clicked: function(){getAlertInfo();}
             });
 
             //Theming
@@ -1214,35 +1208,12 @@ $(document).ready(function () {
             }
             themeEngine();
 
-            //Alert Info
-            var checkAlerts=true;
-            function getAlertInfo() {
-                if(checkAlerts){
-                    nBar.clear();
-                    nBar.add($('<span> On first page of alerts:</span>'));
-                    $.get('/account/alerts?page=' + 0, function(data) {
-                        var tagNum = $(data).find("h3:contains('tagged')").length;
-                        var likeNum = $(data).find("h3:contains('liked')").length;
-                        var quoteNum = $(data).find("h3:contains('quoted')").length;
-                        var replyNum = $(data).find("h3:contains('replied')").length;
-                        var startedNum = $(data).find("h3:contains('started')").length;
-                        if(tagNum > 0){nBar.add($('<span> Tags: '+tagNum+'</span>'));}
-                        if(likeNum > 0){nBar.add($('<span> Likes: '+likeNum+'</span>'));}
-                        if(quoteNum > 0){nBar.add($('<span> Quotes: '+quoteNum+'</span>'));}
-                        if(replyNum > 0){nBar.add($('<span> Replies: '+replyNum+'</span>'));}
-                        if(startedNum > 0){nBar.add($('<span> Threads Started: '+startedNum+'</span>'));}
-                    });
-                }
-                checkAlerts = !checkAlerts;
-            }
-
             //get rid of big picture if there
             if($(".sidebar img[src*='content.oneplus.net/media']").length > 0){
                 var picture = new sidebar("News");
                 picture.custom("<div id='picture'></div>");
                 $(".sidebar img[src*='content.oneplus.net/media']").parent().parent().insertAfter($("#picture"));
             }
-
 
             //Turn attachments to images
             attToImg();        
