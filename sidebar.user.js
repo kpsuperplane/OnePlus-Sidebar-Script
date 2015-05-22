@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.8.9
+// @version      2.9.0
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -12,7 +12,7 @@
 $(document).ready(function () {
     //MAKE SURE TO UPDATE THIS NUMBER
     if(GM_info === undefined)
-        sidebarVersion = "2.8.9";
+        sidebarVersion = "2.9.0";
     else
         sidebarVersion = GM_info.script.version;
 
@@ -197,21 +197,21 @@ $(document).ready(function () {
                         var url = 'https://forums.oneplus.net/conversations/add';
                         var token = document.getElementsByName('_xfToken')[0].getAttribute('value');
                         var msgTitle = pm_title.val();
-                        var msg = pm_msg.val().replace('\n', '<br>');
-                        $.get('/conversations/add', function(data) {
-                            $.post('/conversations/insert', {
-                                recipients: user,
-                                title: msgTitle,
-                                message_html: msg,
-                                last_date: Date.now(),
-                                last_known_date: Date.now(),
-                                xfRelativeResolver: url,
-                                _xfToken: token,
-                                _xfRequestUri: url.replace("https://forums.oneplus.net", ""),
-                                _xfNoRedirect: 1,
-                                _xfResponseType: "json"
-                            });
+                        var msg = pm_msg.val().replace(new RegExp("\n", 'g'), "<br>");
+                        //$.get('/conversations/add', function(data) {
+                        $.post('/conversations/insert', {
+                            recipients: user,
+                            title: msgTitle,
+                            message_html: msg,
+                            last_date: Date.now(),
+                            last_known_date: Date.now(),
+                            xfRelativeResolver: url,
+                            _xfToken: token,
+                            _xfRequestUri: url.replace("https://forums.oneplus.net", ""),
+                            _xfNoRedirect: 1,
+                            _xfResponseType: "json"
                         });
+                        //});
                     }
                 },
                 'Cancel': {
