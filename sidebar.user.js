@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.9.0
+// @version      2.9.1
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -12,7 +12,7 @@
 $(document).ready(function () {
     //MAKE SURE TO UPDATE THIS NUMBER
     if(typeof GM_info === 'undefined')
-        sidebarVersion = "2.9.0";
+        sidebarVersion = "2.9.1";
     else
         sidebarVersion = GM_info.script.version;
 
