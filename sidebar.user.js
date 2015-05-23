@@ -11,7 +11,7 @@
 //ADD JQUERY SCRIPT ADAPTED FROM https://gist.github.com/eristoddle/4440713
 $(document).ready(function () {
     //MAKE SURE TO UPDATE THIS NUMBER
-    if(GM_info === undefined)
+    if(typeof GM_info === 'undefined')
         sidebarVersion = "2.9.0";
     else
         sidebarVersion = GM_info.script.version;
