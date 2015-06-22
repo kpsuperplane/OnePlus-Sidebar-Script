@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.net*
-// @version      2.9.1
+// @version      2.9.2
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato
 // @include      *forums.oneplus.net*
@@ -12,7 +12,7 @@
 $(document).ready(function () {
     //MAKE SURE TO UPDATE THIS NUMBER
     if(typeof GM_info === 'undefined')
-        sidebarVersion = "2.9.1";
+        sidebarVersion = "2.9.2";
     else
         sidebarVersion = GM_info.script.version;
 
@@ -1251,14 +1251,15 @@ $(document).ready(function () {
                 location.href = "/forums/"; 
             });
             $('#widget-11 ul.xenforo-list-2cols').append(
-                "<li><a href=\"/forums/oxygenos/\">OxygenOS</a></li>"+
+                "<li><a href=\"/forums/dev-roms/\">Development</a></li>"+
                 "<li><a href=\"/forums/accessories/\">Accessories</a></li>"+
+                "<li><a href=\"/forums/tech-support/\">General Support</a></li>"+
                 "<li><a href=\"/forums/introduce-yourself/\">Introduce Yourself</a></li>");
             $('#widget-11 ul.xenforo-list-2cols li:eq(0)').after("<li><a href=\"/forums/contests/\">Contests</a></li>");
             $("#widget-11 ul.xenforo-list-2cols li:eq(7)").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(2)"));
             $("#widget-11 ul.xenforo-list-2cols li:eq(8)").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(5)"));
             $("#widget-11 ul.xenforo-list-2cols li:eq(8)").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(6)"));
-            $("<li><a href=\"/forums/cyanogenmod-11s/\">CyanogenMod 11S</a></li>").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(4)"));
+            $("<li><a href=\"/forums/cyanogenmod/\">CyanogenMod</a></li>").insertAfter($("#widget-11 ul.xenforo-list-2cols li:eq(4)"));
 
             $('#widget-12 .widget_header_small').click(function(){
                 location.href = "/forums/#language.33"; 
