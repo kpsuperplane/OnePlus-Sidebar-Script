@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OnePlus Forum Sidebar
 // @namespace    *.oneplus.com*
-// @version      2.9.3
+// @version      2.9.4
 // @description  Useful sidebar addon for the OnePlus forum! :)
 // @author       Mikasa Ackerman aka Kallen, Kevin Pei aka kp1234, Sam Prescott aka sp99, awkward_potato, WuerfelDev
 // @include      *forums.oneplus.com*
@@ -12,7 +12,7 @@
 $(document).ready(function () {
     //MAKE SURE TO UPDATE THIS NUMBER
     if(typeof GM_info === 'undefined')
-        sidebarVersion = "2.9.3";
+        sidebarVersion = "2.9.4";
     else
         sidebarVersion = GM_info.script.version;
 
@@ -99,7 +99,7 @@ $(document).ready(function () {
             var re;
             $.ajax({
                 type : 'GET',
-                url : 'https://forums.oneplus.net/threads/tool-oneplus-forum-sidebar-mod.208545/#post-8332926',
+                url : 'https://gitlab.com/WuerfelDev/OnePlus-Sidebar-Script/-/raw/master/sidebar.user.js',
                 success : function (data) {
                     var ver2 = data.match(/\d\.\d\.\d/i);
                     var v1 = sidebarVersion.toString().split(".");
@@ -111,13 +111,13 @@ $(document).ready(function () {
                         v1[y] = parseInt(v1[y]);
                     }
                     if (v1[0] < v2[0] || v1[1] < v2[1] || v1[2] < v2[2]) {
-                        var updateText = "New version found! \nWould you like to view the release page and update?";
+                        var updateText = "New version found! \nWould you like to update the Sidebar script?";
                         new modal('Update!', updateText, {
                             'Yes': {
                                 type: 'red',
                                 click: function(){
                                     this.close();
-                                    location.href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/raw/master/sidebar.user.js";
+                                    location.href="https://gitlab.com/WuerfelDev/OnePlus-Sidebar-Script/-/raw/master/sidebar.user.js";
                                     setTimeout(function(){
                                         location.reload(true);
                                     }, 1000);
@@ -884,12 +884,9 @@ $(document).ready(function () {
                 layout: "twoColumns"
             });
             sidebarInfo.add($('<a href="/threads/tool-oneplus-forum-sidebar-mod.208545/">Sidebar Thread</a>'));
-            sidebarInfo.add($('<a href="#" onClick="return false;" id="eUpdates">Email Updates</a>'));
-            sidebarInfo.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/releases/" target="_blank" id="updateLink">Github Releases</a>'));
-            sidebarInfo.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/blob/v' + sidebarVersion + '/README.md">View README</a>'));
-            sidebarInfo.add($('<a href="https://forums.oneplus.net/threads/tool-oneplus-forum-sidebar-mod.208545/#post-8332933">View Changelog</a>'));
-            sidebarInfo.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/issues/new">Report an Issue</a>'));
-            sidebarInfo.add($('<a href="#" onClick="return false;" id="featureRequest">Request a Feature</a>'));
+            sidebarInfo.add($('<a href="https://gitlab.com/WuerfelDev/OnePlus-Sidebar-Script/" target="_blank" id="updateLink">Gitlab Repo</a>'));
+            sidebarInfo.add($('<a href="https://gitlab.com/WuerfelDev/OnePlus-Sidebar-Script/-/blob/master/README.md">View README (Changelog)</a>'));
+            sidebarInfo.add($('<a href="https://github.com/kpsuperplane/OnePlus-Sidebar-Script/issues/new">Report an issue or request a feature</a>'));
             sidebarInfo.add($('<a href="#" onClick="return false;" id="vInfo">Version Info</a>'));
             sidebarInfo.add($('<a href="#" onClick="return false;" id="check">Check for updates</a>'));
 
@@ -897,29 +894,6 @@ $(document).ready(function () {
                 alert("Sidebar Version - v" + sidebarVersion);
             });
 
-            featureRequest.addEventListener("click", function(){
-                var featureForm = $('<iframe src="https://docs.google.com/forms/d/1W2xyAM3HdwdrAxhsdcSB8BefnPSa6NngRbxU-IZN37w/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
-                new modal('Feature Request Form', featureForm, {
-                    'Done': {
-                        type: 'red',
-                        click: function(){
-                            this.close();
-                        }
-                    }
-                });		
-            });
-
-            eUpdates.addEventListener("click", function(){
-                var emailForm = $('<center><iframe src="https://docs.google.com/forms/d/1NmKqdgBI-rcZviGtNawZRva1KsLUOWpP8b_kfli653E/viewform?embedded=true" width="550" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></center>');
-                new modal('Email Update Form', emailForm, {
-                    'Done': {
-                        type: 'red',
-                        click: function(){
-                            this.close();
-                        }
-                    }
-                });		
-            });
             if(window.location.href.indexOf("thread") == -1 && window.location.href.indexOf("conversation") == -1){
                 update();
             }
